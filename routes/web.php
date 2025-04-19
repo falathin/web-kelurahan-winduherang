@@ -25,3 +25,11 @@ Route::get('/peta-sukamulya', function () {
 Route::get('/wartaWargi-sukamulya', function () {
     return view('wartawar');
 })->name('wartaWargi');
+
+Route::get('/pemerintahan-sukamulya', function () {
+    return view('pemerintahan');
+})->name('pemerintahan');
+
+Route::get('/admin-sukamulya', function () {
+    return view('admin.content.dashboard');
+})->name('admin.dashboard');

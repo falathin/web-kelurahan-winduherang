@@ -232,18 +232,35 @@
 
         <!-- MODAL -->
         <div id="modalBerita" class="fixed inset-0 z-50 hidden items-center justify-center bg-black bg-opacity-50">
-            <div class="bg-white max-w-2xl w-full mx-4 md:mx-auto rounded-xl shadow-lg overflow-hidden">
+            <div
+                class="bg-white max-w-2xl w-full mx-4 md:mx-auto rounded-xl shadow-xl overflow-hidden animate__animated animate__fadeIn">
+
+                <!-- Gambar Header -->
+                <img id="modalImage" src="https://via.placeholder.com/800x400" alt="Gambar Berita"
+                    class="w-full h-52 md:h-64 object-cover">
+
                 <div class="p-6 space-y-4">
-                    <div class="flex justify-between items-center border-b pb-3">
-                        <h4 id="modalTitle" class="text-xl font-bold text-green-800">Judul Berita</h4>
-                        <button onclick="closeModal()" class="text-gray-400 hover:text-red-600 text-2xl">&times;</button>
+                    <!-- Header & Tombol Close -->
+                    <div class="flex justify-between items-start border-b pb-3">
+                        <div>
+                            <span id="modalCategory"
+                                class="inline-block text-xs font-semibold bg-green-100 text-green-700 px-3 py-1 rounded-full mb-1">Kategori</span>
+                            <h4 id="modalTitle" class="text-2xl font-bold text-green-800">Judul Berita</h4>
+                            <p id="modalDate" class="text-sm text-gray-500">Tanggal</p>
+                        </div>
+                        <button onclick="closeModal()"
+                            class="text-gray-400 hover:text-red-600 text-2xl leading-none">&times;</button>
                     </div>
-                    <div id="modalContent" class="text-gray-700 text-sm leading-relaxed max-h-[60vh] overflow-y-auto">
-                        <!-- Konten akan diisi lewat JS -->
+
+                    <!-- Konten -->
+                    <div id="modalContent"
+                        class="text-gray-700 text-sm leading-relaxed space-y-4 max-h-[60vh] overflow-y-auto">
+                        <p>Konten berita akan muncul di sini...</p>
                     </div>
                 </div>
             </div>
         </div>
+
     </section>
 
     <!-- SCRIPT MODAL -->
@@ -294,7 +311,7 @@
     </script>
 
 
-    <!-- Galeri Alam Section - Minimalis Estetik -->
+    <!-- Galeri Alam Section - Minimalis Estetik Upgrade -->
     <section class="py-20 bg-white">
         <div class="max-w-6xl mx-auto px-4">
             <h3 class="text-3xl md:text-4xl font-semibold text-center text-green-700 mb-14 tracking-tight"
@@ -304,22 +321,30 @@
 
             <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
                 @foreach (range(1, 8) as $id)
-                    <div class="group overflow-hidden rounded-2xl border border-green-100 bg-white shadow-sm hover:shadow-md transition duration-300 cursor-pointer"
+                    <div class="group relative overflow-hidden rounded-2xl border border-green-200 bg-white shadow transition duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg hover:border-green-400 cursor-pointer"
                         data-aos="zoom-in" data-aos-delay="{{ $loop->iteration * 100 }}"
                         @click="Swal.fire({ 
-              title: 'Kegiatan Alam RW {{ $id }}',
-              html: '<p><strong>Jenis:</strong> Penanaman Pohon</p><p><strong>Tanggal:</strong> 2024-04-{{ 10 + $id }}</p><p><strong>Deskripsi:</strong> Penanaman pohon bersama warga RW {{ $id }} di tepi sungai untuk menjaga ekosistem.</p>',
-              imageUrl: 'https://picsum.photos/id/{{ 100 + $id }}/600/400',
-              imageWidth: 600,
-              imageHeight: 400,
-              imageAlt: 'Kegiatan RW {{ $id }}',
-              confirmButtonColor: '#34D399'
-            })">
+                title: '🌳 Kegiatan Alam RW {{ $id }}',
+                html: `
+                  <div class='text-left leading-relaxed'>
+                    <p><strong>📌 Jenis:</strong> Penanaman Pohon</p>
+                    <p><strong>📅 Tanggal:</strong> 2024-04-{{ 10 + $id }}</p>
+                    <p><strong>📝 Deskripsi:</strong> Penanaman pohon bersama warga RW {{ $id }} di tepi sungai untuk menjaga ekosistem.</p>
+                  </div>`,
+                imageUrl: 'https://picsum.photos/id/{{ 100 + $id }}/800/500',
+                imageWidth: '100%',
+                imageAlt: 'Kegiatan RW {{ $id }}',
+                showCloseButton: true,
+                focusConfirm: false,
+                confirmButtonColor: '#34D399',
+                confirmButtonText: 'Tutup'
+              })">
                         <img src="https://picsum.photos/id/{{ 100 + $id }}/400/300"
                             alt="Kegiatan Alam RW {{ $id }}"
-                            class="w-full h-44 object-cover group-hover:scale-105 transition-transform duration-300 ease-in-out">
-                        <div class="p-3 text-center text-green-800 text-sm font-medium bg-green-50">
-                            RW {{ $id }} &mdash; Penanaman Pohon
+                            class="w-full h-44 object-cover transition-transform duration-300 ease-in-out group-hover:scale-110">
+                        <div
+                            class="absolute bottom-0 w-full bg-green-50 bg-opacity-90 px-3 py-2 text-center text-green-800 text-sm font-semibold backdrop-blur-md">
+                            🌿 RW {{ $id }} — Penanaman Pohon
                         </div>
                     </div>
                 @endforeach
@@ -327,39 +352,44 @@
         </div>
     </section>
 
+<!-- Maps & Keterangan Section - Desa Winduherang -->
+<section class="bg-gradient-to-br from-green-50 to-green-200 py-20 font-sans">
+  <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-3 gap-10 items-start">
 
-    <!-- Maps & Keterangan Section - Explorer Style -->
-    <section class="bg-gradient-to-br from-amber-50 to-green-100 py-20 font-sans">
-        <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-3 gap-10 items-start">
+    <!-- Peta Kantor Desa -->
+    <div class="lg:col-span-2">
+      <div class="overflow-hidden rounded-2xl shadow-xl border-2 border-green-200 ring-1 ring-green-100 transition-transform hover:scale-[1.01] duration-300">
+        <iframe
+          src="https://maps.google.com/maps?q=-6.974394,107.753007&z=16&output=embed"
+          class="w-full h-80 md:h-[500px] border-0"
+          allowfullscreen
+          loading="lazy">
+        </iframe>
+      </div>
+    </div>
 
-            <!-- Peta -->
-            <div class="lg:col-span-2">
-                <div class="overflow-hidden rounded-2xl shadow-xl border-2 border-green-200 ring-1 ring-green-100">
-                    <iframe
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d63256.93166364357!2d107.753006987159!3d-6.974394464096728!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e68ebfdf9eafc69%3A0x82bf2d7e3a22c165!2sKelurahan%20Winduherang!5e0!3m2!1sen!2sid!4v1686140000000"
-                        class="w-full h-80 md:h-[500px] border-0" allowfullscreen="" loading="lazy">
-                    </iframe>
-                </div>
-            </div>
+    <!-- Keterangan Lokasi -->
+    <div class="space-y-8">
+      <h4 class="text-3xl font-bold text-green-900 mb-4 inline-flex items-center gap-2">
+        🗺️ Keterangan Lokasi
+        <span class="block w-16 h-1 bg-green-300 rounded-full"></span>
+      </h4>
 
-            <!-- Keterangan Lokasi -->
-            <div class="space-y-6">
-                <h4 class="text-3xl font-bold text-green-900 mb-6">🧭 Keterangan Lokasi</h4>
-                @foreach ([
-            '🗣️ Komentar' => 'Warga desa sangat ramah dan selalu menyapa dengan senyuman.',
-            '📧 Email' => 'winduherang@example.com',
-            '📬 Pesan' => 'Silakan kirimkan pertanyaan atau aspirasi Anda melalui formulir ini.',
-        ] as $title => $text)
-                    <div
-                        class="border-l-4 border-green-600 pl-5 pr-4 bg-white rounded-xl shadow-lg p-5 hover:bg-green-50 transition duration-300">
-                        <h5 class="font-semibold text-green-800 text-lg mb-2">{{ $title }}</h5>
-                        <p class="text-gray-700 text-sm leading-relaxed tracking-wide">{{ $text }}</p>
-                    </div>
-                @endforeach
-            </div>
-
+      @foreach ([
+        '🏢 Alamat'  => 'Jl. Raya Winduherang No.1, Kecamatan Cigugur, Kabupaten Kuningan',
+        '📧 Email'   => 'desawinduherang@kuningan.go.id',
+        '📞 Telepon' => '(0232) 8900110'
+      ] as $title => $text)
+        <div class="border-l-4 border-green-600 bg-white rounded-xl shadow-md p-6 hover:bg-green-50 transition hover:shadow-lg">
+          <h5 class="font-semibold text-green-800 text-lg mb-2">{{ $title }}</h5>
+          <p class="text-gray-700 text-sm leading-relaxed">{{ $text }}</p>
         </div>
-    </section>
+      @endforeach
+    </div>
+
+  </div>
+</section>
+
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
     <script>
         // nothing else needed  here; Alpine init is automatic

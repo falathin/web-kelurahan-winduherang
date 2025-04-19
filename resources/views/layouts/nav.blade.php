@@ -1,71 +1,77 @@
-{{-- Navbar Non-Sticky --}}
+{{-- resources/views/partials/navbar.blade.php --}}
 <nav id="mainNav" class="bg-green-700 animate__animated animate__fadeInDown z-50">
     <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
         {{-- Logo dan Nama Desa --}}
         <div class="flex items-center">
             <img src="{{ asset('images/Logo_Kabupaten_kuningan.png') }}" alt="Logo Kabupaten Kuningan"
                 class="w-10 h-10 object-cover rounded-full mr-3" />
-            <span class="text-white text-xl font-bold">Kelurahan Sukamulya</span>
+            <span class="text-white text-xl font-bold">Kelurahan Winduherang</span>
         </div>
 
         {{-- Menu Desktop --}}
         <div class="hidden md:flex space-x-6">
-            <a href="{{route('home')}}#beranda" class="text-white hover:text-green-100 font-medium">Beranda</a>
-            <a href="{{route('profil')}}#profil" class="text-white hover:text-green-100 font-medium">Profil Desa</a>
-            <a href="{{route('berita')}}#berita" class="text-white hover:text-green-100 font-medium">Berita</a>
-            <a href="{{route('galeri')}}#galeri" class="text-white hover:text-green-100 font-medium">Galeri</a>
-            <a href="{{route('peta')}}#maps" class="text-white hover:text-green-100 font-medium">Peta</a>
-            <a href="{{route('wartaWargi')}}#wargaWargi" class="text-white hover:text-green-100 font-medium">Warga Wargi</a>
+            @php
+                $items = [
+                    ['route' => 'home', 'label' => 'Beranda'],
+                    ['route' => 'profil', 'label' => 'Profil Desa'],
+                    ['route' => 'berita', 'label' => 'Berita'],
+                    ['route' => 'galeri', 'label' => 'Galeri'],
+                    ['route' => 'peta', 'label' => 'Peta'],
+                    ['route' => 'pemerintahan', 'label' => 'Pemerintahan'],
+                    ['route' => 'wartaWargi', 'label' => 'Kontak Kami'],
+                ];
+            @endphp
+            @foreach($items as $item)
+                <a href="{{ route($item['route']) }}#{{ $item['route'] }}"
+                    class="font-medium {{ request()->routeIs($item['route']) ? 'text-green-300 underline' : 'text-white hover:text-green-100' }}">
+                    {{ $item['label'] }}
+                </a>
+            @endforeach
         </div>
 
         {{-- Hamburger Button --}}
         <button class="md:hidden text-white focus:outline-none" onclick="toggleMenu()">
-            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg">
+            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M4 6h16M4 12h16M4 18h16"></path>
+                      d="M4 6h16M4 12h16M4 18h16" />
             </svg>
         </button>
     </div>
 
     {{-- Mobile Menu --}}
-    <div id="mobileMenu" class="md:hidden hidden bg-green-800 px-4 py-2">
-        <a href="{{route('home')}}#beranda" class="block text-white py-2 hover:text-green-100">Beranda</a>
-        <a href="{{route('profil')}}#profil" class="block text-white py-2 hover:text-green-100">Profil Desa</a>
-        <a href="{{route('berita')}}#berita" class="block text-white py-2 hover:text-green-100">Berita</a>
-        <a href="{{route('galeri')}}#galeri" class="block text-white py-2 hover:text-green-100">Galeri</a>
-        <a href="{{route('peta')}}#maps" class="block text-white py-2 hover:text-green-100">Peta</a>
-        <a href="{{route('wartaWargi')}}#wargaWargi" class="block text-white py-2 hover:text-green-100">Warga Wargi</a>
+    <div id="mobileMenu" class="md:hidden hidden bg-green-800 px-4 py-2 space-y-1">
+        @foreach($items as $item)
+            <a href="{{ route($item['route']) }}#{{ $item['route'] }}"
+               class="block py-2 px-3 rounded-md font-medium {{ request()->routeIs($item['route']) ? 'bg-green-700 text-white' : 'text-white hover:bg-green-700 hover:text-green-100' }}">
+                {{ $item['label'] }}
+            </a>
+        @endforeach
     </div>
 </nav>
 
-{{-- Sticky Navbar Saat Scroll --}}
-<nav id="stickyNav" class="sticky-nav bg-green-700 hidden animate__animated animate__fadeInDown z-50 fixed w-full top-0">
+<nav id="stickyNav" class="bg-green-700 hidden animate__animated animate__fadeInDown z-50 fixed w-full top-0">
     <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
         <div class="flex items-center">
             <img src="{{ asset('images/Logo_Kabupaten_kuningan.png') }}" alt="Logo Kabupaten Kuningan"
                 class="w-10 h-10 object-cover rounded-full mr-3" />
-            <span class="text-white text-xl font-bold">Kelurahan Sukamulya</span>
+            <span class="text-white text-xl font-bold">Kelurahan Winduherang</span>
         </div>
         <div class="hidden md:flex space-x-6">
-            <a href="{{route('home')}}#beranda" class="text-white hover:text-green-100 font-medium">Beranda</a>
-            <a href="{{route('profil')}}#profil" class="text-white hover:text-green-100 font-medium">Profil Desa</a>
-            <a href="{{route('berita')}}#berita" class="text-white hover:text-green-100 font-medium">Berita</a>
-            <a href="{{route('galeri')}}#galeri" class="text-white hover:text-green-100 font-medium">Galeri</a>
-            <a href="{{route('peta')}}#maps" class="text-white hover:text-green-100 font-medium">Peta</a>
-            <a href="{{route('wartaWargi')}}#wargaWargi" class="text-white hover:text-green-100 font-medium">Warga Wargi</a>
+            @foreach($items as $item)
+                <a href="{{ route($item['route']) }}#{{ $item['route'] }}"
+                   class="font-medium {{ request()->routeIs($item['route']) ? 'text-green-300 underline' : 'text-white hover:text-green-100' }}">
+                    {{ $item['label'] }}
+                </a>
+            @endforeach
         </div>
     </div>
 </nav>
 
-{{-- JS for Mobile Menu & Sticky Navbar --}}
 <script>
     function toggleMenu() {
-        const mobileMenu = document.getElementById('mobileMenu');
-        mobileMenu.classList.toggle('hidden');
+        document.getElementById('mobileMenu').classList.toggle('hidden');
     }
-
-    window.addEventListener('scroll', function () {
+    window.addEventListener('scroll', () => {
         const mainNav = document.getElementById('mainNav');
         const stickyNav = document.getElementById('stickyNav');
         if (window.scrollY > 150) {
