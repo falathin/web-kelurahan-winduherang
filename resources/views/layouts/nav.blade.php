@@ -21,28 +21,33 @@
                     ['route' => 'wartaWargi', 'label' => 'Kontak Kami'],
                 ];
             @endphp
-            @foreach($items as $item)
+            @foreach ($items as $item)
                 <a href="{{ route($item['route']) }}#{{ $item['route'] }}"
                     class="font-medium {{ request()->routeIs($item['route']) ? 'text-green-300 underline' : 'text-white hover:text-green-100' }}">
                     {{ $item['label'] }}
                 </a>
             @endforeach
+            @auth
+                <a href="{{ route('admin.dashboard') }}" class="font-medium {{ request()->routeIs('admin.dashboard') ? 'text-green-300 underline' : 'text-white hover:text-green-100' }}">dashboard</a>
+            @endauth
+            @guest
+                <a href="{{ route('login') }}" class="font-medium {{ request()->routeIs('login') ? 'text-green-300 underline' : 'text-white hover:text-green-100'}}">Login</a>
+            @endguest
         </div>
 
         {{-- Hamburger Button --}}
         <button class="md:hidden text-white focus:outline-none" onclick="toggleMenu()">
             <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                      d="M4 6h16M4 12h16M4 18h16" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
             </svg>
         </button>
     </div>
 
     {{-- Mobile Menu --}}
     <div id="mobileMenu" class="md:hidden hidden bg-green-800 px-4 py-2 space-y-1">
-        @foreach($items as $item)
+        @foreach ($items as $item)
             <a href="{{ route($item['route']) }}#{{ $item['route'] }}"
-               class="block py-2 px-3 rounded-md font-medium {{ request()->routeIs($item['route']) ? 'bg-green-700 text-white' : 'text-white hover:bg-green-700 hover:text-green-100' }}">
+                class="block py-2 px-3 rounded-md font-medium {{ request()->routeIs($item['route']) ? 'bg-green-700 text-white' : 'text-white hover:bg-green-700 hover:text-green-100' }}">
                 {{ $item['label'] }}
             </a>
         @endforeach
@@ -57,9 +62,9 @@
             <span class="text-white text-xl font-bold">Kelurahan Winduherang</span>
         </div>
         <div class="hidden md:flex space-x-6">
-            @foreach($items as $item)
+            @foreach ($items as $item)
                 <a href="{{ route($item['route']) }}#{{ $item['route'] }}"
-                   class="font-medium {{ request()->routeIs($item['route']) ? 'text-green-300 underline' : 'text-white hover:text-green-100' }}">
+                    class="font-medium {{ request()->routeIs($item['route']) ? 'text-green-300 underline' : 'text-white hover:text-green-100' }}">
                     {{ $item['label'] }}
                 </a>
             @endforeach
