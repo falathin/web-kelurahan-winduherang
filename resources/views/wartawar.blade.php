@@ -1,7 +1,7 @@
 {{-- resources/views/wartawargi.blade.php --}}
 @extends('layouts.app')
 
-@section('title', 'Pengaduan Masyarakat & Kontak - Kelurahan Sukamulya')
+@section('title', 'Pengaduan Masyarakat & Kontak - Kelurahan Winduherang')
 
 @section('content')
     {{-- Hero --}}
@@ -176,8 +176,8 @@
                     <path stroke-linecap="round" stroke-linejoin="round"
                         d="M3 8l7-3l7 3m0 0v8l-7 3m7-11l-7 3M3 8v8l7 3" />
                 </svg>
-                <a href="mailto:info@sukamulya.com"
-                    class="text-gray-700 font-medium hover:text-green-800">info@sukamulya.com</a>
+                <a href="mailto:info@Winduherang.com"
+                    class="text-gray-700 font-medium hover:text-green-800">info@Winduherang.com</a>
             </div>
             <div class="inline-flex items-center gap-3">
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-green-600" fill="none"
@@ -193,7 +193,7 @@
                     stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M3 7h18M3 12h18M3 17h18" />
                 </svg>
-                <span class="text-gray-700">Jl. Merdeka No.11, Sukamulya, Kuningan</span>
+                <span class="text-gray-700">Jl. Merdeka No.11, Winduherang, Kuningan</span>
             </div>
         </div>
     </section>

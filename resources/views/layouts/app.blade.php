@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@yield('title', 'Kelurahan Sukamulya')</title>
+    <title>@yield('title', 'Kelurahan Winduherang')</title>
     {{-- Favicon (logo kecil di tab) --}}
     <link rel="icon" href="{{ asset('images/Logo_Kabupaten_kuningan.png') }}" type="image/png">
     <!-- CDN Tailwind CSS -->

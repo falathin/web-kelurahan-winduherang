@@ -45,45 +45,76 @@
         x-transition:enter-start="-translate-x-full" x-transition:enter-end="translate-x-0"
         x-transition:leave="transition ease-in duration-300" x-transition:leave-start="translate-x-0"
         x-transition:leave-end="-translate-x-full"
-        class="fixed inset-y-0 left-0 w-64 bg-desa-hijau text-white z-50 transform md:hidden shadow-lg">
+        class="fixed inset-y-0 left-0 w-64 bg-gradient-to-b from-[#14532d] to-[#22c55e] text-white z-50 transform md:hidden shadow-2xl rounded-r-xl overflow-y-auto">
         <div class="flex items-center justify-between px-6 py-4 border-b border-white/10">
             <h1 class="text-xl font-bold">Desa Winduherang</h1>
-            <button @click="sidebarOpen = false" class="text-2xl leading-none">&times;</button>
+            <button @click="sidebarOpen = false" class="text-2xl leading-none hover:text-yellow-400">&times;</button>
         </div>
         <nav class="p-6 space-y-2">
-            <template x-for="item in ['Dashboard', 'Artikel', 'Kas Desa', 'Pengaduan', 'Galeri', 'Jadwal', 'Kontak']">
-                <a :href="'#' + item.toLowerCase().replace(/ /g, '')"
-                    class="block py-2 px-4 rounded hover:bg-desa-emas transition-all duration-200">
-                    <span x-text="item"></span>
+            @php
+                $navItems = [
+                    ['name' => 'Dashboard', 'route' => 'dashboard'],
+                    ['name' => 'Artikel', 'route' => 'articles'],
+                    ['name' => 'Kas Desa', 'route' => 'kas'],
+                    ['name' => 'Pengaduan', 'route' => 'pengaduan'],
+                    ['name' => 'Galeri', 'route' => 'galeri'],
+                    ['name' => 'Jadwal', 'route' => 'jadwal'],
+                    ['name' => 'Kontak', 'route' => 'kontak'],
+                    ['name' => 'Guest Page', 'route' => 'home'],
+                ];
+            @endphp
+
+            @foreach ($navItems as $item)
+                <a href="#{{ $item['route'] }}"
+                    class="block py-2 px-4 rounded transition-all duration-200 {{ request()->is($item['route'] . '*') ? 'bg-[#facc15] text-black font-semibold' : 'hover:bg-[#facc15] hover:text-black' }}">
+                    {{ $item['name'] }}
                 </a>
-            </template>
-            <form method="POST" action="{{ route('logout') }}">
+            @endforeach
+
+            <form method="POST" action="{{ route('logout') }}" id="logoutFormMobile">
                 @csrf
-                <button type="submit" class="w-full mt-4 py-2 px-4 text-left bg-red-500 hover:bg-red-600 rounded">Log Out</button>
+                <button type="submit" onclick="return confirmLogout(event)"
+                    class="w-full mt-4 py-2 px-4 text-left bg-red-500 hover:bg-red-600 rounded">
+                    Log Out
+                </button>
             </form>
         </nav>
     </aside>
 
     <!-- Sidebar Desktop -->
-    <aside class="hidden md:fixed md:inset-y-0 md:w-64 md:flex md:flex-col bg-desa-hijau text-white shadow-lg">
+    <aside
+        class="hidden md:fixed md:inset-y-0 md:w-64 md:flex md:flex-col bg-gradient-to-b from-[#14532d] to-[#22c55e] text-white shadow-2xl rounded-r-xl overflow-y-auto">
         <div class="px-6 py-6 border-b border-white/10">
             <h1 class="text-2xl font-bold">Desa Winduherang</h1>
             <p class="text-sm text-gray-300">Admin Dashboard</p>
         </div>
         <nav class="flex-1 p-6 space-y-2">
-            <a href="#dashboard" class="block py-2 px-4 rounded hover:bg-desa-emas">Dashboard</a>
-            <a href="#articles" class="block py-2 px-4 rounded hover:bg-desa-emas">Artikel</a>
-            <a href="#kas" class="block py-2 px-4 rounded hover:bg-desa-emas">Kas Desa</a>
-            <a href="#pengaduan" class="block py-2 px-4 rounded hover:bg-desa-emas">Pengaduan</a>
-            <a href="#galeri" class="block py-2 px-4 rounded hover:bg-desa-emas">Galeri</a>
-            <a href="#jadwal" class="block py-2 px-4 rounded hover:bg-desa-emas">Jadwal</a>
-            <a href="#kontak" class="block py-2 px-4 rounded hover:bg-desa-emas">Kontak</a>
-            <form method="POST" action="{{ route('logout') }}">
+            @foreach ($navItems as $item)
+                <a href="#{{ $item['route'] }}"
+                    class="block py-2 px-4 rounded transition-all duration-200 {{ request()->is($item['route'] . '*') ? 'bg-[#facc15] text-black font-semibold' : 'hover:bg-[#facc15] hover:text-black' }}">
+                    {{ $item['name'] }}
+                </a>
+            @endforeach
+
+            <form method="POST" action="{{ route('logout') }}" id="logoutFormDesktop">
                 @csrf
-                <button type="submit" class="w-full mt-6 py-2 px-4 text-left bg-red-500 hover:bg-red-600 rounded">Log Out</button>
+                <button type="submit" onclick="return confirmLogout(event)"
+                    class="w-full mt-6 py-2 px-4 text-left bg-red-500 hover:bg-red-600 rounded">
+                    Log Out
+                </button>
             </form>
         </nav>
     </aside>
+
+    <!-- JavaScript Alert Confirmation -->
+    <script>
+        function confirmLogout(event) {
+            event.preventDefault();
+            if (confirm('Apakah kamu yakin ingin logout?')) {
+                event.target.closest('form').submit();
+            }
+        }
+    </script>
 
     <!-- Main Content -->
     <div class="md:pl-64 min-h-screen flex flex-col">

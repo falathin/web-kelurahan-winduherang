@@ -1,7 +1,7 @@
 {{-- resources/views/pemerintahan.blade.php --}}
 @extends('layouts.app')
 
-@section('title', 'Pemerintahan Desa Sukamulya')
+@section('title', 'Pemerintahan Desa Winduherang')
 
 @section('content')
 <!-- Hero Slider -->
@@ -162,7 +162,7 @@
       RT / RW
     </h2>
     <p class="text-gray-700 leading-relaxed">
-      Daftar Ketua RT & RW di Kelurahan Sukamulya.
+      Daftar Ketua RT & RW di Kelurahan Winduherang.
     </p>
     <div class="overflow-x-auto">
       <table class="w-full bg-white rounded-lg shadow">
@@ -212,11 +212,11 @@
       Kelompok Tani
     </h2>
     <p class="text-gray-700 leading-relaxed">
-      Kelompok Tani Mandiri merupakan wadah yang berperan penting dalam pengelolaan pertanian di desa Sukamulya.
+      Kelompok Tani Mandiri merupakan wadah yang berperan penting dalam pengelolaan pertanian di desa Winduherang.
       Kelompok ini membina para petani, mengembangkan teknik budidaya, serta membantu dalam memasarkan hasil panen.
     </p>
     <p class="text-gray-700 leading-relaxed">
-      Saat ini terdapat tiga kelompok tani aktif di desa Sukamulya:
+      Saat ini terdapat tiga kelompok tani aktif di desa Winduherang:
     </p>
     <ul class="list-disc list-inside text-gray-700 space-y-2">
       <li><strong>Maju Jaya</strong>, dipimpin oleh <strong>Ketua Maju Jaya</strong>.</li>
@@ -231,7 +231,7 @@
       Struktur Lembaga Desa
     </h2>
     <p class="text-gray-700 leading-relaxed">
-      Berikut adalah struktur pemerintahan desa Sukamulya:
+      Berikut adalah struktur pemerintahan desa Winduherang:
     </p>
     <div class="overflow-x-auto">
       <table class="w-full bg-white rounded-lg shadow">

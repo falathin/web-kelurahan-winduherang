@@ -1,7 +1,7 @@
 {{-- resources/views/berita.blade.php --}}
 @extends('layouts.app')
 
-@section('title', 'Berita Desa - Kelurahan Sukamulya')
+@section('title', 'Berita Desa - Kelurahan Winduherang')
 
 @section('content')
 @php

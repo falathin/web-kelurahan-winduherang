@@ -1,7 +1,7 @@
 {{-- resources/views/profile.blade.php --}}
 @extends('layouts.app')
 
-@section('title', 'Profil Desa Sukamulya')
+@section('title', 'Profil Desa Winduherang')
 
 @section('content')
 
@@ -29,7 +29,7 @@
     ></div>
   </template>
   <div class="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-center items-center text-white px-4">
-    <h1 class="text-3xl md:text-5xl font-bold">Profil Desa Sukamulya</h1>
+    <h1 class="text-3xl md:text-5xl font-bold">Profil Desa Winduherang</h1>
     <p class="mt-2 text-sm md:text-lg">Temukan informasi lengkap tentang desa kita</p>
     <div class="flex space-x-4 mt-4">
       <button @click="prev()" class="p-2 bg-green-700 rounded-full hover:bg-green-600 transition">

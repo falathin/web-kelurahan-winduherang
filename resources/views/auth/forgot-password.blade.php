@@ -1,25 +1,85 @@
-<x-guest-layout>
-    <div class="mb-4 text-sm text-gray-600">
-        {{ __('Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.') }}
+{{-- resources/views/auth/forgot-password.blade.php --}}
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lupa Password - Desa Winduherang</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'desa-green': '#047857',
+            'desa-light': '#10B981',
+            'desa-bg': '#ECFDF5'
+          }
+        }
+      }
+    };
+  </script>
+</head>
+
+<body class="min-h-screen bg-gradient-to-br from-desa-green via-desa-light to-lime-300 flex items-center justify-center p-4">
+
+  <div class="max-w-md w-full bg-white rounded-2xl shadow-xl overflow-hidden">
+    <!-- Header -->
+    <div class="bg-desa-green p-6 flex flex-col items-center">
+      <img src="{{ asset('images/Logo_Kabupaten_kuningan.png') }}" alt="Logo Kuningan" class="h-16 w-16 mb-4">
+      <h1 class="text-2xl font-extrabold text-white">Desa Winduherang</h1>
+      <p class="text-desa-bg mt-1">Reset Password Anda</p>
     </div>
 
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
+    <!-- Info -->
+    <div class="p-8 space-y-6">
+      @if(session('status'))
+        <div class="bg-green-100 text-green-800 p-3 rounded">
+          {{ session('status') }}
+        </div>
+      @endif
 
-    <form method="POST" action="{{ route('password.email') }}">
+      <p class="text-gray-700">
+        Lupa password? Masukkan email Anda dan kami akan mengirimkan tautan untuk mereset password.
+      </p>
+
+      <!-- Reset Form -->
+      <form method="POST" action="{{ route('password.email') }}" class="space-y-4">
         @csrf
 
-        <!-- Email Address -->
+        <!-- Email -->
         <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+          <label for="email" class="block text-gray-700 font-medium">Email</label>
+          <input
+            id="email"
+            name="email"
+            type="email"
+            value="{{ old('email') }}"
+            required autofocus
+            class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-desa-light focus:border-desa-light"
+          >
+          @error('email')
+            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+          @enderror
         </div>
 
-        <div class="flex items-center justify-end mt-4">
-            <x-primary-button>
-                {{ __('Email Password Reset Link') }}
-            </x-primary-button>
+        <!-- Submit -->
+        <div class="flex items-center justify-end">
+          <button type="submit"
+                  class="bg-desa-light hover:bg-desa-green text-white font-semibold px-6 py-2 rounded-lg transition">
+            Kirim Tautan Reset
+          </button>
         </div>
-    </form>
-</x-guest-layout>
+      </form>
+    </div>
+
+    <!-- Footer Motto -->
+    <div class="bg-desa-bg text-center py-3">
+      <p class="text-xs text-desa-green">Rapih • Winangun • Kerta Raharja</p>
+    </div>
+  </div>
+
+</body>
+</html>

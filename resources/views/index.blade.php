@@ -89,7 +89,7 @@
             <div class="lg:w-2/3 w-full space-y-6 animate-fade-in">
                 <div class="flex items-center gap-2">
                     <h2 class="text-3xl font-bold text-green-800 border-b-4 border-green-600 pb-2 inline-block relative">
-                        Sambutan Lurah Sukamulya
+                        Sambutan Lurah Winduherang
                         <span class="absolute -bottom-1 left-0 w-12 h-1 bg-green-300"></span>
                     </h2>
                     <span
@@ -98,12 +98,13 @@
 
                 <div class="space-y-4 text-gray-800 leading-relaxed">
                     <p><strong>Assalamu’alaikum warahmatullahi wabarakatuh</strong></p>
-                    <p>Selamat Datang di “Website Kelurahan Sukamulya“. Salam sejahtera bagi kita semua.</p>
+                    <p>Selamat Datang di “Website Kelurahan Winduherang“. Salam sejahtera bagi kita semua.</p>
                     <p>
-                        Kepada masyarakat Kelurahan Sukamulya sekalian yang saya banggakan. Pada kesempatan yang berbahagia
+                        Kepada masyarakat Kelurahan Winduherang sekalian yang saya banggakan. Pada kesempatan yang
+                        berbahagia
                         ini, kiranya tiada kata-kata yang patut untuk kita ucapkan terlebih dahulu melainkan puji syukur
                         yang sedalam-dalamnya, atas rahmat dan karunia Allah SWT sehingga pembuatan website Kelurahan
-                        Sukamulya dapat terlaksana dengan baik.
+                        Winduherang dapat terlaksana dengan baik.
                     </p>
 
                     <!-- Konten tersembunyi -->
@@ -115,15 +116,15 @@
                             kepada masyarakat luas.
                         </p>
                         <p>
-                            Melalui website ini kami berupaya agar informasi tentang Kelurahan Sukamulya menjadi lebih
+                            Melalui website ini kami berupaya agar informasi tentang Kelurahan Winduherang menjadi lebih
                             terbuka dan interaktif. Profil, kegiatan dan program kelurahan serta jenis dan prosedur
                             pelayanan dapat diakses oleh masyarakat secara langsung dan cepat.
                         </p>
                         <p>
-                            Sebagai Lurah Kelurahan Sukamulya, kami mengajak kepada masyarakat Kelurahan Sukamulya untuk
+                            Sebagai Lurah Kelurahan Winduherang, kami mengajak kepada masyarakat Kelurahan Winduherang untuk
                             ikut pula berpartisipasi menyumbangkan ide, kreasi dan informasinya agar website ini menarik
                             minat pembaca dan menunjang kami untuk memperkenalkan potensi-potensi yang ada di Kelurahan
-                            Sukamulya kepada daerah lain.
+                            Winduherang kepada daerah lain.
                         </p>
                         <p>
                             Kami sampaikan terima kasih kepada semua pihak yang telah banyak memberikan bantuan, dukungan
@@ -131,13 +132,13 @@
                             terealisasi.
                         </p>
                         <p>
-                            Semoga dengan adanya Website Kelurahan Sukamulya ini dapat bermanfaat dan menjadi salah satu
+                            Semoga dengan adanya Website Kelurahan Winduherang ini dapat bermanfaat dan menjadi salah satu
                             upaya peningkatan pelayanan desa. Namun disadari bahwa upaya kami ini masih jauh dari
                             kesempurnaan. Untuk itu kritik, saran, dan masukan yang konstruktif, kreatif dan inovatif sangat
                             kami nantikan demi penyempurnaan website ini.
                         </p>
                         <p><strong>Wassalamu’alaikum warahmatullahi wabarakatuh</strong></p>
-                        <p class="font-semibold text-green-800">Lurah Kelurahan Sukamulya<br>Kusnadi, S.IP</p>
+                        <p class="font-semibold text-green-800">Lurah Kelurahan Winduherang<br>Kusnadi, S.IP</p>
                     </div>
 
                     <!-- Tombol -->
@@ -286,7 +287,7 @@
                 content: `
         <p>Warga secara sukarela bergotong royong membersihkan saluran air dan jalan desa, terutama di area berbukit.</p>
         <p>Kegiatan ini rutin dilakukan agar tidak terjadi penyumbatan air dan demi menciptakan lingkungan sehat dan asri.</p>
-        <p>Kebersamaan dan semangat gotong royong ini merupakan nilai budaya yang terus dijaga di Kelurahan Sukamulya.</p>
+        <p>Kebersamaan dan semangat gotong royong ini merupakan nilai budaya yang terus dijaga di Kelurahan Winduherang.</p>
       `
             }
         ];
@@ -352,43 +353,130 @@
         </div>
     </section>
 
-<!-- Maps & Keterangan Section - Desa Winduherang -->
-<section class="bg-gradient-to-br from-green-50 to-green-200 py-20 font-sans">
-  <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-3 gap-10 items-start">
+    @php
+        $locations = [
+            ['name' => 'Kantor Desa Winduherang', 'coords' => [-6.989075, 108.456295], 'cat' => 'office'],
+            ['name' => 'Lapangan Bola Winduherang', 'coords' => [-6.98685, 108.45789], 'cat' => 'public'],
+            ['name' => 'SD Negeri Winduherang II', 'coords' => [-6.98922, 108.45741], 'cat' => 'edu'],
+        ];
+    @endphp
 
-    <!-- Peta Kantor Desa -->
-    <div class="lg:col-span-2">
-      <div class="overflow-hidden rounded-2xl shadow-xl border-2 border-green-200 ring-1 ring-green-100 transition-transform hover:scale-[1.01] duration-300">
-        <iframe
-          src="https://maps.google.com/maps?q=-6.974394,107.753007&z=16&output=embed"
-          class="w-full h-80 md:h-[500px] border-0"
-          allowfullscreen
-          loading="lazy">
-        </iframe>
-      </div>
-    </div>
-
-    <!-- Keterangan Lokasi -->
-    <div class="space-y-8">
-      <h4 class="text-3xl font-bold text-green-900 mb-4 inline-flex items-center gap-2">
-        🗺️ Keterangan Lokasi
-        <span class="block w-16 h-1 bg-green-300 rounded-full"></span>
-      </h4>
-
-      @foreach ([
-        '🏢 Alamat'  => 'Jl. Raya Winduherang No.1, Kecamatan Cigugur, Kabupaten Kuningan',
-        '📧 Email'   => 'desawinduherang@kuningan.go.id',
-        '📞 Telepon' => '(0232) 8900110'
-      ] as $title => $text)
-        <div class="border-l-4 border-green-600 bg-white rounded-xl shadow-md p-6 hover:bg-green-50 transition hover:shadow-lg">
-          <h5 class="font-semibold text-green-800 text-lg mb-2">{{ $title }}</h5>
-          <p class="text-gray-700 text-sm leading-relaxed">{{ $text }}</p>
+    <div class="max-w-7xl mx-auto px-4 py-10">
+        <div class="text-center mb-6">
+            <h1 class="text-4xl font-bold text-green-700">Peta Petualangan Winduherang</h1>
+            <p class="text-gray-600 mt-2">Eksplorasi titik penting di Desa Winduherang</p>
         </div>
-      @endforeach
+
+        <div class="flex flex-col md:flex-row gap-6">
+            {{-- Sidebar --}}
+            <aside id="sidebar" class="w-full md:w-64 bg-green-50 rounded-xl p-4 shadow border border-green-100">
+                <input id="locSearch" type="text" placeholder="Cari lokasi..."
+                    class="w-full px-3 py-2 mb-4 border border-green-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400" />
+
+                <ul id="locList" class="space-y-2 max-h-[60vh] overflow-y-auto text-sm">
+                    @foreach ($locations as $idx => $loc)
+                        <li>
+                            <button data-idx="{{ $idx }}"
+                                class="location-btn w-full text-left px-3 py-2 rounded-lg hover:bg-green-100">
+                                {{ $loc['name'] }}
+                            </button>
+                        </li>
+                    @endforeach
+                </ul>
+
+                <div class="mt-6 text-xs text-gray-500">
+                    Klik titik di peta atau nama lokasi untuk navigasi.
+                </div>
+            </aside>
+
+            {{-- Map --}}
+            <div class="flex-1 h-[70vh] rounded-xl overflow-hidden shadow border border-gray-200">
+                <div id="map" class="w-full h-full"></div>
+            </div>
+        </div>
     </div>
 
-  </div>
-</section>
+    {{-- Leaflet & CSS --}}
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+
+    <script>
+        const locations = @json($locations);
+
+        const map = L.map('map', {
+            zoomControl: false
+        }).setView(locations[0].coords, 17);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; OpenStreetMap contributors'
+        }).addTo(map);
+
+        L.control.zoom({
+            position: 'bottomright'
+        }).addTo(map);
+
+        const icons = {
+            office: L.icon({
+                iconUrl: 'https://cdn.jsdelivr.net/gh/pointhi/leaflet-color-markers@master/img/marker-icon-green.png',
+                iconSize: [25, 41],
+                iconAnchor: [12, 41]
+            }),
+            public: L.icon({
+                iconUrl: 'https://cdn.jsdelivr.net/gh/pointhi/leaflet-color-markers@master/img/marker-icon-yellow.png',
+                iconSize: [25, 41],
+                iconAnchor: [12, 41]
+            }),
+            edu: L.icon({
+                iconUrl: 'https://cdn.jsdelivr.net/gh/pointhi/leaflet-color-markers@master/img/marker-icon-blue.png',
+                iconSize: [25, 41],
+                iconAnchor: [12, 41]
+            }),
+        };
+
+        const layers = {
+            office: L.layerGroup().addTo(map),
+            public: L.layerGroup().addTo(map),
+            edu: L.layerGroup().addTo(map),
+        };
+
+        locations.forEach(loc => {
+            L.marker(loc.coords, {
+                    icon: icons[loc.cat]
+                })
+                .bindPopup(`<strong>${loc.name}</strong>`)
+                .addTo(layers[loc.cat]);
+        });
+
+        L.control.layers(null, {
+            'Kantor Desa': layers.office,
+            'Fasilitas Umum': layers.public,
+            'Pendidikan': layers.edu
+        }, {
+            collapsed: false,
+            position: 'topright'
+        }).addTo(map);
+
+        document.querySelectorAll('.location-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const idx = btn.dataset.idx;
+                const loc = locations[idx];
+                map.flyTo(loc.coords, 18, {
+                    duration: 1
+                });
+                L.popup().setLatLng(loc.coords).setContent(`<strong>${loc.name}</strong>`).openOn(map);
+                document.querySelectorAll('.location-btn').forEach(b => b.classList.remove('bg-green-100'));
+                btn.classList.add('bg-green-100');
+            });
+        });
+
+        document.getElementById('locSearch').addEventListener('input', e => {
+            const q = e.target.value.toLowerCase();
+            document.querySelectorAll('#locList li').forEach(li => {
+                li.style.display = li.textContent.toLowerCase().includes(q) ? 'block' : 'none';
+            });
+        });
+    </script>
+    </section>
 
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
     <script>
