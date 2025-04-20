@@ -1,7 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\{
+    ProfileController,
+    ArticleController
+};
 
 Route::get('/', function () {
     return view('index');
@@ -31,10 +34,6 @@ Route::get('/pemerintahan-winduherang', function () {
     return view('pemerintahan');
 })->name('pemerintahan');
 
-Route::get('/dashboard', function () {
-    return view('admin.content.dashboard');
-})->name('admin.dashboard');
-
 // Route::get('/', function () {
 //     return view('welcome');
 // });
@@ -44,6 +43,11 @@ Route::get('/dashboard', function () {
 // })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
+    Route::resource('admin/content/article', ArticleController::class)->names('admin.article');
+
+    Route::get('/dashboard', function () {
+        return view('admin.content.dashboard');
+    })->name('admin.dashboard');
     
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

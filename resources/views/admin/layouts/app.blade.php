@@ -25,6 +25,8 @@
             },
         };
     </script>
+    {{-- Favicon (logo kecil di tab) --}}
+    <link rel="icon" href="{{ asset('images/Logo_Kabupaten_kuningan.png') }}" type="image/png">
 
     <!-- Google Font (Inter) -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
@@ -40,71 +42,75 @@
         @click="sidebarOpen = false">
     </div>
 
-    <!-- Sidebar Mobile -->
-    <aside x-show="sidebarOpen" x-transition:enter="transition ease-out duration-300"
-        x-transition:enter-start="-translate-x-full" x-transition:enter-end="translate-x-0"
-        x-transition:leave="transition ease-in duration-300" x-transition:leave-start="translate-x-0"
-        x-transition:leave-end="-translate-x-full"
-        class="fixed inset-y-0 left-0 w-64 bg-gradient-to-b from-[#14532d] to-[#22c55e] text-white z-50 transform md:hidden shadow-2xl rounded-r-xl overflow-y-auto">
-        <div class="flex items-center justify-between px-6 py-4 border-b border-white/10">
-            <h1 class="text-xl font-bold">Desa Winduherang</h1>
-            <button @click="sidebarOpen = false" class="text-2xl leading-none hover:text-yellow-400">&times;</button>
-        </div>
-        <nav class="p-6 space-y-2">
-            @php
-                $navItems = [
-                    ['name' => 'Dashboard', 'route' => 'dashboard'],
-                    ['name' => 'Artikel', 'route' => 'articles'],
-                    ['name' => 'Kas Desa', 'route' => 'kas'],
-                    ['name' => 'Pengaduan', 'route' => 'pengaduan'],
-                    ['name' => 'Galeri', 'route' => 'galeri'],
-                    ['name' => 'Jadwal', 'route' => 'jadwal'],
-                    ['name' => 'Kontak', 'route' => 'kontak'],
-                    ['name' => 'Guest Page', 'route' => 'home'],
-                ];
-            @endphp
+<!-- Sidebar Mobile -->
+<aside x-show="sidebarOpen" x-transition:enter="transition ease-out duration-300"
+    x-transition:enter-start="-translate-x-full" x-transition:enter-end="translate-x-0"
+    x-transition:leave="transition ease-in duration-300" x-transition:leave-start="translate-x-0"
+    x-transition:leave-end="-translate-x-full"
+    class="fixed inset-y-0 left-0 w-64 bg-gradient-to-b from-[#14532d] to-[#22c55e] text-white z-50 transform md:hidden shadow-2xl rounded-r-xl overflow-y-auto">
 
-            @foreach ($navItems as $item)
-                <a href="#{{ $item['route'] }}"
-                    class="block py-2 px-4 rounded transition-all duration-200 {{ request()->is($item['route'] . '*') ? 'bg-[#facc15] text-black font-semibold' : 'hover:bg-[#facc15] hover:text-black' }}">
-                    {{ $item['name'] }}
-                </a>
-            @endforeach
+    <div class="flex items-center justify-between px-6 py-4 border-b border-white/10">
+        <h1 class="text-xl font-bold">Desa Winduherang</h1>
+        <button @click="sidebarOpen = false" class="text-2xl leading-none hover:text-yellow-400">&times;</button>
+    </div>
 
-            <form method="POST" action="{{ route('logout') }}" id="logoutFormMobile">
-                @csrf
-                <button type="submit" onclick="return confirmLogout(event)"
-                    class="w-full mt-4 py-2 px-4 text-left bg-red-500 hover:bg-red-600 rounded">
-                    Log Out
-                </button>
-            </form>
-        </nav>
-    </aside>
+    <nav class="p-6 space-y-2">
+        <a href="{{ route('admin.dashboard') }}"
+            class="block py-2 px-4 rounded transition-all duration-200 {{ request()->routeIs('admin.dashboard') ? 'bg-[#facc15] text-black font-semibold' : 'hover:bg-[#facc15] hover:text-black' }}">
+            Dashboard
+        </a>
+        <a href="{{ route('admin.article.index') }}"
+            class="block py-2 px-4 rounded transition-all duration-200 {{ request()->routeIs('admin.article.*') ? 'bg-[#facc15] text-black font-semibold' : 'hover:bg-[#facc15] hover:text-black' }}">
+            Artikel
+        </a>
+        <a href="{{ route('home') }}"
+            class="block py-2 px-4 rounded transition-all duration-200 {{ request()->routeIs('home') ? 'bg-[#facc15] text-black font-semibold' : 'hover:bg-[#facc15] hover:text-black' }}">
+            Guest Page
+        </a>
 
-    <!-- Sidebar Desktop -->
-    <aside
-        class="hidden md:fixed md:inset-y-0 md:w-64 md:flex md:flex-col bg-gradient-to-b from-[#14532d] to-[#22c55e] text-white shadow-2xl rounded-r-xl overflow-y-auto">
-        <div class="px-6 py-6 border-b border-white/10">
-            <h1 class="text-2xl font-bold">Desa Winduherang</h1>
-            <p class="text-sm text-gray-300">Admin Dashboard</p>
-        </div>
-        <nav class="flex-1 p-6 space-y-2">
-            @foreach ($navItems as $item)
-                <a href="#{{ $item['route'] }}"
-                    class="block py-2 px-4 rounded transition-all duration-200 {{ request()->is($item['route'] . '*') ? 'bg-[#facc15] text-black font-semibold' : 'hover:bg-[#facc15] hover:text-black' }}">
-                    {{ $item['name'] }}
-                </a>
-            @endforeach
+        <form method="POST" action="{{ route('logout') }}" id="logoutFormMobile">
+            @csrf
+            <button type="submit" onclick="return confirmLogout(event)"
+                class="w-full mt-4 py-2 px-4 text-left bg-red-500 hover:bg-red-600 rounded">
+                Log Out
+            </button>
+        </form>
+    </nav>
+</aside>
 
-            <form method="POST" action="{{ route('logout') }}" id="logoutFormDesktop">
-                @csrf
-                <button type="submit" onclick="return confirmLogout(event)"
-                    class="w-full mt-6 py-2 px-4 text-left bg-red-500 hover:bg-red-600 rounded">
-                    Log Out
-                </button>
-            </form>
-        </nav>
-    </aside>
+<!-- Sidebar Desktop -->
+<aside
+    class="hidden md:fixed md:inset-y-0 md:w-64 md:flex md:flex-col bg-gradient-to-b from-[#14532d] to-[#22c55e] text-white shadow-2xl rounded-r-xl overflow-y-auto">
+    <div class="px-6 py-6 border-b border-white/10">
+        <h1 class="text-2xl font-bold">Desa Winduherang</h1>
+        <p class="text-sm text-gray-300">Admin Dashboard</p>
+    </div>
+
+    <nav class="flex-1 p-6 space-y-2">
+        <a href="{{ route('admin.dashboard') }}"
+            class="block py-2 px-4 rounded transition-all duration-200 {{ request()->routeIs('admin.dashboard') ? 'bg-[#facc15] text-black font-semibold' : 'hover:bg-[#facc15] hover:text-black' }}">
+            Dashboard
+        </a>
+        <a href="{{ route('admin.article.index') }}"
+            class="block py-2 px-4 rounded transition-all duration-200 {{ request()->routeIs('admin.article.*') ? 'bg-[#facc15] text-black font-semibold' : 'hover:bg-[#facc15] hover:text-black' }}">
+            Artikel
+        </a>
+        <a href="{{ route('home') }}"
+            class="block py-2 px-4 rounded transition-all duration-200 {{ request()->routeIs('home') ? 'bg-[#facc15] text-black font-semibold' : 'hover:bg-[#facc15] hover:text-black' }}">
+            Guest Page
+        </a>
+
+        <form method="POST" action="{{ route('logout') }}" id="logoutFormDesktop">
+            @csrf
+            <button type="submit" onclick="return confirmLogout(event)"
+                class="w-full mt-6 py-2 px-4 text-left bg-red-500 hover:bg-red-600 rounded">
+                Log Out
+            </button>
+        </form>
+    </nav>
+</aside>
+
+
 
     <!-- JavaScript Alert Confirmation -->
     <script>
