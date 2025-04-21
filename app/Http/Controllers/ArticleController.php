@@ -41,23 +41,23 @@ class ArticleController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title'         => 'required|min:3',
-            'content'       => 'required',
-            'category'      => 'nullable|string',
-            'date'          => 'required|date',
-            'image'         => 'nullable|image|max:2048',
-            'author_name'   => 'nullable|string',
-            'author_photo'  => 'nullable|image|max:2048',
+            'title' => 'required|min:3',
+            'content' => 'required',
+            'category' => 'nullable|string',
+            'date' => 'required|date',
+            'image' => 'nullable|image|max:2048',
+            'author_name' => 'nullable|string',
+            'author_photo' => 'nullable|image|max:2048',
         ], [
-            'title.required'        => 'Judul wajib diisi.',
-            'title.min'             => 'Judul minimal harus :min karakter.',
-            'content.required'      => 'Konten wajib diisi.',
-            'date.required'         => 'Tanggal wajib diisi.',
-            'date.date'             => 'Tanggal tidak valid.',
-            'image.image'           => 'File gambar tidak valid.',
-            'image.max'             => 'Ukuran gambar maksimal 2MB.',
-            'author_photo.image'    => 'Foto penulis harus berupa gambar.',
-            'author_photo.max'      => 'Ukuran foto penulis maksimal 2MB.',
+            'title.required' => 'Judul wajib diisi.',
+            'title.min' => 'Judul minimal harus :min karakter.',
+            'content.required' => 'Konten wajib diisi.',
+            'date.required' => 'Tanggal wajib diisi.',
+            'date.date' => 'Tanggal tidak valid.',
+            'image.image' => 'File gambar tidak valid.',
+            'image.max' => 'Ukuran gambar maksimal 2MB.',
+            'author_photo.image' => 'Foto penulis harus berupa gambar.',
+            'author_photo.max' => 'Ukuran foto penulis maksimal 2MB.',
         ]);
 
         $data = $request->all();
@@ -93,23 +93,23 @@ class ArticleController extends Controller
         $article = Article::findOrFail($id);
 
         $request->validate([
-            'title'         => 'required|min:3',
-            'content'       => 'required',
-            'category'      => 'nullable|string',
-            'date'          => 'required|date',
-            'image'         => 'nullable|image|max:2048',
-            'author_name'   => 'nullable|string',
-            'author_photo'  => 'nullable|image|max:2048',
+            'title' => 'required|min:3',
+            'content' => 'required',
+            'category' => 'nullable|string',
+            'date' => 'required|date',
+            'image' => 'nullable|image|max:2048',
+            'author_name' => 'nullable|string',
+            'author_photo' => 'nullable|image|max:2048',
         ], [
-            'title.required'        => 'Judul wajib diisi.',
-            'title.min'             => 'Judul minimal harus :min karakter.',
-            'content.required'      => 'Konten wajib diisi.',
-            'date.required'         => 'Tanggal wajib diisi.',
-            'date.date'             => 'Tanggal tidak valid.',
-            'image.image'           => 'File gambar tidak valid.',
-            'image.max'             => 'Ukuran gambar maksimal 2MB.',
-            'author_photo.image'    => 'Foto penulis harus berupa gambar.',
-            'author_photo.max'      => 'Ukuran foto penulis maksimal 2MB.',
+            'title.required' => 'Judul wajib diisi.',
+            'title.min' => 'Judul minimal harus :min karakter.',
+            'content.required' => 'Konten wajib diisi.',
+            'date.required' => 'Tanggal wajib diisi.',
+            'date.date' => 'Tanggal tidak valid.',
+            'image.image' => 'File gambar tidak valid.',
+            'image.max' => 'Ukuran gambar maksimal 2MB.',
+            'author_photo.image' => 'Foto penulis harus berupa gambar.',
+            'author_photo.max' => 'Ukuran foto penulis maksimal 2MB.',
         ]);
 
         $data = $request->all();
@@ -125,7 +125,8 @@ class ArticleController extends Controller
         return redirect('/admin/content/article')->with('success', 'Artikel berhasil diperbarui.');
     }
 
-    // Halaman depan (public)
+    // app/Http/Controllers/ArticleController.php
+
     public function frontIndex(Request $request)
     {
         $query = Article::query();
@@ -133,16 +134,21 @@ class ArticleController extends Controller
         if ($request->filled('category')) {
             $query->where('category', $request->category);
         }
-
         if ($request->filled('search')) {
             $query->where('title', 'like', '%' . $request->search . '%');
         }
 
-        $articles = $query->latest()->paginate(10)->appends($request->query());
-
+        $articles = $query->latest()->paginate(9)->appends($request->query());
         $categories = Article::select('category')->distinct()->pluck('category');
 
-        return view('news', compact('articles', 'categories'));
+        return view('berita', compact('articles', 'categories'));
+    }
+
+    // Tampilkan artikel spesifik
+    public function showLove($id)
+    {
+        $article = Article::findOrFail($id);
+        return view('berita-detail', compact('article'));
     }
 
     // Hapus artikel
@@ -153,4 +159,5 @@ class ArticleController extends Controller
 
         return redirect('/admin/content/article')->with('success', 'Artikel berhasil dihapus.');
     }
+
 }

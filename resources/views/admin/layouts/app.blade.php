@@ -135,7 +135,7 @@
                 </button>
                 <h2 class="text-xl font-bold">Dashboard</h2>
             </div>
-            <span class="text-sm hidden md:inline-block">Selamat datang, Admin!</span>
+            <span class="text-sm hidden md:inline-block">Selamat datang, {{ Auth::user()->name }}</span>
         </header>
 
         <!-- Main Content -->

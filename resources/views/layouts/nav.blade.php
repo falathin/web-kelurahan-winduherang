@@ -14,7 +14,7 @@
                 $items = [
                     ['route' => 'home', 'label' => 'Beranda'],
                     ['route' => 'profil', 'label' => 'Profil Desa'],
-                    ['route' => 'berita', 'label' => 'Berita'],
+                    ['route' => 'news', 'label' => 'Berita'],
                     ['route' => 'galeri', 'label' => 'Galeri'],
                     ['route' => 'pemerintahan', 'label' => 'Pemerintahan'],
                     ['route' => 'wartaWargi', 'label' => 'Kontak Kami'],

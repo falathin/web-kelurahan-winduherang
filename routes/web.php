@@ -14,9 +14,11 @@ Route::get('/profil', function () {
     return view('profil');
 })->name('profil');
 
-Route::get('/berita-winduherang', function () {
-    return view('berita');
-})->name('berita');
+Route::get('/berita', [ArticleController::class, 'frontIndex'])
+     ->name('news');
+
+Route::get('/berita-detail/{id}', [ArticleController::class, 'showLove'])
+     ->name('article.show');
 
 Route::get('/galeri-winduherang', function () {
     return view('galeri');
