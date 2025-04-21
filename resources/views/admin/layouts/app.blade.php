@@ -56,15 +56,23 @@
 
     <nav class="p-6 space-y-2">
         <a href="{{ route('admin.dashboard') }}"
-            class="block py-2 px-4 rounded transition-all duration-200 {{ request()->routeIs('admin.dashboard') ? 'bg-[#facc15] text-black font-semibold' : 'hover:bg-[#facc15] hover:text-black' }}">
+            class="block py-2 px-4 rounded transition-all duration-200
+                   {{ request()->routeIs('admin.dashboard') ? 'bg-[#facc15] text-black font-semibold' : 'hover:bg-[#facc15] hover:text-black' }}">
             Dashboard
         </a>
         <a href="{{ route('admin.article.index') }}"
-            class="block py-2 px-4 rounded transition-all duration-200 {{ request()->routeIs('admin.article.*') ? 'bg-[#facc15] text-black font-semibold' : 'hover:bg-[#facc15] hover:text-black' }}">
+            class="block py-2 px-4 rounded transition-all duration-200
+                   {{ request()->routeIs('admin.article.*') ? 'bg-[#facc15] text-black font-semibold' : 'hover:bg-[#facc15] hover:text-black' }}">
             Artikel
         </a>
+        <a href="{{ route('admin.gallery.index') }}"
+            class="block py-2 px-4 rounded transition-all duration-200
+                   {{ request()->routeIs('admin.gallery.*') ? 'bg-[#facc15] text-black font-semibold' : 'hover:bg-[#facc15] hover:text-black' }}">
+            Galeri
+        </a>
         <a href="{{ route('home') }}"
-            class="block py-2 px-4 rounded transition-all duration-200 {{ request()->routeIs('home') ? 'bg-[#facc15] text-black font-semibold' : 'hover:bg-[#facc15] hover:text-black' }}">
+            class="block py-2 px-4 rounded transition-all duration-200
+                   {{ request()->routeIs('home') ? 'bg-[#facc15] text-black font-semibold' : 'hover:bg-[#facc15] hover:text-black' }}">
             Guest Page
         </a>
 
@@ -88,15 +96,23 @@
 
     <nav class="flex-1 p-6 space-y-2">
         <a href="{{ route('admin.dashboard') }}"
-            class="block py-2 px-4 rounded transition-all duration-200 {{ request()->routeIs('admin.dashboard') ? 'bg-[#facc15] text-black font-semibold' : 'hover:bg-[#facc15] hover:text-black' }}">
+            class="block py-2 px-4 rounded transition-all duration-200
+                   {{ request()->routeIs('admin.dashboard') ? 'bg-[#facc15] text-black font-semibold' : 'hover:bg-[#facc15] hover:text-black' }}">
             Dashboard
         </a>
         <a href="{{ route('admin.article.index') }}"
-            class="block py-2 px-4 rounded transition-all duration-200 {{ request()->routeIs('admin.article.*') ? 'bg-[#facc15] text-black font-semibold' : 'hover:bg-[#facc15] hover:text-black' }}">
+            class="block py-2 px-4 rounded transition-all duration-200
+                   {{ request()->routeIs('admin.article.*') ? 'bg-[#facc15] text-black font-semibold' : 'hover:bg-[#facc15] hover:text-black' }}">
             Artikel
         </a>
+        <a href="{{ route('admin.gallery.index') }}"
+            class="block py-2 px-4 rounded transition-all duration-200
+                   {{ request()->routeIs('admin.gallery.*') ? 'bg-[#facc15] text-black font-semibold' : 'hover:bg-[#facc15] hover:text-black' }}">
+            Galeri
+        </a>
         <a href="{{ route('home') }}"
-            class="block py-2 px-4 rounded transition-all duration-200 {{ request()->routeIs('home') ? 'bg-[#facc15] text-black font-semibold' : 'hover:bg-[#facc15] hover:text-black' }}">
+            class="block py-2 px-4 rounded transition-all duration-200
+                   {{ request()->routeIs('home') ? 'bg-[#facc15] text-black font-semibold' : 'hover:bg-[#facc15] hover:text-black' }}">
             Guest Page
         </a>
 
@@ -110,6 +126,14 @@
     </nav>
 </aside>
 
+<script>
+function confirmLogout(e) {
+    e.preventDefault();
+    if (confirm('Apakah kamu yakin ingin logout?')) {
+        e.target.closest('form').submit();
+    }
+}
+</script>
 
 
     <!-- JavaScript Alert Confirmation -->

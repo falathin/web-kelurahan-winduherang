@@ -3,7 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\{
     ProfileController,
-    ArticleController
+    ArticleController,
+    GalleryItemController,
 };
 
 Route::get('/', function () {
@@ -46,6 +47,7 @@ Route::get('/pemerintahan-winduherang', function () {
 
 Route::middleware('auth')->group(function () {
     Route::resource('admin/content/article', ArticleController::class)->names('admin.article');
+    Route::resource('admin/content/gallery', GalleryItemController::class)->names('admin.gallery');
 
     Route::get('/dashboard', function () {
         return view('admin.content.dashboard');
