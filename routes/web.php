@@ -7,6 +7,11 @@ use App\Http\Controllers\{
     GalleryItemController,
     ContactController,
     AdminPengaduanController,
+    FamilyCardController,
+    HamletController,
+    ResidentController,
+    RtController,
+    RwController,
 };
 
 Route::get('/', function () {
@@ -51,6 +56,13 @@ Route::post('/pengaduan', [ContactController::class,'store'])->name('pengaduan.s
 Route::middleware('auth')->group(function () {
     Route::resource('admin/content/article', ArticleController::class)->names('admin.article');
     Route::resource('admin/content/gallery', GalleryItemController::class)->names('admin.gallery');
+    
+    Route::resource('admin/penduduk', ResidentController::class)->names('penduduk');
+    Route::resource('admin/kk', FamilyCardController::class)->names('kk');
+    Route::resource('admin/dusun', HamletController::class)->names('dusun');
+    Route::resource('admin/Rw', RwController::class)->names('Rw');
+    Route::resource('admin/Rt', RtController::class)->names('Rt');
+
 
     Route::get('/dashboard', function () {
         return view('admin.content.dashboard');
