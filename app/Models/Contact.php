@@ -8,6 +8,7 @@ class Contact extends Model
 {
     protected $fillable = [
         'nama',
+        'email',
         'rw',
         'rt',
         'waktu',
@@ -18,6 +19,6 @@ class Contact extends Model
 
     protected $casts = [
         'waktu' => 'datetime',
-        'bukti' => 'array', // Menangani JSON otomatis sebagai array
+        'bukti' => 'array',
     ];
 }

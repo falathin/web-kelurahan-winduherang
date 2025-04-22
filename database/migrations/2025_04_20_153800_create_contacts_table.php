@@ -11,18 +11,19 @@ class CreateContactsTable extends Migration
         Schema::create('contacts', function (Blueprint $table) {
             $table->id();
             $table->string('nama');
+            $table->string('email');                  // <--- tambah ini
             $table->string('rw');
             $table->string('rt');
             $table->dateTime('waktu');
             $table->string('lokasi');
             $table->text('deskripsi');
-            $table->json('bukti')->nullable(); // Simpan array path gambar dalam JSON
+            $table->json('bukti')->nullable();
             $table->timestamps();
         });
     }
 
     public function down()
     {
-        Schema::dropIfExists('pengaduans');
+        Schema::dropIfExists('contacts');
     }
 }

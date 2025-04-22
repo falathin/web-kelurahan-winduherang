@@ -5,6 +5,8 @@ use App\Http\Controllers\{
     ProfileController,
     ArticleController,
     GalleryItemController,
+    ContactController,
+    AdminPengaduanController,
 };
 
 Route::get('/', function () {
@@ -21,9 +23,8 @@ Route::get('/berita', [ArticleController::class, 'frontIndex'])
 Route::get('/berita-detail/{id}', [ArticleController::class, 'showLove'])
      ->name('article.show');
 
-Route::get('/galeri-winduherang', function () {
-    return view('galeri');
-})->name('galeri');
+     Route::get('/gallery', [GalleryItemController::class, 'frontIndex'])
+     ->name('galeri');
 
 Route::get('/peta-winduherang', function () {
     return view('peta');
@@ -36,6 +37,8 @@ Route::get('/wartaWargi-winduherang', function () {
 Route::get('/pemerintahan-winduherang', function () {
     return view('pemerintahan');
 })->name('pemerintahan');
+
+Route::post('/pengaduan', [ContactController::class,'store'])->name('pengaduan.store');
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -52,6 +55,18 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard', function () {
         return view('admin.content.dashboard');
     })->name('admin.dashboard');
+
+    Route::get('admin/pengaduan', [AdminPengaduanController::class, 'index'])
+        ->name('admin.pengaduan.index');
+
+    Route::get('admin/pengaduan/{pengaduan}/reply', [AdminPengaduanController::class, 'showReplyForm'])
+        ->name('admin.pengaduan.reply');
+
+    Route::post('admin/pengaduan/{pengaduan}/reply', [AdminPengaduanController::class, 'sendReply'])
+        ->name('admin.pengaduan.sendReply');
+
+    Route::delete('admin/pengaduan/{pengaduan}', [AdminPengaduanController::class, 'destroy'])
+        ->name('admin.pengaduan.destroy');
     
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

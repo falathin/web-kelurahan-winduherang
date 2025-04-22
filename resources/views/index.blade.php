@@ -75,7 +75,6 @@
         <div class="absolute top-20 left-10 w-16 h-1 bg-green-600 rounded-full"></div>
         <div class="absolute bottom-10 right-10 w-24 h-1 bg-gradient-to-l from-green-600 to-green-300 rounded-full"></div>
         <div class="absolute bottom-20 right-10 w-16 h-1 bg-green-600 rounded-full"></div>
-        <div class="absolute top-1/2 left-5 transform -translate-y-1/2 h-40 border-l-4 border-green-400 rounded-full"></div>
 
         <div class="max-w-6xl mx-auto px-4 flex flex-col lg:flex-row items-start gap-10 relative z-10">
 
@@ -167,8 +166,14 @@
     </section>
 
 
-    <!-- Berita Desa Section -->
-    <section class="bg-gray-50 py-20 relative">
+    {{-- resources/views/partials/berita_section.blade.php --}}
+    @php
+        use App\Models\Article;
+        // ambil 3 berita terbaru berdasarkan kolom `date`
+        $latestArticles = Article::orderByDesc('date')->take(3)->get();
+    @endphp
+
+    <section class="bg-gray-50 border-t border-green-200 py-20">
         <div class="max-w-7xl mx-auto px-4">
             <h3 class="text-4xl font-bold text-center text-green-800 mb-16 relative inline-block">
                 Berita Desa
@@ -176,182 +181,130 @@
             </h3>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
-                @foreach (['Jumat Bersih', 'Pemeliharaan Area Gazebo Komunitas', 'Gotong Royong'] as $i => $title)
-                    <div
-                        class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 group relative">
-                        <!-- Gambar Thumbnail -->
+                @foreach ($latestArticles as $idx => $article)
+                    <a href="{{ route('article.show', $article) }}" data-aos="fade-up" data-aos-delay="{{ $idx * 100 }}"
+                        class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 group block">
+
+                        {{-- Thumbnail --}}
                         <div class="relative">
-                            <img src="https://picsum.photos/seed/{{ $i }}/600/400" alt="{{ $title }}"
+                            <img src="{{ $article->image ? asset('storage/' . $article->image) : 'https://via.placeholder.com/600x400' }}"
+                                alt="{{ $article->title }}"
                                 class="w-full h-52 object-cover transition-transform duration-300 group-hover:scale-105">
                             <div
                                 class="absolute bottom-2 left-2 bg-green-700 text-white text-xs px-3 py-1 rounded-full shadow">
-                                10 Apr 2025</div>
+                                {{ \Carbon\Carbon::parse($article->date)->format('d M Y') }}
+                            </div>
                         </div>
 
-                        <!-- Konten Berita -->
+                        {{-- Content --}}
                         <div class="p-6 space-y-3">
                             <span
                                 class="inline-block text-xs font-medium uppercase tracking-wide text-green-700 bg-green-100 px-2 py-1 rounded-full">
-                                @if ($i === 0)
-                                    Kegiatan Warga
-                                @elseif($i === 1)
-                                    Infrastruktur
-                                @else
-                                    Lingkungan
-                                @endif
+                                {{ $article->category }}
                             </span>
                             <h4 class="text-lg font-semibold text-gray-800 group-hover:text-green-700 transition-colors">
-                                {{ $title }}
+                                {{ \Illuminate\Support\Str::limit($article->title, 50) }}
                             </h4>
-                            <p class="text-gray-600 text-sm leading-relaxed line-clamp-3">
-                                @if ($i === 0)
-                                    Warga Kelurahan Winduherang berkumpul di jalan lingkungan untuk menjalankan program
-                                    kebersihan bersama.
-                                @elseif($i === 1)
-                                    Sebuah gazebo komunitas sedang dibersihkan dan dirawat, menjadi pusat kegiatan warga.
-                                @else
-                                    Warga bergotong royong membersihkan saluran air dan jalan untuk mencegah banjir.
-                                @endif
-                            </p>
 
-                            <!-- Tombol Popup -->
+                            <div class="text-gray-600 text-sm leading-relaxed prose max-w-none">
+                                {!! \Illuminate\Support\Str::limit($article->content, 200) !!}
+                            </div>
+
                             <div class="mt-4">
-                                <button onclick="openModal({{ $i }})"
+                                <span
                                     class="text-green-700 font-medium inline-flex items-center hover:underline transition">
                                     Baca Selengkapnya
                                     <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" stroke-width="2"
                                         viewBox="0 0 24 24">
                                         <path d="M9 5l7 7-7 7" />
                                     </svg>
-                                </button>
+                                </span>
                             </div>
                         </div>
-                    </div>
+
+                    </a>
                 @endforeach
             </div>
         </div>
-
-        <!-- MODAL -->
-        <div id="modalBerita" class="fixed inset-0 z-50 hidden items-center justify-center bg-black bg-opacity-50">
-            <div
-                class="bg-white max-w-2xl w-full mx-4 md:mx-auto rounded-xl shadow-xl overflow-hidden animate__animated animate__fadeIn">
-
-                <!-- Gambar Header -->
-                <img id="modalImage" src="https://via.placeholder.com/800x400" alt="Gambar Berita"
-                    class="w-full h-52 md:h-64 object-cover">
-
-                <div class="p-6 space-y-4">
-                    <!-- Header & Tombol Close -->
-                    <div class="flex justify-between items-start border-b pb-3">
-                        <div>
-                            <span id="modalCategory"
-                                class="inline-block text-xs font-semibold bg-green-100 text-green-700 px-3 py-1 rounded-full mb-1">Kategori</span>
-                            <h4 id="modalTitle" class="text-2xl font-bold text-green-800">Judul Berita</h4>
-                            <p id="modalDate" class="text-sm text-gray-500">Tanggal</p>
-                        </div>
-                        <button onclick="closeModal()"
-                            class="text-gray-400 hover:text-red-600 text-2xl leading-none">&times;</button>
-                    </div>
-
-                    <!-- Konten -->
-                    <div id="modalContent"
-                        class="text-gray-700 text-sm leading-relaxed space-y-4 max-h-[60vh] overflow-y-auto">
-                        <p>Konten berita akan muncul di sini...</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
     </section>
 
-    <!-- SCRIPT MODAL -->
-    <script>
-        const beritaDetails = [{
-                title: 'Jumat Bersih',
-                content: `
-        <p>Warga Kelurahan Winduherang berkumpul di lingkungan masing-masing untuk menjalankan kegiatan Jumat Bersih.</p>
-        <p>Kegiatan ini tidak hanya bertujuan menjaga kebersihan, namun juga mempererat silaturahmi antarwarga dari berbagai latar belakang budaya dan agama.</p>
-        <p>Koordinasi dilakukan bersama Ketua RT, RW, dan perangkat kelurahan setempat untuk memastikan area bersih dan bebas sampah.</p>
-      `
-            },
-            {
-                title: 'Pemeliharaan Area Gazebo Komunitas',
-                content: `
-        <p>Gazebo atau pendopo komunitas yang terletak di pusat desa sedang dilakukan pembersihan dan perawatan.</p>
-        <p>Gazebo ini merupakan tempat bersejarah tempat warga sering berkumpul, berdiskusi, bahkan menggelar pelatihan keterampilan lokal.</p>
-        <p>Diharapkan dengan perawatan berkala ini, area tetap nyaman digunakan sebagai pusat kegiatan masyarakat.</p>
-      `
-            },
-            {
-                title: 'Gotong Royong',
-                content: `
-        <p>Warga secara sukarela bergotong royong membersihkan saluran air dan jalan desa, terutama di area berbukit.</p>
-        <p>Kegiatan ini rutin dilakukan agar tidak terjadi penyumbatan air dan demi menciptakan lingkungan sehat dan asri.</p>
-        <p>Kebersamaan dan semangat gotong royong ini merupakan nilai budaya yang terus dijaga di Kelurahan Winduherang.</p>
-      `
-            }
-        ];
+    {{-- resources/views/partials/galeri_alam.blade.php --}}
+    @php
+        use App\Models\GalleryItem;
+        $latestItems = GalleryItem::orderByDesc('date')->take(4)->get();
+    @endphp
 
-        function openModal(index) {
-            const modal = document.getElementById('modalBerita');
-            const title = document.getElementById('modalTitle');
-            const content = document.getElementById('modalContent');
-
-            title.innerText = beritaDetails[index].title;
-            content.innerHTML = beritaDetails[index].content;
-
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
-        }
-
-        function closeModal() {
-            const modal = document.getElementById('modalBerita');
-            modal.classList.remove('flex');
-            modal.classList.add('hidden');
-        }
-    </script>
-
-
-    <!-- Galeri Alam Section - Minimalis Estetik Upgrade -->
     <section class="py-20 bg-white">
         <div class="max-w-6xl mx-auto px-4">
             <h3 class="text-3xl md:text-4xl font-semibold text-center text-green-700 mb-14 tracking-tight"
                 data-aos="fade-up">
                 Galeri Kegiatan Alam Desa
+                <span class="block w-24 h-1 bg-green-300 mt-4 mx-auto rounded-full"></span>
             </h3>
 
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-                @foreach (range(1, 8) as $id)
-                    <div class="group relative overflow-hidden rounded-2xl border border-green-200 bg-white shadow transition duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg hover:border-green-400 cursor-pointer"
-                        data-aos="zoom-in" data-aos-delay="{{ $loop->iteration * 100 }}"
-                        @click="Swal.fire({ 
-                title: '🌳 Kegiatan Alam RW {{ $id }}',
-                html: `
-                  <div class='text-left leading-relaxed'>
-                    <p><strong>📌 Jenis:</strong> Penanaman Pohon</p>
-                    <p><strong>📅 Tanggal:</strong> 2024-04-{{ 10 + $id }}</p>
-                    <p><strong>📝 Deskripsi:</strong> Penanaman pohon bersama warga RW {{ $id }} di tepi sungai untuk menjaga ekosistem.</p>
-                  </div>`,
-                imageUrl: 'https://picsum.photos/id/{{ 100 + $id }}/800/500',
-                imageWidth: '100%',
-                imageAlt: 'Kegiatan RW {{ $id }}',
-                showCloseButton: true,
-                focusConfirm: false,
-                confirmButtonColor: '#34D399',
-                confirmButtonText: 'Tutup'
-              })">
-                        <img src="https://picsum.photos/id/{{ 100 + $id }}/400/300"
-                            alt="Kegiatan Alam RW {{ $id }}"
-                            class="w-full h-44 object-cover transition-transform duration-300 ease-in-out group-hover:scale-110">
+            {{-- 4‑column grid, always one row --}}
+            <div class="grid grid-cols-4 gap-6">
+                @foreach ($latestItems as $loopIndex => $item)
+                    <div class="group relative overflow-hidden rounded-2xl border border-green-200 bg-white shadow transition transform hover:scale-105 hover:shadow-lg hover:border-green-400 cursor-pointer"
+                        data-aos="zoom-in" data-aos-delay="{{ ($loopIndex + 1) * 100 }}"
+                        onclick="openModal('{{ $item->image_url }}', '{{ addslashes($item->title) }}', '{{ $item->date->format('d M Y') }}')">
+                        {{-- Thumbnail --}}
+                        <img src="{{ $item->image_url }}" alt="{{ $item->title }}"
+                            class="w-full h-44 object-cover transition-transform duration-300 group-hover:scale-110">
+
+                        {{-- Caption overlay --}}
                         <div
                             class="absolute bottom-0 w-full bg-green-50 bg-opacity-90 px-3 py-2 text-center text-green-800 text-sm font-semibold backdrop-blur-md">
-                            🌿 RW {{ $id }} — Penanaman Pohon
+                            🌿 {{ $item->title }} — {{ $item->date->format('d M Y') }}
                         </div>
                     </div>
                 @endforeach
             </div>
         </div>
+
+        {{-- Modal --}}
+        <div id="galleryModal"
+            class="fixed inset-0 bg-black bg-opacity-70 backdrop-blur-sm flex items-center justify-center hidden z-50 px-4 py-8 overflow-y-auto">
+            <div
+                class="relative bg-white rounded-2xl shadow-2xl w-full max-w-3xl overflow-hidden animate__animated animate__zoomIn">
+                <!-- Close Button -->
+                <button onclick="closeModal()"
+                    class="absolute top-4 right-4 text-gray-400 hover:text-red-600 text-3xl leading-none font-bold focus:outline-none">
+                    &times;
+                </button>
+                <!-- Modal Image -->
+                <img id="modalImage" src="" alt="Detail"
+                    class="w-full h-[40vh] sm:h-[50vh] md:h-[60vh] object-cover bg-gray-100">
+                <!-- Caption -->
+                <div class="p-6 bg-green-50">
+                    <h3 id="modalTitle" class="text-2xl font-semibold text-green-800 text-center mb-2"></h3>
+                    <p id="modalDate" class="text-center text-gray-600"></p>
+                </div>
+            </div>
+        </div>
     </section>
+
+    <script>
+        function openModal(src, title, date) {
+            document.getElementById('modalImage').src = src;
+            document.getElementById('modalTitle').textContent = title;
+            document.getElementById('modalDate').textContent = date;
+            document.getElementById('galleryModal').classList.remove('hidden');
+            document.body.classList.add('overflow-hidden');
+        }
+
+        function closeModal() {
+            document.getElementById('galleryModal').classList.add('hidden');
+            document.body.classList.remove('overflow-hidden');
+        }
+
+        // click outside to close
+        document.getElementById('galleryModal').addEventListener('click', e => {
+            if (e.target.id === 'galleryModal') closeModal();
+        });
+    </script>
+
+
 
     @php
         $locations = [

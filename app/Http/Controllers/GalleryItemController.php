@@ -41,6 +41,11 @@ class GalleryItemController extends Controller
     {
         return view('admin.content.gallery.show', ['item' => $gallery]);
     }
+    public function Frontindex()
+    {
+        $items = GalleryItem::latest()->get(); // Ambil semua item galeri
+        return view('galeri', compact('items')); // Kirim ke view
+    }
 
     public function edit(GalleryItem $gallery)
     {

@@ -26,53 +26,74 @@
     {{-- Form Pengaduan --}}
     <section id="form-pengaduan" class="max-w-3xl mx-auto px-4 py-16 bg-white rounded-2xl shadow-lg mb-24">
         <h2 class="text-2xl font-bold text-green-800 mb-6 text-center">Form Pengaduan Masyarakat</h2>
-        <form action="#" method="POST" enctype="multipart/form-data" class="space-y-6">
+        {{-- Success Message --}}
+        @if (session('success'))
+            <div x-data="{ show: true }" x-init="setTimeout(() => show = false, 5000)" x-show="show"
+                class="mb-6 p-4 bg-green-100 border-l-4 border-green-500 text-green-800 rounded-lg shadow">
+                {{ session('success') }}
+            </div>
+        @endif
+        <form action="{{ route('pengaduan.store') }}" method="POST" enctype="multipart/form-data" class="space-y-6">
             @csrf
+        
+            {{-- Baris 1: Nama dan Email --}}
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                     <label class="block text-gray-700 font-medium mb-1">Nama Pelapor</label>
                     <input type="text" name="nama" placeholder="Nama lengkap"
                         class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-200" />
                 </div>
-                <div class="flex space-x-4">
-                    <div class="flex-1">
-                        <label class="block text-gray-700 font-medium mb-1">RW</label>
-                        <input type="text" name="rw" placeholder="RW"
-                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-200" />
-                    </div>
-                    <div class="flex-1">
-                        <label class="block text-gray-700 font-medium mb-1">RT</label>
-                        <input type="text" name="rt" placeholder="RT"
-                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-200" />
-                    </div>
+                <div>
+                    <label class="block text-gray-700 font-medium mb-1">Email Pelapor</label>
+                    <input type="text" name="email" placeholder="Email"
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-200" />
                 </div>
             </div>
-
+        
+            {{-- Baris 2: RW dan RT --}}
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <label class="block text-gray-700 font-medium mb-1">RW</label>
+                    <input type="text" maxlength="3" name="rw" placeholder="RW"
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-200" />
+                </div>
+                <div>
+                    <label class="block text-gray-700 font-medium mb-1">RT</label>
+                    <input type="text" maxlength="3" name="rt" placeholder="RT"
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-200" />
+                </div>
+            </div>
+        
+            {{-- Baris 3: Tanggal & Lokasi --}}
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                     <label class="block text-gray-700 font-medium mb-1">Tanggal & Waktu</label>
                     <input type="datetime-local" name="waktu"
+                        value="{{ now()->format('Y-m-d\TH:i') }}"
                         class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-200" />
-                </div>
+                </div>                
                 <div>
                     <label class="block text-gray-700 font-medium mb-1">Lokasi Masalah</label>
                     <input type="text" name="lokasi" placeholder="Contoh: Jalan Desa RT 03"
                         class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-200" />
                 </div>
             </div>
-
+        
+            {{-- Baris 4: Deskripsi --}}
             <div>
                 <label class="block text-gray-700 font-medium mb-1">Deskripsi Masalah</label>
                 <textarea name="deskripsi" rows="4" placeholder="Jelaskan secara singkat masalah atau keluhan Anda..."
                     class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-200"></textarea>
             </div>
-
+        
+            {{-- Baris 5: Upload --}}
             <div>
                 <label class="block text-gray-700 font-medium mb-1">Dokumentasi (gambar)</label>
                 <input type="file" name="bukti[]" accept="image/*" multiple class="w-full text-gray-600" />
-                <p class="text-sm text-gray-500 mt-1">Unggah hingga 5 foto untuk memperkuat bukti.</p>
+                <p class="text-sm text-gray-500 mt-1">Unggah foto untuk memperkuat bukti.</p>
             </div>
-
+        
+            {{-- Tombol --}}
             <div class="text-center">
                 <button type="submit"
                     class="bg-green-600 hover:bg-green-500 text-white font-semibold px-8 py-3 rounded-lg shadow-md transition">
@@ -80,6 +101,7 @@
                 </button>
             </div>
         </form>
+        
     </section>
 
     <!-- Pengaduan Populer Lengkap -->

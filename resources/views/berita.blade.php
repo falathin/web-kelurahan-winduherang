@@ -48,16 +48,9 @@
     <div id="articlesGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
       @forelse($articles as $idx => $item)
         <a href="{{ route('article.show', $item->id) }}"
-           class="group bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-2xl transition transform hover:-translate-y-1"
-           data-index="{{ $idx }}"
-           data-title="{{ Str::limit($item->title, 100) }}"
-           data-category="{{ $item->category }}"
-           data-date="{{ \Carbon\Carbon::parse($item->date)->format('d M Y') }}"
-           data-content="{{ Str::limit(strip_tags($item->content), 120) }}"
-           data-author="{{ $item->author_name }}"
-           data-author-photo="{{ $item->author_photo ? asset('storage/'.$item->author_photo) : 'https://via.placeholder.com/50' }}"
-           data-image="{{ $item->image ? asset('storage/'.$item->image) : 'https://via.placeholder.com/600x400' }}"
-        >
+           class="article-card group bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-2xl transition transform hover:-translate-y-1"
+           data-title="{{ Str::lower($item->title) }}"
+           data-category="{{ $item->category }}">
           <div class="relative overflow-hidden">
             <img src="{{ $item->image ? asset('storage/'.$item->image) : 'https://via.placeholder.com/600x400' }}"
                  alt="{{ $item->title }}"
@@ -70,26 +63,23 @@
             </span>
           </div>
           <div class="p-6 flex flex-col h-48 justify-between">
-            <h2 class="text-lg font-semibold text-gray-800 line-clamp-2">
-              {{ Str::limit($item->title, 25) }}
-            </h2>            
+            <h2 class="text-lg font-semibold text-gray-800 line-clamp-2">{{ Str::limit($item->title, 30) }}</h2>
             <p class="text-gray-600 text-sm mt-2 line-clamp-3">
               {{ Str::limit(strip_tags($item->content), 100) }}
             </p>
             <div class="mt-4 flex justify-between items-center">
               <span class="text-green-700 font-semibold hover:underline">Baca Detail &rarr;</span>
               <div class="flex items-center gap-2">
-                <img src="{{ $item->author_photo ? asset('storage/'.$item->author_photo) : 'https://via.placeholder.com/50' }}" 
+                <img src="{{ $item->author_photo ? asset('storage/'.$item->author_photo) : 'https://via.placeholder.com/40' }}" 
                      alt="{{ $item->author_name }}" 
-                     class="w-10 h-10 rounded-full object-cover">
+                     class="w-8 h-8 rounded-full object-cover">
                 <span class="text-sm text-gray-600">{{ $item->author_name }}</span>
               </div>
             </div>
           </div>
         </a>
       @empty
-        <div id="noResults"
-             class="col-span-full text-center text-gray-500 text-lg font-medium">
+        <div id="noResults" class="col-span-full text-center text-gray-500 text-lg font-medium">
           😢 Tidak ada berita yang sesuai.
         </div>
       @endforelse
@@ -97,8 +87,44 @@
 
     {{-- Pagination --}}
     <div class="mt-12 flex justify-center">
-      {{ $articles->appends(request()->query())->links() }}
+      {{ $articles->links() }}
     </div>
   </div>
 </section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const searchInput    = document.getElementById('searchInput');
+    const categoryFilter = document.getElementById('categoryFilter');
+    const cards          = document.querySelectorAll('.article-card');
+    const noRes          = document.getElementById('noResults');
+
+    function filterArticles() {
+      const q   = searchInput.value.trim().toLowerCase();
+      const cat = categoryFilter.value;
+      let visible = 0;
+
+      cards.forEach(card => {
+        const title    = card.dataset.title;
+        const category = card.dataset.category;
+        const okText   = !q || title.includes(q);
+        const okCat    = !cat || category === cat;
+
+        if (okText && okCat) {
+          card.style.display = '';
+          visible++;
+        } else {
+          card.style.display = 'none';
+        }
+      });
+
+      if (noRes) {
+        noRes.style.display = (visible > 0 ? 'none' : '');
+      }
+    }
+
+    searchInput.addEventListener('input',   filterArticles);
+    categoryFilter.addEventListener('change', filterArticles);
+  });
+</script>
 @endsection
