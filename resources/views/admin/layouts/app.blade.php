@@ -44,160 +44,65 @@
 
     @php $cnt = \App\Models\Contact::count(); @endphp
 
-    <!-- Sidebar Mobile -->
-    <aside x-show="sidebarOpen" x-transition:enter="transition ease-out duration-300"
-        x-transition:enter-start="-translate-x-full" x-transition:enter-end="translate-x-0"
-        x-transition:leave="transition ease-in duration-300" x-transition:leave-start="translate-x-0"
-        x-transition:leave-end="-translate-x-full"
-        class="fixed inset-y-0 left-0 w-64 bg-gradient-to-b from-[#14532d] to-[#22c55e] text-white z-50 transform md:hidden shadow-2xl rounded-r-xl overflow-y-auto">
-
-        <div class="flex items-center justify-between px-6 py-4 border-b border-white/10">
-            <h1 class="text-xl font-bold">Desa Winduherang</h1>
-            <button @click="sidebarOpen = false" class="text-2xl leading-none hover:text-yellow-400">&times;</button>
-        </div>
-
-        <nav class="p-6 space-y-2">
-            <a href="{{ route('admin.dashboard') }}"
-                class="block py-2 px-4 rounded transition-all duration-200
-                {{ request()->routeIs('admin.dashboard') ? 'bg-[#facc15] text-black font-semibold' : 'hover:bg-[#facc15] hover:text-black' }}">
-                Dashboard
-            </a>
-            <a href="{{ route('admin.article.index') }}"
-                class="block py-2 px-4 rounded transition-all duration-200
-                {{ request()->routeIs('admin.article.*') ? 'bg-[#facc15] text-black font-semibold' : 'hover:bg-[#facc15] hover:text-black' }}">
-                Artikel
-            </a>
-            <a href="{{ route('admin.gallery.index') }}"
-                class="block py-2 px-4 rounded transition-all duration-200
-                {{ request()->routeIs('admin.gallery.*') ? 'bg-[#facc15] text-black font-semibold' : 'hover:bg-[#facc15] hover:text-black' }}">
-                Galeri
-            </a>
-            @auth
-                <a href="{{ route('admin.pengaduan.index') }}"
-                    class="relative block py-2 px-4 rounded transition-all duration-200
-                {{ request()->routeIs('admin.pengaduan.*') ? 'bg-[#facc15] text-black font-semibold' : 'hover:bg-[#facc15] hover:text-black' }}">
-                    Pengaduan
-                    @if ($cnt)
-                        <span
-                            class="absolute top-1 right-3 bg-red-500 text-xs text-white rounded-full px-1">{{ $cnt }}</span>
-                    @endif
-                </a>
-            @endauth
-            <a href="{{ route('home') }}"
-                class="block py-2 px-4 rounded transition-all duration-200
-                {{ request()->routeIs('home') ? 'bg-[#facc15] text-black font-semibold' : 'hover:bg-[#facc15] hover:text-black' }}">
-                Guest Page
-            </a>
-
-            <form method="POST" action="{{ route('logout') }}" id="logoutFormMobile">
-                @csrf
-                <button type="submit" onclick="return confirmLogout(event)"
-                    class="w-full mt-4 py-2 px-4 text-left bg-red-500 hover:bg-red-600 rounded">
-                    Log Out
-                </button>
-            </form>
-        </nav>
-    </aside>
-
-    <!-- Sidebar Desktop -->
-    <aside
-        class="hidden md:fixed md:inset-y-0 md:w-64 md:flex md:flex-col bg-gradient-to-b from-[#14532d] to-[#22c55e] text-white shadow-2xl rounded-r-xl overflow-y-auto">
-        <div class="px-6 py-6 border-b border-white/10">
-            <h1 class="text-2xl font-bold">Desa Winduherang</h1>
-            <p class="text-sm text-gray-300">Admin Dashboard</p>
-        </div>
-
-        <nav class="flex-1 p-6 space-y-2">
-            <a href="{{ route('admin.dashboard') }}"
-                class="block py-2 px-4 rounded transition-all duration-200
-                {{ request()->routeIs('admin.dashboard') ? 'bg-[#facc15] text-black font-semibold' : 'hover:bg-[#facc15] hover:text-black' }}">
-                Dashboard
-            </a>
-            <a href="{{ route('admin.article.index') }}"
-                class="block py-2 px-4 rounded transition-all duration-200
-                {{ request()->routeIs('admin.article.*') ? 'bg-[#facc15] text-black font-semibold' : 'hover:bg-[#facc15] hover:text-black' }}">
-                Artikel
-            </a>
-            <a href="{{ route('admin.gallery.index') }}"
-                class="block py-2 px-4 rounded transition-all duration-200
-                {{ request()->routeIs('admin.gallery.*') ? 'bg-[#facc15] text-black font-semibold' : 'hover:bg-[#facc15] hover:text-black' }}">
-                Galeri
-            </a>
-            <a href="{{ route('admin.pengaduan.index') }}"
-                class="relative block py-2 px-4 rounded transition-all duration-200
-                {{ request()->routeIs('admin.pengaduan.*') ? 'bg-[#facc15] text-black font-semibold' : 'hover:bg-[#facc15] hover:text-black' }}">
+<!-- Sidebar Mobile -->
+<aside x-show="sidebarOpen" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="-translate-x-full" x-transition:enter-end="translate-x-0" x-transition:leave="transition ease-in duration-300" x-transition:leave-start="translate-x-0" x-transition:leave-end="-translate-x-full" class="fixed inset-y-0 left-0 w-64 bg-gradient-to-b from-[#14532d] to-[#22c55e] text-white z-50 transform md:hidden shadow-2xl rounded-r-xl overflow-y-auto">
+    <div class="flex items-center justify-between px-6 py-4 border-b border-white/10">
+        <h1 class="text-xl font-bold">Desa Winduherang</h1>
+        <button @click="sidebarOpen = false" class="text-2xl leading-none hover:text-yellow-400">&times;</button>
+    </div>
+    <nav class="p-6 space-y-2">
+        <a href="{{ route('admin.dashboard') }}" class="block py-2 px-4 rounded transition-all duration-200 {{ request()->routeIs('admin.dashboard') ? 'bg-[#facc15] text-black font-semibold' : 'hover:bg-[#facc15] hover:text-black' }}">Dashboard</a>
+        <a href="{{ route('admin.article.index') }}" class="block py-2 px-4 rounded transition-all duration-200 {{ request()->routeIs('admin.article.*') ? 'bg-[#facc15] text-black font-semibold' : 'hover:bg-[#facc15] hover:text-black' }}">Artikel</a>
+        <a href="{{ route('admin.gallery.index') }}" class="block py-2 px-4 rounded transition-all duration-200 {{ request()->routeIs('admin.gallery.*') ? 'bg-[#facc15] text-black font-semibold' : 'hover:bg-[#facc15] hover:text-black' }}">Galeri</a>
+        @auth
+            <a href="{{ route('admin.pengaduan.index') }}" class="relative block py-2 px-4 rounded transition-all duration-200 {{ request()->routeIs('admin.pengaduan.*') ? 'bg-[#facc15] text-black font-semibold' : 'hover:bg-[#facc15] hover:text-black' }}">
                 Pengaduan
-                @if ($cnt)
-                    <span
-                        class="absolute top-1 right-3 bg-red-500 text-xs text-white rounded-full px-1">{{ $cnt }}</span>
+                @if($cnt)
+                    <span class="absolute top-1 right-3 bg-red-500 text-xs text-white rounded-full px-1">{{ $cnt }}</span>
                 @endif
             </a>
+        @endauth
+        <a href="{{ route('penduduk.index') }}" class="block py-2 px-4 rounded transition-all duration-200 {{ request()->routeIs('penduduk.*') ? 'bg-[#facc15] text-black font-semibold' : 'hover:bg-[#facc15] hover:text-black' }}">Penduduk</a>
+        <a href="{{ route('kk.index') }}" class="block py-2 px-4 rounded transition-all duration-200 {{ request()->routeIs('kk.*') ? 'bg-[#facc15] text-black font-semibold' : 'hover:bg-[#facc15] hover:text-black' }}">Kartu Keluarga</a>
+        <a href="{{ route('dusun.index') }}" class="block py-2 px-4 rounded transition-all duration-200 {{ request()->routeIs('dusun.*') ? 'bg-[#facc15] text-black font-semibold' : 'hover:bg-[#facc15] hover:text-black' }}">Dusun</a>
+        <a href="{{ route('rw.index') }}" class="block py-2 px-4 rounded transition-all duration-200 {{ request()->routeIs('rw.*') ? 'bg-[#facc15] text-black font-semibold' : 'hover:bg-[#facc15] hover:text-black' }}">RW</a>
+        <a href="{{ route('rt.index') }}" class="block py-2 px-4 rounded transition-all duration-200 {{ request()->routeIs('rt.*') ? 'bg-[#facc15] text-black font-semibold' : 'hover:bg-[#facc15] hover:text-black' }}">RT</a>
+        <a href="{{ route('home') }}" class="block py-2 px-4 rounded transition-all duration-200 {{ request()->routeIs('home') ? 'bg-[#facc15] text-black font-semibold' : 'hover:bg-[#facc15] hover:text-black' }}">Guest Page</a>
+        <form method="POST" action="{{ route('logout') }}" id="logoutFormMobile">
+            @csrf
+            <button type="submit" onclick="return confirmLogout(event)" class="w-full mt-4 py-2 px-4 text-left bg-red-500 hover:bg-red-600 rounded">Log Out</button>
+        </form>
+    </nav>
+</aside>
 
-            <a href="{{ route('penduduk.index') }}"
-                class="relative block py-2 px-4 rounded transition-all duration-200
-                {{ request()->routeIs('admin.pengaduan.*') ? 'bg-[#facc15] text-black font-semibold' : 'hover:bg-[#facc15] hover:text-black' }}">
-                Penduduk
-                @if ($cnt)
-                    <span
-                        class="absolute top-1 right-3 bg-red-500 text-xs text-white rounded-full px-1">{{ $cnt }}</span>
-                @endif
-            </a>
-
-            <a href="{{ route('kk.index') }}"
-                class="relative block py-2 px-4 rounded transition-all duration-200
-                {{ request()->routeIs('admin.pengaduan.*') ? 'bg-[#facc15] text-black font-semibold' : 'hover:bg-[#facc15] hover:text-black' }}">
-                Kartu Keluarga
-                @if ($cnt)
-                    <span
-                        class="absolute top-1 right-3 bg-red-500 text-xs text-white rounded-full px-1">{{ $cnt }}</span>
-                @endif
-            </a>
-
-            <a href="{{ route('dusun.index') }}"
-                class="relative block py-2 px-4 rounded transition-all duration-200
-                {{ request()->routeIs('admin.pengaduan.*') ? 'bg-[#facc15] text-black font-semibold' : 'hover:bg-[#facc15] hover:text-black' }}">
-                Dusun
-                @if ($cnt)
-                    <span
-                        class="absolute top-1 right-3 bg-red-500 text-xs text-white rounded-full px-1">{{ $cnt }}</span>
-                @endif
-            </a>
-
-            <a href="{{ route('rw.index') }}"
-                class="relative block py-2 px-4 rounded transition-all duration-200
-                {{ request()->routeIs('admin.pengaduan.*') ? 'bg-[#facc15] text-black font-semibold' : 'hover:bg-[#facc15] hover:text-black' }}">
-                RW
-                @if ($cnt)
-                    <span
-                        class="absolute top-1 right-3 bg-red-500 text-xs text-white rounded-full px-1">{{ $cnt }}</span>
-                @endif
-            </a>
-
-            <a href="{{ route('rt.index') }}"
-                class="relative block py-2 px-4 rounded transition-all duration-200
-                {{ request()->routeIs('admin.pengaduan.*') ? 'bg-[#facc15] text-black font-semibold' : 'hover:bg-[#facc15] hover:text-black' }}">
-                RT
-                @if ($cnt)
-                    <span
-                        class="absolute top-1 right-3 bg-red-500 text-xs text-white rounded-full px-1">{{ $cnt }}</span>
-                @endif
-            </a>
-            
-            <a href="{{ route('home') }}"
-                class="block py-2 px-4 rounded transition-all duration-200
-                {{ request()->routeIs('home') ? 'bg-[#facc15] text-black font-semibold' : 'hover:bg-[#facc15] hover:text-black' }}">
-                Guest Page
-            </a>
-
-            <form method="POST" action="{{ route('logout') }}" id="logoutFormDesktop">
-                @csrf
-                <button type="submit" onclick="return confirmLogout(event)"
-                    class="w-full mt-6 py-2 px-4 text-left bg-red-500 hover:bg-red-600 rounded">
-                    Log Out
-                </button>
-            </form>
-        </nav>
-    </aside>
+<!-- Sidebar Desktop -->
+<aside class="hidden md:fixed md:inset-y-0 md:w-64 md:flex md:flex-col bg-gradient-to-b from-[#14532d] to-[#22c55e] text-white shadow-2xl rounded-r-xl overflow-y-auto">
+    <div class="px-6 py-6 border-b border-white/10">
+        <h1 class="text-2xl font-bold">Desa Winduherang</h1>
+        <p class="text-sm text-gray-300">Admin Dashboard</p>
+    </div>
+    <nav class="flex-1 p-6 space-y-2">
+        <a href="{{ route('admin.dashboard') }}" class="block py-2 px-4 rounded transition-all duration-200 {{ request()->routeIs('admin.dashboard') ? 'bg-[#facc15] text-black font-semibold' : 'hover:bg-[#facc15] hover:text-black' }}">Dashboard</a>
+        <a href="{{ route('admin.article.index') }}" class="block py-2 px-4 rounded transition-all duration-200 {{ request()->routeIs('admin.article.*') ? 'bg-[#facc15] text-black font-semibold' : 'hover:bg-[#facc15] hover:text-black' }}">Artikel</a>
+        <a href="{{ route('admin.gallery.index') }}" class="block py-2 px-4 rounded transition-all duration-200 {{ request()->routeIs('admin.gallery.*') ? 'bg-[#facc15] text-black font-semibold' : 'hover:bg-[#facc15] hover:text-black' }}">Galeri</a>
+        <a href="{{ route('admin.pengaduan.index') }}" class="relative block py-2 px-4 rounded transition-all duration-200 {{ request()->routeIs('admin.pengaduan.*') ? 'bg-[#facc15] text-black font-semibold' : 'hover:bg-[#facc15] hover:text-black' }}">
+            Pengaduan
+            @if($cnt)
+                <span class="absolute top-1 right-3 bg-red-500 text-xs text-white rounded-full px-1">{{ $cnt }}</span>
+            @endif
+        </a>
+        <a href="{{ route('penduduk.index') }}" class="block py-2 px-4 rounded transition-all duration-200 {{ request()->routeIs('penduduk.*') ? 'bg-[#facc15] text-black font-semibold' : 'hover:bg-[#facc15] hover:text-black' }}">Penduduk</a>
+        <a href="{{ route('kk.index') }}" class="block py-2 px-4 rounded transition-all duration-200 {{ request()->routeIs('kk.*') ? 'bg-[#facc15] text-black font-semibold' : 'hover:bg-[#facc15] hover:text-black' }}">Kartu Keluarga</a>
+        <a href="{{ route('dusun.index') }}" class="block py-2 px-4 rounded transition-all duration-200 {{ request()->routeIs('dusun.*') ? 'bg-[#facc15] text-black font-semibold' : 'hover:bg-[#facc15] hover:text-black' }}">Dusun</a>
+        <a href="{{ route('rw.index') }}" class="block py-2 px-4 rounded transition-all duration-200 {{ request()->routeIs('rw.*') ? 'bg-[#facc15] text-black font-semibold' : 'hover:bg-[#facc15] hover:text-black' }}">RW</a>
+        <a href="{{ route('rt.index') }}" class="block py-2 px-4 rounded transition-all duration-200 {{ request()->routeIs('rt.*') ? 'bg-[#facc15] text-black font-semibold' : 'hover:bg-[#facc15] hover:text-black' }}">RT</a>
+        <a href="{{ route('home') }}" class="block py-2 px-4 rounded transition-all duration-200 {{ request()->routeIs('home') ? 'bg-[#facc15] text-black font-semibold' : 'hover:bg-[#facc15] hover:text-black' }}">Guest Page</a>
+        <form method="POST" action="{{ route('logout') }}" id="logoutFormDesktop">
+            @csrf
+            <button type="submit" onclick="return confirmLogout(event)" class="w-full mt-6 py-2 px-4 text-left bg-red-500 hover:bg-red-600 rounded">Log Out</button>
+        </form>
+    </nav>
+</aside>
 
 
     <script>
