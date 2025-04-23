@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Rt extends Model
 {
     protected $table = 'rts';
-    protected $primaryKey = 'id_rt';
+    // protected $primaryKey = 'id_rt';
     protected $fillable = ['nomor_rt', 'id_rw'];
 
     public function rw()

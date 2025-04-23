@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Hamlet;
 use App\Models\Rw;
 use Illuminate\Http\Request;
 
@@ -12,8 +13,8 @@ class RwController extends Controller
      */
     public function index()
     {
-        $rws = Rw::latest()->get();  // Ambil semua data RW
-        return view('rw.index', compact('rws'));  // Kirim data ke view
+        $rws = Rw::with('hamlet')->latest()->get();  // Ambil semua data RW
+        return view('admin.content.rw.index', compact('rws'));  // Kirim data ke view
     }
 
     /**
@@ -21,7 +22,8 @@ class RwController extends Controller
      */
     public function create()
     {
-        return view('rw.create');  // Tampilkan form input
+        $dusuns = Hamlet::latest()->get();  // Ambil semua data Dusun
+        return view('admin.content.rw.create', compact('dusuns'));  // Tampilkan form input
     }
 
     /**
@@ -31,8 +33,8 @@ class RwController extends Controller
     {
         // Validasi inputan
         $request->validate([
-            'nama_rw' => 'required|string|max:255',  // Nama RW wajib diisi
-            'id_dusun' => 'required|exists:dusun,id',  // ID Dusun wajib ada dan valid
+            'nomor_rw' => 'required|string|max:255',  // Nomor RW wajib diisi
+            'id_dusun' => 'required|exists:hamlets,id',  // ID Dusun wajib ada dan valid
             // 'alamat' => 'required|string|max:500',  // Alamat wajib diisi dan maksimal 500 karakter
         ]);
 
@@ -49,7 +51,7 @@ class RwController extends Controller
     public function show(string $id)
     {
         $rw = Rw::findOrFail($id);  // Cari data RW berdasarkan ID
-        return view('rw.show', compact('rw'));  // Kirim data ke view
+        return view('admin.content.rw.show', compact('rw'));  // Kirim data ke view
     }
 
     /**
@@ -58,7 +60,8 @@ class RwController extends Controller
     public function edit(string $id)
     {
         $rw = Rw::findOrFail($id);  // Cari data RW berdasarkan ID
-        return view('rw.edit', compact('rw'));  // Tampilkan form edit dengan data RW
+        $dusuns = Hamlet::latest()->get();  // Ambil semua data Dusun
+        return view('admin.content.rw.edit', compact('rw', 'dusuns'));  // Tampilkan form edit dengan data RW
     }
 
     /**
@@ -68,8 +71,8 @@ class RwController extends Controller
     {
         // Validasi inputan
         $request->validate([
-            'nama_rw' => 'required|string|max:255',  // Nama RW wajib diisi
-            'id_dusun' => 'required|exists:dusun,id',  // ID Dusun wajib ada dan valid
+            'nomor_rw' => 'required|string|max:255',  // Nomor RW wajib diisi
+            'id_dusun' => 'required|exists:hamlets,id',  // ID Dusun wajib ada dan valid
             // 'alamat' => 'required|string|max:500',  // Alamat wajib diisi dan maksimal 500 karakter
         ]);
 

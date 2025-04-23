@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Rt;
+use App\Models\Rw;
 use Illuminate\Http\Request;
 
 class RtController extends Controller
@@ -10,14 +11,15 @@ class RtController extends Controller
     // Menampilkan daftar semua RT
     public function index()
     {
-        $rts = Rt::all();  // Ambil semua data RT
-        return view('rt.index', compact('rts'));  // Kirim data ke view
+        $rts = Rt::with('rw')->get();  // Ambil semua data RT
+        return view('admin.content.rt.index', compact('rts'));  // Kirim data ke view
     }
 
     // Menampilkan form untuk menambah RT
     public function create()
     {
-        return view('rt.create');  // Tampilkan form input
+        $rws = Rw::all();  // Ambil semua data RW
+        return view('admin.content.rt.create', compact('rws'));  // Tampilkan form input
     }
 
     // Menyimpan data RT baru
@@ -25,8 +27,8 @@ class RtController extends Controller
     {
         // Validasi inputan
         $request->validate([
-            'nama_rt' => 'required|string|max:255',  // Nama RT wajib diisi
-            'id_dusun' => 'required|exists:dusun,id',  // ID Dusun wajib ada dan valid
+            'nomor_rt' => 'required|string|max:255',  // nomor RT wajib diisi
+            'id_rw' => 'required|exists:rws,id',  // ID Rw wajib ada dan valid
             // 'alamat' => 'required|string|max:500',  // Alamat wajib diisi dan maksimal 500 karakter
         ]);
 
@@ -41,14 +43,15 @@ class RtController extends Controller
     public function show($id)
     {
         $rt = Rt::findOrFail($id);  // Cari data RT berdasarkan ID
-        return view('rt.show', compact('rt'));  // Kirim data ke view
+        return view('admin.content.rt.show', compact('rt'));  // Kirim data ke view
     }
 
     // Menampilkan form untuk mengedit data RT
     public function edit($id)
     {
         $rt = Rt::findOrFail($id);  // Ambil data RT berdasarkan ID
-        return view('rt.edit', compact('rt'));  // Kirim data ke form edit
+        $rws = Rw::all();  // Ambil semua data RW
+        return view('admin.content.rt.edit', compact('rt', 'rws'));  // Kirim data ke form edit
     }
 
     // Mengupdate data RT berdasarkan ID
@@ -56,8 +59,8 @@ class RtController extends Controller
     {
         // Validasi inputan
         $request->validate([
-            'nama_rt' => 'required|string|max:255',  // Nama RT wajib diisi
-            'id_dusun' => 'required|exists:dusun,id',  // ID Dusun wajib ada dan valid
+            'nomor_rt' => 'required|string|max:255',  // nomor RT wajib diisi
+            'id_rw' => 'required|exists:rws,id',  // ID Dusun wajib ada dan valid
             // 'alamat' => 'required|string|max:500',  // Alamat wajib diisi dan maksimal 500 karakter
         ]);
 

@@ -13,7 +13,7 @@ class HamletController extends Controller
     public function index()
     {
         $dusuns = Hamlet::latest()->get();  // Ambil semua data dusun
-        return view('dusun.index', compact('dusuns'));  // Kirim data ke view
+        return view('admin.content.hamlet.index', compact('dusuns'));  // Kirim data ke view
     }
 
     /**
@@ -21,7 +21,7 @@ class HamletController extends Controller
      */
     public function create()
     {
-        return view('dusun.create');  // Tampilkan form input
+        return view('admin.content.hamlet.create');  // Tampilkan form input
     }
 
     /**
@@ -32,9 +32,7 @@ class HamletController extends Controller
         // Validasi inputan
         $request->validate([
             'nama_dusun' => 'required|string|max:255',  // Nama dusun wajib diisi
-            'id_rt' => 'required|exists:rukun_tetangga,id',  // ID RT wajib ada dan valid
-            'id_rw' => 'required|exists:rukun_warga,id',  // ID RW wajib ada dan valid
-            'alamat' => 'required|string|max:500',  // Alamat wajib diisi dan maksimal 500 karakter
+            // 'alamat' => 'required|string|max:500',  // Alamat wajib diisi dan maksimal 500 karakter
         ]);
 
         // Simpan data dusun ke database
@@ -50,7 +48,7 @@ class HamletController extends Controller
     public function show(string $id)
     {
         $dusun = Hamlet::findOrFail($id);  // Ambil data dusun berdasarkan ID
-        return view('dusun.show', compact('dusun'));  // Kirim data ke view
+        return view('admin.content.hamlet.show', compact('dusun'));  // Kirim data ke view
     }
 
     /**
@@ -59,7 +57,7 @@ class HamletController extends Controller
     public function edit(string $id)
     {
         $dusun = Hamlet::findOrFail($id);  // Ambil data dusun berdasarkan ID
-        return view('dusun.edit', compact('dusun'));  // Tampilkan form edit dengan data dusun
+        return view('admin.content.hamlet.edit', compact('dusun'));  // Tampilkan form edit dengan data dusun
     }
 
     /**
@@ -70,9 +68,7 @@ class HamletController extends Controller
         // Validasi inputan
         $request->validate([
             'nama_dusun' => 'required|string|max:255',  // Nama dusun wajib diisi
-            'id_rt' => 'required|exists:rukun_tetangga,id',  // ID RT wajib ada dan valid
-            'id_rw' => 'required|exists:rukun_warga,id',  // ID RW wajib ada dan valid
-            'alamat' => 'required|string|max:500',  // Alamat wajib diisi dan maksimal 500 karakter
+            // 'alamat' => 'required|string|max:500',  // Alamat wajib diisi dan maksimal 500 karakter
         ]);
 
         // Cari dusun berdasarkan ID dan update data

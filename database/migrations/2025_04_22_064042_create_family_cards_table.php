@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('family_cards', function (Blueprint $table) {
             $table->id();
             $table->string('no_kk', 16)->unique();
-            $table->text('alamat');
             $table->unsignedBigInteger('id_rt');
             $table->unsignedBigInteger('id_rw');
             $table->unsignedBigInteger('id_dusun');

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\FamilyCard;
+use App\Models\Hamlet;
 use Illuminate\Http\Request;
 
 class FamilyCardController extends Controller
@@ -12,8 +13,8 @@ class FamilyCardController extends Controller
      */
     public function index()
     {
-        $kartuKeluarga = FamilyCard::latest()->get();  // Ambil semua data kartu keluarga
-        return view('kartu_keluarga.index', compact('kartuKeluarga'));  // Kirim data ke view
+        $kartuKeluarga = FamilyCard::with(['hamlet', 'rw', 'rt'])->latest()->get();  // Ambil semua data kartu keluarga
+        return view('admin.content.familyCard.index', compact('kartuKeluarga'));  // Kirim data ke view
     }
 
     /**
@@ -21,7 +22,8 @@ class FamilyCardController extends Controller
      */
     public function create()
     {
-        return view('kartu_keluarga.create');  // Tampilkan form input
+        $dusuns = Hamlet::with('rws.rts')->get();  // Ambil semua data dusun
+        return view('admin.content.familyCard.create', compact('dusuns'));  // Tampilkan form input
     }
 
     /**
@@ -31,19 +33,18 @@ class FamilyCardController extends Controller
     {
         // Validasi inputan
         $request->validate([
-            'no_kk' => 'required|unique:kartu_keluarga,no_kk|digits:16',  // No KK wajib unik dan panjang 16 digit
-            'kepala_keluarga' => 'required|string|max:255',                  // Kepala keluarga wajib diisi
-            'alamat' => 'required|string|max:500',                            // Alamat wajib diisi dan maksimal 500 karakter
-            'id_rt' => 'required|exists:rukun_tetangga,id',                   // ID RT wajib ada dan valid
-            'id_rw' => 'required|exists:rukun_warga,id',                      // ID RW wajib ada dan valid
-            'id_dusun' => 'required|exists:dusun,id',                         // ID Dusun wajib ada dan valid
+            'no_kk' => 'required|unique:family_cards,no_kk|digits:16',  // No KK wajib unik dan panjang 16 digit
+            // 'alamat' => 'required|string|max:500',                            // Alamat wajib diisi dan maksimal 500 karakter
+            'id_rt' => 'required|exists:rts,id',                   // ID RT wajib ada dan valid
+            'id_rw' => 'required|exists:rws,id',                      // ID RW wajib ada dan valid
+            'id_dusun' => 'required|exists:hamlets,id',                         // ID Dusun wajib ada dan valid
         ]);
 
         // Simpan data kartu keluarga ke database
         FamilyCard::create($request->all());
 
         // Redirect ke halaman daftar kartu keluarga dengan pesan sukses
-        return redirect()->route('kartu_keluarga.index')->with('success', 'Kartu Keluarga berhasil ditambahkan!');
+        return redirect()->route('kk.index')->with('success', 'Kartu Keluarga berhasil ditambahkan!');
     }
 
     /**
@@ -51,8 +52,8 @@ class FamilyCardController extends Controller
      */
     public function show(string $id)
     {
-        $kartuKeluarga = FamilyCard::findOrFail($id);  // Ambil data kartu keluarga berdasarkan ID
-        return view('kartu_keluarga.show', compact('kartuKeluarga'));  // Kirim data ke view
+        $kartuKeluarga = FamilyCard::with(['residents', 'hamlet', 'rw', 'rt'])->findOrFail($id);  // Ambil data kartu keluarga berdasarkan ID
+        return view('admin.content.familyCard.show', compact('kartuKeluarga'));  // Kirim data ke view
     }
 
     /**
@@ -60,8 +61,9 @@ class FamilyCardController extends Controller
      */
     public function edit(string $id)
     {
-        $kartuKeluarga = FamilyCard::findOrFail($id);  // Ambil data kartu keluarga berdasarkan ID
-        return view('kartu_keluarga.edit', compact('kartuKeluarga'));  // Kirim data ke view
+        $kartuKeluarga = FamilyCard::with(['hamlet', 'rw', 'rt'])->findOrFail($id);  // Ambil data kartu keluarga berdasarkan ID
+        $dusuns = Hamlet::with('rws.rts')->get();  // Ambil semua data dusun
+        return view('admin.content.familyCard.edit', compact('kartuKeluarga', 'dusuns'));  // Kirim data ke view
     }
 
     /**
@@ -71,12 +73,11 @@ class FamilyCardController extends Controller
     {
         // Validasi inputan
         $request->validate([
-            'no_kk' => 'required|digits:16|unique:kartu_keluarga,no_kk,' . $id,  // No KK wajib unik kecuali untuk yang sedang diupdate
-            'kepala_keluarga' => 'required|string|max:255',                           // Kepala keluarga wajib diisi
-            'alamat' => 'required|string|max:500',                                     // Alamat wajib diisi dan maksimal 500 karakter
-            'id_rt' => 'required|exists:rukun_tetangga,id',                            // ID RT wajib ada dan valid
-            'id_rw' => 'required|exists:rukun_warga,id',                               // ID RW wajib ada dan valid
-            'id_dusun' => 'required|exists:dusun,id',                                  // ID Dusun wajib ada dan valid
+            'no_kk' => 'required|digits:16|unique:family_cards,no_kk,' . $id,  // No KK wajib unik kecuali untuk yang sedang diupdate
+            // 'alamat' => 'required|string|max:500',                                     // Alamat wajib diisi dan maksimal 500 karakter
+            'id_rt' => 'required|exists:rts,id',                            // ID RT wajib ada dan valid
+            'id_rw' => 'required|exists:rws,id',                               // ID RW wajib ada dan valid
+            'id_dusun' => 'required|exists:hamlets,id',                                  // ID Dusun wajib ada dan valid
         ]);
 
         // Cari kartu keluarga berdasarkan ID dan update data
@@ -84,7 +85,7 @@ class FamilyCardController extends Controller
         $kartuKeluarga->update($request->all());
 
         // Redirect ke halaman daftar kartu keluarga dengan pesan sukses
-        return redirect()->route('kartu_keluarga.index')->with('success', 'Kartu Keluarga berhasil diperbarui!');
+        return redirect()->route('kk.index')->with('success', 'Kartu Keluarga berhasil diperbarui!');
     }
 
     /**
@@ -97,6 +98,6 @@ class FamilyCardController extends Controller
         $kartuKeluarga->delete();
 
         // Redirect ke halaman daftar kartu keluarga dengan pesan sukses
-        return redirect()->route('kartu_keluarga.index')->with('success', 'Kartu Keluarga berhasil dihapus!');
+        return redirect()->route('kk.index')->with('success', 'Kartu Keluarga berhasil dihapus!');
     }
 }

@@ -123,17 +123,66 @@
                 {{ request()->routeIs('admin.gallery.*') ? 'bg-[#facc15] text-black font-semibold' : 'hover:bg-[#facc15] hover:text-black' }}">
                 Galeri
             </a>
-            @auth
-                <a href="{{ route('admin.pengaduan.index') }}"
-                    class="relative block py-2 px-4 rounded transition-all duration-200
+            <a href="{{ route('admin.pengaduan.index') }}"
+                class="relative block py-2 px-4 rounded transition-all duration-200
                 {{ request()->routeIs('admin.pengaduan.*') ? 'bg-[#facc15] text-black font-semibold' : 'hover:bg-[#facc15] hover:text-black' }}">
-                    Pengaduan
-                    @if ($cnt)
-                        <span
-                            class="absolute top-1 right-3 bg-red-500 text-xs text-white rounded-full px-1">{{ $cnt }}</span>
-                    @endif
-                </a>
-            @endauth
+                Pengaduan
+                @if ($cnt)
+                    <span
+                        class="absolute top-1 right-3 bg-red-500 text-xs text-white rounded-full px-1">{{ $cnt }}</span>
+                @endif
+            </a>
+
+            <a href="{{ route('penduduk.index') }}"
+                class="relative block py-2 px-4 rounded transition-all duration-200
+                {{ request()->routeIs('admin.pengaduan.*') ? 'bg-[#facc15] text-black font-semibold' : 'hover:bg-[#facc15] hover:text-black' }}">
+                Penduduk
+                @if ($cnt)
+                    <span
+                        class="absolute top-1 right-3 bg-red-500 text-xs text-white rounded-full px-1">{{ $cnt }}</span>
+                @endif
+            </a>
+
+            <a href="{{ route('kk.index') }}"
+                class="relative block py-2 px-4 rounded transition-all duration-200
+                {{ request()->routeIs('admin.pengaduan.*') ? 'bg-[#facc15] text-black font-semibold' : 'hover:bg-[#facc15] hover:text-black' }}">
+                Kartu Keluarga
+                @if ($cnt)
+                    <span
+                        class="absolute top-1 right-3 bg-red-500 text-xs text-white rounded-full px-1">{{ $cnt }}</span>
+                @endif
+            </a>
+
+            <a href="{{ route('dusun.index') }}"
+                class="relative block py-2 px-4 rounded transition-all duration-200
+                {{ request()->routeIs('admin.pengaduan.*') ? 'bg-[#facc15] text-black font-semibold' : 'hover:bg-[#facc15] hover:text-black' }}">
+                Dusun
+                @if ($cnt)
+                    <span
+                        class="absolute top-1 right-3 bg-red-500 text-xs text-white rounded-full px-1">{{ $cnt }}</span>
+                @endif
+            </a>
+
+            <a href="{{ route('rw.index') }}"
+                class="relative block py-2 px-4 rounded transition-all duration-200
+                {{ request()->routeIs('admin.pengaduan.*') ? 'bg-[#facc15] text-black font-semibold' : 'hover:bg-[#facc15] hover:text-black' }}">
+                RW
+                @if ($cnt)
+                    <span
+                        class="absolute top-1 right-3 bg-red-500 text-xs text-white rounded-full px-1">{{ $cnt }}</span>
+                @endif
+            </a>
+
+            <a href="{{ route('rt.index') }}"
+                class="relative block py-2 px-4 rounded transition-all duration-200
+                {{ request()->routeIs('admin.pengaduan.*') ? 'bg-[#facc15] text-black font-semibold' : 'hover:bg-[#facc15] hover:text-black' }}">
+                RT
+                @if ($cnt)
+                    <span
+                        class="absolute top-1 right-3 bg-red-500 text-xs text-white rounded-full px-1">{{ $cnt }}</span>
+                @endif
+            </a>
+            
             <a href="{{ route('home') }}"
                 class="block py-2 px-4 rounded transition-all duration-200
                 {{ request()->routeIs('home') ? 'bg-[#facc15] text-black font-semibold' : 'hover:bg-[#facc15] hover:text-black' }}">

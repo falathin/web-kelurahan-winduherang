@@ -56,12 +56,12 @@ Route::post('/pengaduan', [ContactController::class,'store'])->name('pengaduan.s
 Route::middleware('auth')->group(function () {
     Route::resource('admin/content/article', ArticleController::class)->names('admin.article');
     Route::resource('admin/content/gallery', GalleryItemController::class)->names('admin.gallery');
-    
-    Route::resource('admin/penduduk', ResidentController::class)->names('penduduk');
-    Route::resource('admin/kk', FamilyCardController::class)->names('kk');
-    Route::resource('admin/dusun', HamletController::class)->names('dusun');
-    Route::resource('admin/Rw', RwController::class)->names('Rw');
-    Route::resource('admin/Rt', RtController::class)->names('Rt');
+
+    Route::resource('admin/content/penduduk', ResidentController::class)->names('penduduk');
+    Route::resource('admin/content/kk', FamilyCardController::class)->names('kk');
+    Route::resource('admin/content/dusun', HamletController::class)->names('dusun');
+    Route::resource('admin/content/rw', RwController::class)->names('rw');
+    Route::resource('admin/content/rt', RtController::class)->names('rt');
 
 
     Route::get('/dashboard', function () {
