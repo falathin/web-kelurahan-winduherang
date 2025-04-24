@@ -11,10 +11,25 @@ class RwController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $rws = Rw::with('hamlet')->latest()->get();  // Ambil semua data RW
-        return view('admin.content.rw.index', compact('rws'));  // Kirim data ke view
+        // Ambil query search dari request
+        $search = $request->input('search');
+
+        // Query dengan filter search pada nomor_rw atau nama dusun
+        $rws = Rw::with('hamlet')
+            ->when($search, function($q) use ($search) {
+                $q->where('nomor_rw', 'like', "%{$search}%")
+                  ->orWhereHas('hamlet', fn($q2) =>
+                      $q2->where('nama_dusun', 'like', "%{$search}%")
+                  );
+            })
+            ->orderByDesc('created_at')
+            ->paginate(10)             // 10 per halaman
+            ->withQueryString();       // pertahankan ?search=...
+
+        // Kirim ke view
+        return view('admin.content.rw.index', compact('rws', 'search'));
     }
 
     /**
@@ -22,8 +37,8 @@ class RwController extends Controller
      */
     public function create()
     {
-        $dusuns = Hamlet::latest()->get();  // Ambil semua data Dusun
-        return view('admin.content.rw.create', compact('dusuns'));  // Tampilkan form input
+        $dusuns = Hamlet::latest()->get();
+        return view('admin.content.rw.create', compact('dusuns'));
     }
 
     /**
@@ -31,27 +46,15 @@ class RwController extends Controller
      */
     public function store(Request $request)
     {
-        // Validasi inputan
         $request->validate([
-            'nomor_rw' => 'required|string|max:255',  // Nomor RW wajib diisi
-            'id_dusun' => 'required|exists:hamlets,id',  // ID Dusun wajib ada dan valid
-            // 'alamat' => 'required|string|max:500',  // Alamat wajib diisi dan maksimal 500 karakter
+            'nomor_rw' => 'required|string|max:255',
+            'id_dusun' => 'required|exists:hamlets,id',
         ]);
 
-        // Simpan data RW ke database
-        Rw::create($request->all());
+        Rw::create($request->only(['nomor_rw','id_dusun']));
 
-        // Redirect ke halaman daftar RW dengan pesan sukses
-        return redirect()->route('rw.index')->with('success', 'RW berhasil ditambahkan!');
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        $rw = Rw::findOrFail($id);  // Cari data RW berdasarkan ID
-        return view('admin.content.rw.show', compact('rw'));  // Kirim data ke view
+        return redirect()->route('rw.index')
+                         ->with('success','RW berhasil ditambahkan!');
     }
 
     /**
@@ -59,9 +62,9 @@ class RwController extends Controller
      */
     public function edit(string $id)
     {
-        $rw = Rw::findOrFail($id);  // Cari data RW berdasarkan ID
-        $dusuns = Hamlet::latest()->get();  // Ambil semua data Dusun
-        return view('admin.content.rw.edit', compact('rw', 'dusuns'));  // Tampilkan form edit dengan data RW
+        $rw     = Rw::findOrFail($id);
+        $dusuns = Hamlet::latest()->get();
+        return view('admin.content.rw.edit', compact('rw','dusuns'));
     }
 
     /**
@@ -69,19 +72,16 @@ class RwController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        // Validasi inputan
         $request->validate([
-            'nomor_rw' => 'required|string|max:255',  // Nomor RW wajib diisi
-            'id_dusun' => 'required|exists:hamlets,id',  // ID Dusun wajib ada dan valid
-            // 'alamat' => 'required|string|max:500',  // Alamat wajib diisi dan maksimal 500 karakter
+            'nomor_rw' => 'required|string|max:255',
+            'id_dusun' => 'required|exists:hamlets,id',
         ]);
 
-        // Cari RW berdasarkan ID dan update data
         $rw = Rw::findOrFail($id);
-        $rw->update($request->all());
+        $rw->update($request->only(['nomor_rw','id_dusun']));
 
-        // Redirect ke halaman daftar RW dengan pesan sukses
-        return redirect()->route('rw.index')->with('success', 'RW berhasil diperbarui!');
+        return redirect()->route('rw.index')
+                         ->with('success','RW berhasil diperbarui!');
     }
 
     /**
@@ -89,11 +89,9 @@ class RwController extends Controller
      */
     public function destroy(string $id)
     {
-        // Cari RW berdasarkan ID dan hapus
-        $rw = Rw::findOrFail($id);
-        $rw->delete();
+        Rw::findOrFail($id)->delete();
 
-        // Redirect ke halaman daftar RW dengan pesan sukses
-        return redirect()->route('rw.index')->with('success', 'RW berhasil dihapus!');
+        return redirect()->route('rw.index')
+                         ->with('success','RW berhasil dihapus!');
     }
 }

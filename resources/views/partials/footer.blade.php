@@ -23,7 +23,7 @@
         <!-- Kolom 3: Jelajah -->
         <div>
             <h4 class="font-semibold mb-3 text-white">Jelajah</h4>
-            <a href="#" class="text-gray-300 hover:underline block">Galeri Foto Desa</a>
+            <a href="{{route('galeri')}}" class="text-gray-300 hover:underline block">Galeri Foto Desa</a>
             @guest
                 <a href="{{ route('login') }}" class="text-gray-300 hover:underline block mt-2">Login</a>
             @endguest

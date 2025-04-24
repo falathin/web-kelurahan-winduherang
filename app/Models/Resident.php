@@ -10,7 +10,9 @@ class Resident extends Model
     protected $fillable = [
         'nik', 'nama_lengkap', 'tempat_lahir', 'tanggal_lahir', 'jenis_kelamin', 'agama',
         'status_perkawinan', 'pekerjaan', 'pendidikan', 'gol_darah', 'shdk', 'id_kk',
-        'nik_ayah', 'nik_ibu', 'no_telp', 'alamat'
+        // 'nik_ayah',
+        //  'nik_ibu',
+          'no_telp', 'alamat'
     ];
 
     public function familyCard()

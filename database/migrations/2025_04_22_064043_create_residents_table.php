@@ -25,8 +25,8 @@ return new class extends Migration
             $table->string('gol_darah')->nullable();
             $table->string('shdk');
             $table->unsignedBigInteger('id_kk');
-            $table->string('nik_ayah')->nullable();
-            $table->string('nik_ibu')->nullable();
+            // $table->string('nik_ayah')->nullable();
+            // $table->string('nik_ibu')->nullable();
             $table->string('no_telp')->nullable();
             $table->foreign('id_kk')->references('id')->on('family_cards')->onDelete('cascade');
             $table->timestamps();

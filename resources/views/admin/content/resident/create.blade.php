@@ -134,7 +134,7 @@
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div>
+        {{-- <div>
           <label class="block text-gray-700 font-medium">NIK Ayah</label>
           <select name="nik_ayah" id="nik_ayah"
                   class="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-green-200">
@@ -147,7 +147,7 @@
                   class="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-green-200">
             <option disabled selected>Pilih Ibu</option>
           </select>
-        </div>
+        </div> --}}
       </div>
 
       <div>

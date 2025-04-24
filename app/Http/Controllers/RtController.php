@@ -9,10 +9,24 @@ use Illuminate\Http\Request;
 class RtController extends Controller
 {
     // Menampilkan daftar semua RT
-    public function index()
+    public function index(Request $request)
     {
-        $rts = Rt::with('rw')->get();  // Ambil semua data RT
-        return view('admin.content.rt.index', compact('rts'));  // Kirim data ke view
+        // Ambil kata kunci pencarian
+        $search = $request->input('search');
+
+        // Query RT dengan eager‐load RW, filter jika ada search, paginate 10
+        $rts = Rt::with('rw')
+            ->when($search, function($q) use ($search) {
+                $q->where('nomor_rt', 'like', "%{$search}%")
+                  ->orWhereHas('rw', fn($q2) => 
+                        $q2->where('nomor_rw', 'like', "%{$search}%")
+                  );
+            })
+            ->orderByDesc('created_at')
+            ->paginate(10)
+            ->withQueryString(); // pertahankan query string search/page
+
+        return view('admin.content.rt.index', compact('rts', 'search'));
     }
 
     // Menampilkan form untuk menambah RT

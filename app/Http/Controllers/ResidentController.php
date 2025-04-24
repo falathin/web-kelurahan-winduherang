@@ -11,12 +11,27 @@ class ResidentController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $penduduk = Resident::latest()->get();  // Ambil semua data penduduk
-        return view('admin.content.resident.index', compact('penduduk'));  // Kirim data ke view
+        // Ambil keyword pencarian
+        $search = $request->input('search');
+    
+        // Bangun query dasar
+        $query = Resident::query();
+    
+        // Jika ada pencarian, filter berdasarkan NIK atau nama lengkap
+        if ($search) {
+            $query->where('nik', 'like', "%{$search}%")
+                  ->orWhere('nama_lengkap', 'like', "%{$search}%");
+        }
+    
+        // Ambil hasil dengan paginate (misal 10 per halaman)
+        $penduduk = $query->latest()->paginate(10);
+    
+        // Sertakan kembali parameter search agar tetap di query string
+        return view('admin.content.resident.index', compact('penduduk', 'search'));
     }
-
+    
     /**
      * Show the form for creating a new resource.
      */
@@ -39,9 +54,9 @@ class ResidentController extends Controller
             'tanggal_lahir' => 'required|date',                      // Tanggal lahir wajib diisi dan harus format tanggal yang valid
             'jenis_kelamin' => 'required|string|in:Laki-laki,Perempuan', // Jenis kelamin wajib diisi dan pilih antara Laki-laki atau Perempuan
             'agama' => 'required|string|max:50',                     // Agama wajib diisi dan maksimal 50 karakter
-            'nik_ayah' => 'required|integer',    // NIK Ayah wajib ada dan harus valid
+            // 'nik_ayah' => 'required|integer',    // NIK Ayah wajib ada dan harus valid
             'shdk' => 'required|string|max:20',                       // SHDK wajib diisi (Status Hubungan Dalam Keluarga)
-            'nik_ibu' => 'required|integer',     // NIK Ibu wajib ada dan harus valid
+            // 'nik_ibu' => 'required|integer',     // NIK Ibu wajib ada dan harus valid
             // 'nama_ibu' => 'required|string|max:255',                  // Nama Ibu wajib diisi dan maksimal 255 karakter
             'gol_darah' => 'required|string|in:A,B,AB,O',            // Golongan darah wajib diisi dengan pilihan A, B, AB, atau O
             'status_perkawinan' => 'required|string', // Status perkawinan wajib diisi dengan pilihan yang sesuai
@@ -89,9 +104,9 @@ class ResidentController extends Controller
             'tanggal_lahir' => 'required|date',                      // Tanggal lahir wajib diisi dan harus format tanggal yang valid
             'jenis_kelamin' => 'required|string|in:Laki-laki,Perempuan', // Jenis kelamin wajib diisi dan pilih antara Laki-laki atau Perempuan
             'agama' => 'required|string|max:50',                     // Agama wajib diisi dan maksimal 50 karakter
-            'nik_ayah' => 'required|integer',    // NIK Ayah wajib ada dan harus valid
+            // 'nik_ayah' => 'required|integer',    // NIK Ayah wajib ada dan harus valid
             'shdk' => 'required|string|max:20',                       // SHDK wajib diisi (Status Hubungan Dalam Keluarga)
-            'nik_ibu' => 'required|integer',     // NIK Ibu wajib ada dan harus valid
+            // 'nik_ibu' => 'required|integer',     // NIK Ibu wajib ada dan harus valid
             // 'nama_ibu' => 'required|string|max:255',                  // Nama Ibu wajib diisi dan maksimal 255 karakter
             'gol_darah' => 'required|string|in:A,B,AB,O',            // Golongan darah wajib diisi dengan pilihan A, B, AB, atau O
             'status_perkawinan' => 'required|string', // Status perkawinan wajib diisi dengan pilihan yang sesuai
