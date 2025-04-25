@@ -12,8 +12,8 @@ class HamletController extends Controller
      */
     public function index()
     {
-        $dusuns = Hamlet::latest()->get();  // Ambil semua data dusun
-        return view('admin.content.hamlet.index', compact('dusuns'));  // Kirim data ke view
+        $dusuns = Hamlet::latest()->paginate(10); // Ambil semua data dusun dengan pagination
+        return view('admin.content.hamlet.index', compact('dusuns')); // Kirim data ke view
     }
 
     /**
@@ -21,7 +21,7 @@ class HamletController extends Controller
      */
     public function create()
     {
-        return view('admin.content.hamlet.create');  // Tampilkan form input
+        return view('admin.content.hamlet.create'); // Tampilkan form input
     }
 
     /**
@@ -31,24 +31,14 @@ class HamletController extends Controller
     {
         // Validasi inputan
         $request->validate([
-            'nama_dusun' => 'required|string|max:255',  // Nama dusun wajib diisi
-            // 'alamat' => 'required|string|max:500',  // Alamat wajib diisi dan maksimal 500 karakter
+            'nama_dusun' => 'required|string|max:255', // Nama Dusun wajib diisi
         ]);
 
-        // Simpan data dusun ke database
+        // Simpan data Dusun ke database
         Hamlet::create($request->all());
 
-        // Redirect ke halaman daftar dusun dengan pesan sukses
+        // Redirect ke halaman daftar Dusun dengan pesan sukses
         return redirect()->route('dusun.index')->with('success', 'Dusun berhasil ditambahkan!');
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        $dusun = Hamlet::findOrFail($id);  // Ambil data dusun berdasarkan ID
-        return view('admin.content.hamlet.show', compact('dusun'));  // Kirim data ke view
     }
 
     /**
@@ -56,8 +46,8 @@ class HamletController extends Controller
      */
     public function edit(string $id)
     {
-        $dusun = Hamlet::findOrFail($id);  // Ambil data dusun berdasarkan ID
-        return view('admin.content.hamlet.edit', compact('dusun'));  // Tampilkan form edit dengan data dusun
+        $dusun = Hamlet::findOrFail($id); // Cari data Dusun berdasarkan ID
+        return view('admin.content.hamlet.edit', compact('dusun')); // Tampilkan form edit dengan data Dusun
     }
 
     /**
@@ -67,15 +57,14 @@ class HamletController extends Controller
     {
         // Validasi inputan
         $request->validate([
-            'nama_dusun' => 'required|string|max:255',  // Nama dusun wajib diisi
-            // 'alamat' => 'required|string|max:500',  // Alamat wajib diisi dan maksimal 500 karakter
+            'nama_dusun' => 'required|string|max:255', // Nama Dusun wajib diisi
         ]);
 
-        // Cari dusun berdasarkan ID dan update data
+        // Cari Dusun berdasarkan ID dan update data
         $dusun = Hamlet::findOrFail($id);
         $dusun->update($request->all());
 
-        // Redirect ke halaman daftar dusun dengan pesan sukses
+        // Redirect ke halaman daftar Dusun dengan pesan sukses
         return redirect()->route('dusun.index')->with('success', 'Dusun berhasil diperbarui!');
     }
 
@@ -84,11 +73,11 @@ class HamletController extends Controller
      */
     public function destroy(string $id)
     {
-        // Cari dusun berdasarkan ID dan hapus
+        // Cari Dusun berdasarkan ID dan hapus
         $dusun = Hamlet::findOrFail($id);
         $dusun->delete();
 
-        // Redirect ke halaman daftar dusun dengan pesan sukses
+        // Redirect ke halaman daftar Dusun dengan pesan sukses
         return redirect()->route('dusun.index')->with('success', 'Dusun berhasil dihapus!');
     }
 }

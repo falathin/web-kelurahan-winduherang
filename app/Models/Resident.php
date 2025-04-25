@@ -14,6 +14,10 @@ class Resident extends Model
         // 'nik_ayah', 'nik_ibu'
     ];
 
+    protected $casts = [
+        'tanggal_lahir' => 'date', 
+    ];
+
     public function familyCard()
     {
         return $this->belongsTo(FamilyCard::class, 'id_kk');

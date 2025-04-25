@@ -11,12 +11,23 @@ class FamilyCardController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $kartuKeluarga = FamilyCard::with(['hamlet', 'rw', 'rt'])->latest()->get();  // Ambil semua data kartu keluarga
-        return view('admin.content.familyCard.index', compact('kartuKeluarga'));  // Kirim data ke view
-    }
+        $search = $request->input('search');
 
+        $kartuKeluarga = FamilyCard::with(['hamlet', 'rw', 'rt'])
+            ->when($search, function ($query, $search) {
+                $query->where('no_kk', 'like', "%{$search}%")
+                      ->orWhereHas('hamlet', fn($q) => $q->where('nama_dusun', 'like', "%{$search}%"))
+                      ->orWhereHas('rw', fn($q) => $q->where('nomor_rw', 'like', "%{$search}%"))
+                      ->orWhereHas('rt', fn($q) => $q->where('nomor_rt', 'like', "%{$search}%"));
+            })
+            ->latest()
+            ->paginate(10)
+            ->withQueryString();
+
+        return view('admin.content.familyCard.index', compact('kartuKeluarga', 'search'));  
+    }
     /**
      * Show the form for creating a new resource.
      */

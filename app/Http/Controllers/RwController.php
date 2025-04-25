@@ -11,12 +11,17 @@ class RwController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $rws = Rw::with('hamlet')->latest()->get();  // Ambil semua data RW
-        return view('admin.content.rw.index', compact('rws'));  // Kirim data ke view
-    }
+        $query = Rw::with('hamlet')->latest();
 
+        if ($request->has('search') && $request->search != '') {
+            $query->where('nomor_rw', 'like', '%' . $request->search . '%');
+        }
+
+        $rws = $query->paginate(10); // Ambil semua data RW dengan pagination
+        return view('admin.content.rw.index', compact('rws')); // Kirim data ke view
+    }
     /**
      * Show the form for creating a new resource.
      */

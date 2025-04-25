@@ -9,12 +9,21 @@ use Illuminate\Http\Request;
 class RtController extends Controller
 {
     // Menampilkan daftar semua RT
-    public function index()
+    public function index(Request $request)
     {
-        $rts = Rt::with('rw')->get();  // Ambil semua data RT
-        return view('admin.content.rt.index', compact('rts'));  // Kirim data ke view
+        $query = Rt::with('rw');
+    
+        if ($search = $request->input('search')) {
+            $query->where('nomor_rt', 'like', "%{$search}%")
+                  ->orWhereHas('rw', function($q) use ($search) {
+                      $q->where('nomor_rw', 'like', "%{$search}%");
+                  });
+        }
+    
+        $rts = $query->paginate(10);
+        return view('admin.content.rt.index', compact('rts'));
     }
-
+    
     // Menampilkan form untuk menambah RT
     public function create()
     {
