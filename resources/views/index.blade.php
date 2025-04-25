@@ -166,8 +166,10 @@
     </section>
 
 
+    {{-- resources/views/partials/berita_section.blade.php --}}
     @php
         use App\Models\Article;
+        // ambil 3 berita terbaru berdasarkan kolom `date`
         $latestArticles = Article::orderByDesc('date')->take(3)->get();
     @endphp
 
@@ -178,52 +180,55 @@
                 <span class="block w-20 h-1 bg-green-300 mt-2 mx-auto rounded-full"></span>
             </h3>
 
-            @if ($latestArticles->isEmpty())
-                <p class="text-center text-gray-500">Belum ada berita.</p>
-            @else
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
-                    @foreach ($latestArticles as $idx => $article)
-                        <a href="{{ route('article.show', $article) }}" data-aos="fade-up"
-                            data-aos-delay="{{ $idx * 100 }}"
-                            class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 group block">
-                            <div class="relative">
-                                <img src="{{ $article->image ? asset('storage/' . $article->image) : 'https://via.placeholder.com/600x400' }}"
-                                    alt="{{ $article->title }}"
-                                    class="w-full h-52 object-cover transition-transform duration-300 group-hover:scale-105">
-                                <div
-                                    class="absolute bottom-2 left-2 bg-green-700 text-white text-xs px-3 py-1 rounded-full shadow">
-                                    {{ \Carbon\Carbon::parse($article->date)->format('d M Y') }}
-                                </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                @foreach ($latestArticles as $idx => $article)
+                    <a href="{{ route('article.show', $article) }}" data-aos="fade-up" data-aos-delay="{{ $idx * 100 }}"
+                        class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 group block">
+
+                        {{-- Thumbnail --}}
+                        <div class="relative">
+                            <img src="{{ $article->image ? asset('storage/' . $article->image) : 'https://via.placeholder.com/600x400' }}"
+                                alt="{{ $article->title }}"
+                                class="w-full h-52 object-cover transition-transform duration-300 group-hover:scale-105">
+                            <div
+                                class="absolute bottom-2 left-2 bg-green-700 text-white text-xs px-3 py-1 rounded-full shadow">
+                                {{ \Carbon\Carbon::parse($article->date)->format('d M Y') }}
                             </div>
-                            <div class="p-6 space-y-3">
+                        </div>
+
+                        {{-- Content --}}
+                        <div class="p-6 space-y-3">
+                            <span
+                                class="inline-block text-xs font-medium uppercase tracking-wide text-green-700 bg-green-100 px-2 py-1 rounded-full">
+                                {{ $article->category }}
+                            </span>
+                            <h4 class="text-lg font-semibold text-gray-800 group-hover:text-green-700 transition-colors">
+                                {{ \Illuminate\Support\Str::limit($article->title, 50) }}
+                            </h4>
+
+                            <div class="text-gray-600 text-sm leading-relaxed prose max-w-none">
+                                {!! \Illuminate\Support\Str::limit($article->content, 200) !!}
+                            </div>
+
+                            <div class="mt-4">
                                 <span
-                                    class="inline-block text-xs font-medium uppercase tracking-wide text-green-700 bg-green-100 px-2 py-1 rounded-full">
-                                    {{ $article->category }}
+                                    class="text-green-700 font-medium inline-flex items-center hover:underline transition">
+                                    Baca Selengkapnya
+                                    <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" stroke-width="2"
+                                        viewBox="0 0 24 24">
+                                        <path d="M9 5l7 7-7 7" />
+                                    </svg>
                                 </span>
-                                <h4
-                                    class="text-lg font-semibold text-gray-800 group-hover:text-green-700 transition-colors">
-                                    {{ \Illuminate\Support\Str::limit($article->title, 50) }}
-                                </h4>
-                                <div class="text-gray-600 text-sm leading-relaxed prose max-w-none">
-                                    {!! \Illuminate\Support\Str::limit($article->content, 200) !!}
-                                </div>
-                                <div class="mt-4">
-                                    <span
-                                        class="text-green-700 font-medium inline-flex items-center hover:underline transition">
-                                        Baca Selengkapnya
-                                        <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" stroke-width="2"
-                                            viewBox="0 0 24 24">
-                                            <path d="M9 5l7 7-7 7" />
-                                        </svg>
-                                    </span>
-                                </div>
                             </div>
-                        </a>
-                    @endforeach
-                </div>
-            @endif
+                        </div>
+
+                    </a>
+                @endforeach
+            </div>
         </div>
     </section>
+
+    {{-- resources/views/partials/galeri_alam.blade.php --}}
     @php
         use App\Models\GalleryItem;
         $latestItems = GalleryItem::orderByDesc('date')->take(4)->get();
@@ -237,32 +242,40 @@
                 <span class="block w-24 h-1 bg-green-300 mt-4 mx-auto rounded-full"></span>
             </h3>
 
-            @if ($latestItems->isEmpty())
-                <p class="text-center text-gray-500">Belum ada data galeri.</p>
-            @else
-                <div class="grid grid-cols-4 gap-6">
-                    @foreach ($latestItems as $i => $item)
-                        <div onclick="openModal('{{ $item->image_url }}','{{ addslashes($item->title) }}','{{ $item->date->format('d M Y') }}')"
-                            data-aos="zoom-in" data-aos-delay="{{ ($i + 1) * 100 }}"
-                            class="group relative overflow-hidden rounded-2xl border border-green-200 bg-white shadow transition transform hover:scale-105 hover:shadow-lg hover:border-green-400 cursor-pointer">
-                            <img src="{{ $item->image_url }}" alt="{{ $item->title }}"
-                                class="w-full h-44 object-cover transition-transform duration-300 group-hover:scale-110">
-                            <div
-                                class="absolute bottom-0 w-full bg-green-50 bg-opacity-90 px-3 py-2 text-center text-green-800 text-sm font-semibold backdrop-blur-md">
-                                🌿 {{ $item->title }} — {{ $item->date->format('d M Y') }}
-                            </div>
+            {{-- 4‑column grid, always one row --}}
+            <div class="grid grid-cols-4 gap-6">
+                @foreach ($latestItems as $loopIndex => $item)
+                    <div class="group relative overflow-hidden rounded-2xl border border-green-200 bg-white shadow transition transform hover:scale-105 hover:shadow-lg hover:border-green-400 cursor-pointer"
+                        data-aos="zoom-in" data-aos-delay="{{ ($loopIndex + 1) * 100 }}"
+                        onclick="openModal('{{ $item->image_url }}', '{{ addslashes($item->title) }}', '{{ $item->date->format('d M Y') }}')">
+                        {{-- Thumbnail --}}
+                        <img src="{{ $item->image_url }}" alt="{{ $item->title }}"
+                            class="w-full h-44 object-cover transition-transform duration-300 group-hover:scale-110">
+
+                        {{-- Caption overlay --}}
+                        <div
+                            class="absolute bottom-0 w-full bg-green-50 bg-opacity-90 px-3 py-2 text-center text-green-800 text-sm font-semibold backdrop-blur-md">
+                            🌿 {{ $item->title }} — {{ $item->date->format('d M Y') }}
                         </div>
-                    @endforeach
-                </div>
-            @endif
+                    </div>
+                @endforeach
+            </div>
         </div>
 
+        {{-- Modal --}}
         <div id="galleryModal"
             class="fixed inset-0 bg-black bg-opacity-70 backdrop-blur-sm flex items-center justify-center hidden z-50 px-4 py-8 overflow-y-auto">
-            <div class="relative bg-white rounded-2xl shadow-2xl w-full max-w-3xl animate__animated animate__zoomIn">
+            <div
+                class="relative bg-white rounded-2xl shadow-2xl w-full max-w-3xl overflow-hidden animate__animated animate__zoomIn">
+                <!-- Close Button -->
                 <button onclick="closeModal()"
-                    class="absolute top-4 right-4 text-gray-400 hover:text-red-600 text-3xl font-bold">&times;</button>
-                <img id="modalImage" src="" alt="Detail" class="w-full h-[50vh] object-cover bg-gray-100">
+                    class="absolute top-4 right-4 text-gray-400 hover:text-red-600 text-3xl leading-none font-bold focus:outline-none">
+                    &times;
+                </button>
+                <!-- Modal Image -->
+                <img id="modalImage" src="" alt="Detail"
+                    class="w-full h-[40vh] sm:h-[50vh] md:h-[60vh] object-cover bg-gray-100">
+                <!-- Caption -->
                 <div class="p-6 bg-green-50">
                     <h3 id="modalTitle" class="text-2xl font-semibold text-green-800 text-center mb-2"></h3>
                     <p id="modalDate" class="text-center text-gray-600"></p>
@@ -270,7 +283,6 @@
             </div>
         </div>
     </section>
-
 
     <script>
         function openModal(src, title, date) {

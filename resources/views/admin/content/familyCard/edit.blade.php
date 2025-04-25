@@ -1,119 +1,99 @@
-@extends('admin.layouts.app')
-
-@section('title','Ubah Kartu Keluarga')
-
-@section('content')
-<div class="container mx-auto p-6">
-  <div class="flex justify-between items-center mb-6">
-    <h1 class="text-2xl font-bold text-green-800">Ubah Kartu Keluarga</h1>
-    <a href="{{ route('kk.index') }}" class="text-green-600 hover:underline">&larr; Kembali</a>
-  </div>
-
-  @if($errors->any())
-    <div class="mb-6 p-4 bg-red-100 text-red-800 rounded-lg">
-      <ul class="list-disc list-inside">
-        @foreach($errors->all() as $error)
-          <li>{{ $error }}</li>
-        @endforeach
-      </ul>
+<h1>Edit Kartu Keluarga</h1>
+<!-- Form edit kartu keluarga -->
+<form action="{{ route('kk.update', $kartuKeluarga->id) }}" method="POST">
+    @csrf
+    @method('PUT')
+    <div class="form-group">
+        <label for="no_kk">No Kartu Keluarga</label>
+        <input type="text" name="no_kk" id="no_kk" class="form-control" value="{{ $kartuKeluarga->no_kk }}"
+            required>
     </div>
-  @endif
 
-  <div class="bg-white shadow-lg rounded-lg p-6">
-    <form action="{{ route('kk.update',$kartuKeluarga) }}" method="POST" class="space-y-4">
-      @csrf @method('PUT')
-      <div>
-        <label class="block font-medium text-gray-700">No Kartu Keluarga</label>
-        <input type="text" name="no_kk" value="{{ $kartuKeluarga->no_kk }}" required
-               class="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-green-200">
-      </div>
+    <div class="form-group">
+        <label for="id_dusun">Nama Dusun</label>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div>
-          <label class="block font-medium text-gray-700">Dusun</label>
-          <select name="id_dusun" id="id_dusun" required
-                  class="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-green-200">
+        {{-- Dusun Dropdown --}}
+        <select name="id_dusun" id="id_dusun" class="form-control" required>
             <option disabled selected>Pilih Dusun</option>
-            @foreach($dusuns as $dusun)
-              <option value="{{ $dusun->id }}"
-                      {{ $kartuKeluarga->id_dusun==$dusun->id?'selected':'' }}>
-                {{ $dusun->nama_dusun }}
-              </option>
-            @endforeach
-          </select>
-        </div>
-        <div>
-          <label class="block font-medium text-gray-700">RW</label>
-          <select name="id_rw" id="id_rw" required
-                  class="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-green-200">
-            <option disabled selected>Pilih RW</option>
-            @foreach($dusuns as $dusun)
-              @foreach($dusun->rws as $rw)
-                <option value="{{ $rw->id }}"
-                        data-dusun="{{ $dusun->id }}"
-                        {{ $kartuKeluarga->id_rw==$rw->id?'selected':'' }}>
-                  RW {{ $rw->nomor_rw }}
+            @foreach ($dusuns as $dusun)
+                <option value="{{ $dusun->id }}" {{ $kartuKeluarga->id_dusun == $dusun->id ? 'selected' : '' }}>
+                    {{ $dusun->nama_dusun }}
                 </option>
-              @endforeach
             @endforeach
-          </select>
-        </div>
-        <div>
-          <label class="block font-medium text-gray-700">RT</label>
-          <select name="id_rt" id="id_rt" required
-                  class="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-green-200">
-            <option disabled selected>Pilih RT</option>
-            @foreach($dusuns as $dusun)
-              @foreach($dusun->rws as $rw)
-                @foreach($rw->rts as $rt)
-                  <option value="{{ $rt->id }}"
-                          data-rw="{{ $rw->id }}"
-                          {{ $kartuKeluarga->id_rt==$rt->id?'selected':'' }}>
-                    RT {{ $rt->nomor_rt }}
-                  </option>
+        </select>
+
+        {{-- RW Dropdown --}}
+        <select name="id_rw" id="id_rw" class="form-control" required>
+            <option disabled selected>Pilih RW</option>
+            @foreach ($dusuns as $dusun)
+                @foreach ($dusun->rws as $rw)
+                    <option value="{{ $rw->id }}" data-dusun="{{ $dusun->id }}"
+                        {{ $kartuKeluarga->id_rw == $rw->id ? 'selected' : '' }}>
+                        RW {{ $rw->nomor_rw }}
+                    </option>
                 @endforeach
-              @endforeach
             @endforeach
-          </select>
-        </div>
-      </div>
+        </select>
+    </div>
 
-      <div class="text-right">
-        <button type="submit"
-                class="bg-green-600 hover:bg-green-500 text-white px-6 py-2 rounded-lg shadow">
-          Simpan Perubahan
-        </button>
-      </div>
-    </form>
-  </div>
-</div>
+    {{-- RT Dropdown --}}
+    <select name="id_rt" id="id_rt" class="form-control" required>
+        <option disabled selected>Pilih RT</option>
+        @foreach ($dusuns as $dusun)
+            @foreach ($dusun->rws as $rw)
+                @foreach ($rw->rts as $rt)
+                    <option value="{{ $rt->id }}" data-rw="{{ $rw->id }}"
+                        {{ $kartuKeluarga->id_rt == $rt->id ? 'selected' : '' }}>
+                        RT {{ $rt->nomor_rt }}
+                    </option>
+                @endforeach
+            @endforeach
+        @endforeach
+    </select>
 
+    <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+    <a href="{{ route('kk.index') }}" class="btn btn-secondary">Kembali</a>
+</form>
+{{-- Menampilkan pesan error jika ada --}}
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
 <script>
-document.addEventListener('DOMContentLoaded', function () {
-  const dusun = document.getElementById('id_dusun');
-  const rw = document.getElementById('id_rw');
-  const rt = document.getElementById('id_rt');
+    document.addEventListener('DOMContentLoaded', function () {
+        const rwSelect = document.getElementById('id_rw');
+        const rtSelect = document.getElementById('id_rt');
+        const dusunSelect = document.getElementById('id_dusun');
 
-  function filter(sel, attr, val) {
-    Array.from(sel.options).forEach(o => {
-      o.hidden = o.hasAttribute(attr) && o.getAttribute(attr) !== val;
+        function filterOptions(selectEl, attr, value) {
+            Array.from(selectEl.options).forEach(opt => {
+                if (!opt.hasAttribute(attr) || opt.getAttribute(attr) === value) {
+                    opt.hidden = false;
+                } else {
+                    opt.hidden = true;
+                }
+            });
+        }
+
+        dusunSelect.addEventListener('change', function () {
+            filterOptions(rwSelect, 'data-dusun', this.value);
+            rwSelect.value = "";
+            rtSelect.value = "";
+            filterOptions(rtSelect, 'data-rw', ""); // hide all
+        });
+
+        rwSelect.addEventListener('change', function () {
+            filterOptions(rtSelect, 'data-rw', this.value);
+            rtSelect.value = "";
+        });
+
+        // Trigger initial filtering if needed
+        filterOptions(rwSelect, 'data-dusun', dusunSelect.value);
+        filterOptions(rtSelect, 'data-rw', rwSelect.value);
     });
-  }
-
-  dusun.addEventListener('change', function () {
-    filter(rw, 'data-dusun', this.value);
-    rw.value = '';
-    filter(rt, 'data-rw', '');
-    rt.value = '';
-  });
-
-  rw.addEventListener('change', function () {
-    filter(rt, 'data-rw', this.value);
-    rt.value = '';
-  });
-
-  filter(rw, 'data-dusun', dusun.value);
-  filter(rt, 'data-rw', rw.value);
-});
 </script>
-@endsection

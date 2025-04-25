@@ -1,49 +1,31 @@
-@extends('admin.layouts.app')
-
-@section('title','Ubah RT')
-
-@section('content')
-<div class="container mx-auto p-4">
-  <a href="{{ route('rt.index') }}" class="inline-block text-green-600 hover:underline mb-4">&larr; Kembali</a>
-
-  @if($errors->any())
-    <div class="mb-6 p-4 bg-red-100 text-red-800 rounded-lg shadow-sm">
-      <ul class="list-disc list-inside space-y-1">
-        @foreach($errors->all() as $e)
-          <li>{{ $e }}</li>
-        @endforeach
-      </ul>
+<h1>Edit RT</h1>
+<!-- Form edit RT -->
+<form action="{{ route('rt.update', $rt->id) }}" method="POST">
+    @csrf
+    @method('PUT')
+    <div class="form-group">
+        <label for="nomor_rt">Nomor RT</label>
+        <input type="text" name="nomor_rt" id="nomor_rt" class="form-control" value="{{ $rt->nomor_rt }}" required>
     </div>
-  @endif
-
-  <div class="bg-white shadow-lg rounded-2xl p-8">
-    <h2 class="text-2xl font-bold mb-6 text-green-800">✏️ Ubah RT</h2>
-    <form action="{{ route('rt.update', $rt->id) }}" method="POST" class="space-y-6">
-      @csrf @method('PUT')
-      <div>
-        <label class="block font-medium text-gray-700">Nomor RT</label>
-        <input type="text" name="nomor_rt" id="nomor_rt" value="{{ old('nomor_rt',$rt->nomor_rt) }}"
-               class="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-green-200" required>
-      </div>
-      <div>
-        <label class="block font-medium text-gray-700">Nomor RW</label>
-        <select name="id_rw" id="id_rw"
-                class="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-green-200" required>
-          <option value="">Pilih RW</option>
-          @foreach($rws as $rw)
-            <option value="{{ $rw->id }}"{{ (old('id_rw',$rt->id_rw) == $rw->id) ? ' selected' : '' }}>
-              {{ $rw->nomor_rw }}
-            </option>
-          @endforeach
+    <div class="form-group">
+        <label for="id_rw">Nomor RW</label>
+        <select name="id_rw" id="id_rw" class="form-control" required>
+            <option value="">Pilih Rw</option>
+            @foreach ($rws as $rw)
+                <option value="{{ $rw->id }}">{{ $rw->nomor_rw }}</option>
+            @endforeach
         </select>
-      </div>
-      <div class="text-right">
-        <button type="submit"
-                class="bg-green-600 hover:bg-green-500 text-white font-semibold px-6 py-3 rounded-lg">
-          Perbarui
-        </button>
-      </div>
-    </form>
-  </div>
-</div>
-@endsection
+    </div>
+    <button type="submit" class="btn btn-primary">Simpan</button>
+    <a href="{{ route('rt.index') }}" class="btn btn-secondary">Kembali</a>
+</form>
+{{-- Menampilkan pesan error jika ada --}}
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif

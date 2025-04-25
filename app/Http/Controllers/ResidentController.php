@@ -11,27 +11,12 @@ class ResidentController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request)
+    public function index()
     {
-        // Ambil keyword pencarian
-        $search = $request->input('search');
-    
-        // Bangun query dasar
-        $query = Resident::query();
-    
-        // Jika ada pencarian, filter berdasarkan NIK atau nama lengkap
-        if ($search) {
-            $query->where('nik', 'like', "%{$search}%")
-                  ->orWhere('nama_lengkap', 'like', "%{$search}%");
-        }
-    
-        // Ambil hasil dengan paginate (misal 10 per halaman)
-        $penduduk = $query->latest()->paginate(10);
-    
-        // Sertakan kembali parameter search agar tetap di query string
-        return view('admin.content.resident.index', compact('penduduk', 'search'));
+        $penduduk = Resident::latest()->get();  // Ambil semua data penduduk
+        return view('admin.content.resident.index', compact('penduduk'));  // Kirim data ke view
     }
-    
+
     /**
      * Show the form for creating a new resource.
      */

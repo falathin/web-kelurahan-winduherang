@@ -10,19 +10,10 @@ class HamletController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request)
+    public function index()
     {
-        // Ambil kata kunci pencarian (jika ada)
-        $search = $request->input('search');
-
-        // Query dengan filter nama_dusun LIKE dan paginate 10 per halaman
-        $dusuns = Hamlet::query()
-            ->when($search, fn($q) => $q->where('nama_dusun', 'like', "%{$search}%"))
-            ->orderByDesc('created_at')
-            ->paginate(10)
-            ->withQueryString(); // agar 'search' tetap di query string
-
-        return view('admin.content.hamlet.index', compact('dusuns', 'search'));
+        $dusuns = Hamlet::latest()->get();  // Ambil semua data dusun
+        return view('admin.content.hamlet.index', compact('dusuns'));  // Kirim data ke view
     }
 
     /**

@@ -10,9 +10,8 @@ class Resident extends Model
     protected $fillable = [
         'nik', 'nama_lengkap', 'tempat_lahir', 'tanggal_lahir', 'jenis_kelamin', 'agama',
         'status_perkawinan', 'pekerjaan', 'pendidikan', 'gol_darah', 'shdk', 'id_kk',
-        // 'nik_ayah',
-        //  'nik_ibu',
-          'no_telp', 'alamat'
+        'no_telp', 'alamat', 
+        // 'nik_ayah', 'nik_ibu'
     ];
 
     public function familyCard()
@@ -20,13 +19,13 @@ class Resident extends Model
         return $this->belongsTo(FamilyCard::class, 'id_kk');
     }
 
-    public function father()
-    {
-        return $this->belongsTo(Resident::class, 'nik_ayah', 'nik');
-    }
+    // public function father()
+    // {
+    //     return $this->belongsTo(Resident::class, 'nik_ayah', 'nik');
+    // }
 
-    public function mother()
-    {
-        return $this->belongsTo(Resident::class, 'nik_ibu', 'nik');
-    }
+    // public function mother()
+    // {
+    //     return $this->belongsTo(Resident::class, 'nik_ibu', 'nik');
+    // }
 }
