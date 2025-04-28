@@ -26,7 +26,7 @@
     {{-- Form Pengaduan --}}
     <section id="form-pengaduan" class="max-w-3xl mx-auto px-4 py-16 bg-white rounded-2xl shadow-lg mb-24">
         <h2 class="text-2xl font-bold text-green-800 mb-6 text-center">Form Pengaduan Masyarakat</h2>
-        {{-- Success Message --}}
+        {{-- Success & Error Messages --}}
         @if (session('success'))
             <div x-data="{ show: true }" x-init="setTimeout(() => show = false, 5000)" x-show="show"
                 class="mb-6 p-4 bg-green-100 border-l-4 border-green-500 text-green-800 rounded-lg shadow">
@@ -102,82 +102,6 @@
             </div>
         </form>
         
-    </section>
-
-    <!-- Pengaduan Populer Lengkap -->
-    <section class="max-w-6xl mx-auto px-4 py-16 bg-white rounded-2xl shadow-md mb-24">
-        <h2 class="text-3xl font-bold text-green-800 mb-8 text-center">📋 Pengaduan Populer</h2>
-
-        <!-- Item Pengaduan -->
-        <div class="space-y-10">
-
-            <!-- Pengaduan 1 -->
-            <div class="p-6 border-l-4 border-green-600 bg-green-50 rounded-lg shadow-sm">
-                <h3 class="text-xl font-semibold mb-2">Lampu Jalan Rusak</h3>
-                <p class="text-gray-600 mb-4">Dikeluhkan sejak 2 minggu terakhir, terutama di RT 03 dan RT 05.</p>
-
-                <!-- Info Pelapor -->
-                <div class="text-sm text-gray-700 space-y-1 mb-4">
-                    <p><span class="font-medium">Pelapor:</span> Siti Rohmah</p>
-                    <p><span class="font-medium">Alamat:</span> RT 03 / RW 01</p>
-                    <p><span class="font-medium">Tanggal:</span> Selasa, 15 April 2025</p>
-                    <p><span class="font-medium">Waktu:</span> 19:45 WIB</p>
-                    <p><span class="font-medium">Lokasi:</span> Jalan Kenanga, depan warung Bu Eni</p>
-                </div>
-
-                <!-- Gambar Dokumentasi -->
-                <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
-                    <img src="https://via.placeholder.com/300x200?text=Lampu+1" alt="Bukti 1" class="rounded shadow">
-                    <img src="https://via.placeholder.com/300x200?text=Lampu+2" alt="Bukti 2" class="rounded shadow">
-                    <img src="https://via.placeholder.com/300x200?text=Lampu+3" alt="Bukti 3" class="rounded shadow">
-                </div>
-            </div>
-
-            <!-- Pengaduan 2 -->
-            <div class="p-6 border-l-4 border-green-600 bg-green-50 rounded-lg shadow-sm">
-                <h3 class="text-xl font-semibold mb-2">Jalan Berlumpur Saat Hujan</h3>
-                <p class="text-gray-600 mb-4">Beberapa titik jalan desa tergenang air dan berlumpur.</p>
-
-                <!-- Info Pelapor -->
-                <div class="text-sm text-gray-700 space-y-1 mb-4">
-                    <p><span class="font-medium">Pelapor:</span> Bambang Setiawan</p>
-                    <p><span class="font-medium">Alamat:</span> RT 05 / RW 02</p>
-                    <p><span class="font-medium">Tanggal:</span> Minggu, 13 April 2025</p>
-                    <p><span class="font-medium">Waktu:</span> 10:30 WIB</p>
-                    <p><span class="font-medium">Lokasi:</span> Jalan Raya Sukamaju dekat jembatan</p>
-                </div>
-
-                <!-- Gambar Dokumentasi -->
-                <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
-                    <img src="https://via.placeholder.com/300x200?text=Jalan+1" alt="Bukti 1" class="rounded shadow">
-                    <img src="https://via.placeholder.com/300x200?text=Jalan+2" alt="Bukti 2" class="rounded shadow">
-                </div>
-            </div>
-
-            <!-- Pengaduan 3 -->
-            <div class="p-6 border-l-4 border-green-600 bg-green-50 rounded-lg shadow-sm">
-                <h3 class="text-xl font-semibold mb-2">Sampah Tidak Terangkut</h3>
-                <p class="text-gray-600 mb-4">Terjadi penumpukan sampah di sekitar TPS RW 02.</p>
-
-                <!-- Info Pelapor -->
-                <div class="text-sm text-gray-700 space-y-1 mb-4">
-                    <p><span class="font-medium">Pelapor:</span> Nurhadi</p>
-                    <p><span class="font-medium">Alamat:</span> RT 02 / RW 02</p>
-                    <p><span class="font-medium">Tanggal:</span> Jumat, 11 April 2025</p>
-                    <p><span class="font-medium">Waktu:</span> 08:15 WIB</p>
-                    <p><span class="font-medium">Lokasi:</span> TPS belakang balai desa</p>
-                </div>
-
-                <!-- Gambar Dokumentasi -->
-                <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
-                    <img src="https://via.placeholder.com/300x200?text=Sampah+1" alt="Bukti 1" class="rounded shadow">
-                    <img src="https://via.placeholder.com/300x200?text=Sampah+2" alt="Bukti 2" class="rounded shadow">
-                    <img src="https://via.placeholder.com/300x200?text=Sampah+3" alt="Bukti 3" class="rounded shadow">
-                    <img src="https://via.placeholder.com/300x200?text=Sampah+4" alt="Bukti 4" class="rounded shadow">
-                </div>
-            </div>
-
-        </div>
     </section>
 
 

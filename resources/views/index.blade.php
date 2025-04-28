@@ -308,11 +308,52 @@
 
     @php
         $locations = [
+            // Kantor & umum
             ['name' => 'Kantor Desa Winduherang', 'coords' => [-6.989075, 108.456295], 'cat' => 'office'],
             ['name' => 'Lapangan Bola Winduherang', 'coords' => [-6.98685, 108.45789], 'cat' => 'public'],
+
+            // Pendidikan
+            ['name' => 'PAUD Permata Hati', 'coords' => [-6.9898, 108.4565], 'cat' => 'edu'],
+            ['name' => 'TK Al-Ikhlas Winduherang', 'coords' => [-6.99, 108.456], 'cat' => 'edu'],
+            ['name' => 'SD Negeri Winduherang I', 'coords' => [-6.9905, 108.4572], 'cat' => 'edu'],
             ['name' => 'SD Negeri Winduherang II', 'coords' => [-6.98922, 108.45741], 'cat' => 'edu'],
+            ['name' => 'SD Negeri Winduherang III', 'coords' => [-6.9899, 108.4576], 'cat' => 'edu'],
+            ['name' => 'SMP Negeri 1 Winduherang', 'coords' => [-6.991, 108.4575], 'cat' => 'edu'],
+            ['name' => 'SMA Negeri 1 Winduherang', 'coords' => [-6.992, 108.4578], 'cat' => 'edu'],
+
+            // Ibadah
+            ['name' => 'Masjid At-Taufik (Islamic Centre)', 'coords' => [-6.988468, 108.456034], 'cat' => 'worship'],
+            ['name' => 'Mesjid Nurul Iman', 'coords' => [-6.9895, 108.4568], 'cat' => 'worship'],
+            ['name' => 'Musholla Al-Muttaqin', 'coords' => [-6.9892, 108.4565], 'cat' => 'worship'],
+            ['name' => 'Gereja Kristen Winduherang', 'coords' => [-6.9897, 108.457], 'cat' => 'worship'],
+
+            // Pariwisata
+            ['name' => 'Kolam Renang Desa', 'coords' => [-6.9875, 108.458], 'cat' => 'tourism'],
+            ['name' => 'Taman Wisata Desa', 'coords' => [-6.9872, 108.4583], 'cat' => 'tourism'],
+            ['name' => 'Pusat Kuliner Tradisional', 'coords' => [-6.988, 108.4573], 'cat' => 'tourism'],
         ];
     @endphp
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = document.getElementById('locSearch');
+            const locList = document.getElementById('locList');
+            const locationButtons = locList.querySelectorAll('.location-btn');
+
+            searchInput.addEventListener('input', function() {
+                const searchTerm = this.value.toLowerCase();
+
+                locationButtons.forEach(button => {
+                    const name = button.textContent.toLowerCase();
+                    if (name.includes(searchTerm)) {
+                        button.parentElement.style.display = 'block';
+                    } else {
+                        button.parentElement.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+
 
     <div class="max-w-7xl mx-auto px-4 py-10">
         <div class="text-center mb-6">
@@ -326,7 +367,7 @@
                 <input id="locSearch" type="text" placeholder="Cari lokasi..."
                     class="w-full px-3 py-2 mb-4 border border-green-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400" />
 
-                <ul id="locList" class="space-y-2 max-h-[60vh] overflow-y-auto text-sm">
+                <ul id="locList" class="space-y-2 max-h-48 overflow-y-auto text-sm pr-2">
                     @foreach ($locations as $idx => $loc)
                         <li>
                             <button data-idx="{{ $idx }}"
@@ -336,6 +377,7 @@
                         </li>
                     @endforeach
                 </ul>
+
 
                 <div class="mt-6 text-xs text-gray-500">
                     Klik titik di peta atau nama lokasi untuk navigasi.

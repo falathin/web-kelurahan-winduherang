@@ -92,7 +92,7 @@
                     </div>
 
                     <div class="prose">
-                        <p class="text-center uppercase text-sm text-gray-600">
+                        <p class="uppercase text-sm text-gray-600 mb-5">
                             Susunan Pengurus LPM Kelurahan Winduherang<br>
                             Kecamatan Cigugur, Kabupaten Kuningan<br>
                             Masa Bhakti 2022 – 2027
@@ -239,13 +239,14 @@
 
         <!-- Posyandu Section -->
         <section>
-            <h2 class="text-3xl font-bold text-green-800 border-b-4 border-green-300 inline-block mb-4 flex items-center">
+            <h2 class="text-3xl font-bold text-green-800 border-b-4 border-green-300 inline-block mb-4 text-center" >
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-800 mr-3" fill="none"
                     viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
                 </svg>
-                Posyandu Anggrek I RW 014
+                Posyandu
             </h2>
+            
             <p class="text-gray-700 leading-relaxed mb-6 text-justify">
                 Posyandu (Pos Pelayanan Terpadu) Winduherang adalah sebuah fasilitas
                 kesehatan yang berfungsi untuk memberikan pelayanan kesehatan dasar kepada masyarakat,
@@ -261,13 +262,13 @@
                 </svg>
                 Struktur Lembaga
             </h3>
-
-            <div class="space-y-10">
-                <table class="table-auto w-full border-separate border-spacing-2 mb-6">
+            
+            <div class="space-y-10 text-center">
+                <table class="table-auto w-full border-separate border-spacing-2 mb-6 mx-auto">
                     <thead>
                         <tr>
-                            <th class="border-b-2 border-gray-300 text-left p-2">Jabatan</th>
-                            <th class="border-b-2 border-gray-300 text-left p-2">Nama</th>
+                            <th class="border-b-2 border-gray-300 p-2 text-center">Jabatan</th>
+                            <th class="border-b-2 border-gray-300 text-center p-2">Nama</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -287,118 +288,90 @@
                             <td class="border-b p-2 font-bold">Bendahara</td>
                             <td class="border-b p-2">Ny. Dini Herdiani, SE</td>
                         </tr>
-                    </tbody>
-                </table>
-
-                <h4 class="text-lg font-semibold mt-6 mb-4">Posyandu Lingga Kamuning</h4>
-                <table class="table-auto w-full border-separate border-spacing-2 mb-6">
-                    <tbody>
                         <tr>
-                            <td class="border-b p-2 font-bold">Ketua</td>
+                            <td class="border-b p-2 font-bold">Ketua Posyandu Lingga Kamuning</td>
                             <td class="border-b p-2">Ny. Inah Suginah</td>
                         </tr>
                         <tr>
-                            <td class="border-b p-2 font-bold">Sekretaris</td>
+                            <td class="border-b p-2 font-bold">Sekretaris Posyandu Lingga Kamuning</td>
                             <td class="border-b p-2">Sri Ratnawati</td>
                         </tr>
                         <tr>
-                            <td class="border-b p-2 font-bold">Bendahara</td>
+                            <td class="border-b p-2 font-bold">Bendahara Posyandu Lingga Kamuning</td>
                             <td class="border-b p-2">Ny. Yati Suryati</td>
                         </tr>
                         <tr>
-                            <td class="border-b p-2 font-bold">Anggota</td>
+                            <td class="border-b p-2 font-bold">Anggota Posyandu Lingga Kamuning</td>
                             <td class="border-b p-2">Ny. Atit</td>
                         </tr>
-                    </tbody>
-                </table>
-
-                <h4 class="text-lg font-semibold mt-6 mb-4">Posyandu Kramat Jaya</h4>
-                <table class="table-auto w-full border-separate border-spacing-2 mb-6">
-                    <tbody>
                         <tr>
-                            <td class="border-b p-2 font-bold">Ketua</td>
+                            <td class="border-b p-2 font-bold">Ketua Posyandu Kramat Jaya</td>
                             <td class="border-b p-2">Ny. Siti Rusmayati</td>
                         </tr>
                         <tr>
-                            <td class="border-b p-2 font-bold">Sekretaris</td>
+                            <td class="border-b p-2 font-bold">Sekretaris Posyandu Kramat Jaya</td>
                             <td class="border-b p-2">Ny. Nia Suniarsih</td>
                         </tr>
                         <tr>
-                            <td class="border-b p-2 font-bold">Bendahara</td>
+                            <td class="border-b p-2 font-bold">Bendahara Posyandu Kramat Jaya</td>
                             <td class="border-b p-2">Ny. Titi S. Yunari</td>
                         </tr>
                         <tr>
-                            <td class="border-b p-2 font-bold">Anggota</td>
+                            <td class="border-b p-2 font-bold">Anggota Posyandu Kramat Jaya</td>
                             <td class="border-b p-2">Ny. Eti</td>
+                        </tr>
+                        <tr>
+                            <td class="border-b p-2 font-bold">Ketua Posyandu Lingga Harapan I</td>
+                            <td class="border-b p-2">Ny. Yuli Arwati</td>
+                        </tr>
+                        <tr>
+                            <td class="border-b p-2 font-bold">Sekretaris Posyandu Lingga Harapan I</td>
+                            <td class="border-b p-2">Ny. Odah Saodah</td>
+                        </tr>
+                        <tr>
+                            <td class="border-b p-2 font-bold">Bendahara Posyandu Lingga Harapan I</td>
+                            <td class="border-b p-2">Ny. Oom Komariah</td>
+                        </tr>
+                        <tr>
+                            <td class="border-b p-2 font-bold">Anggota Posyandu Lingga Harapan I</td>
+                            <td class="border-b p-2">Ny. Yeni, Ny. Uun Unaesih</td>
+                        </tr>
+                        <tr>
+                            <td class="border-b p-2 font-bold">Ketua Posyandu Lingga Harapan II</td>
+                            <td class="border-b p-2">Ny. Ade Natikah</td>
+                        </tr>
+                        <tr>
+                            <td class="border-b p-2 font-bold">Sekretaris Posyandu Lingga Harapan II</td>
+                            <td class="border-b p-2">Ny. Mimin Karmini</td>
+                        </tr>
+                        <tr>
+                            <td class="border-b p-2 font-bold">Bendahara Posyandu Lingga Harapan II</td>
+                            <td class="border-b p-2">Ny. Rita Susiana</td>
+                        </tr>
+                        <tr>
+                            <td class="border-b p-2 font-bold">Anggota Posyandu Lingga Harapan II</td>
+                            <td class="border-b p-2">Ny. Ini, Ny. Eti</td>
+                        </tr>
+                        <tr>
+                            <td class="border-b p-2 font-bold">Ketua Posyandu Lingga Harapan III</td>
+                            <td class="border-b p-2">Ny. Nani Sumarni</td>
+                        </tr>
+                        <tr>
+                            <td class="border-b p-2 font-bold">Sekretaris Posyandu Lingga Harapan III</td>
+                            <td class="border-b p-2">Ny. Inah Marnah</td>
+                        </tr>
+                        <tr>
+                            <td class="border-b p-2 font-bold">Bendahara Posyandu Lingga Harapan III</td>
+                            <td class="border-b p-2">Ny. Heni Rosliana</td>
+                        </tr>
+                        <tr>
+                            <td class="border-b p-2 font-bold">Anggota Posyandu Lingga Harapan III</td>
+                            <td class="border-b p-2">Ny. Ami, Ny. Mia</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
-            <h4 class="text-lg font-semibold mt-6 mb-4">Posyandu Lingga Harapan I</h4>
-            <table class="table-auto w-full border-separate border-spacing-2">
-                <tbody>
-                    <tr>
-                        <td class="border-b p-2 font-bold">Ketua</td>
-                        <td class="border-b p-2">Ny. Yuli Arwati</td>
-                    </tr>
-                    <tr>
-                        <td class="border-b p-2 font-bold">Sekretaris</td>
-                        <td class="border-b p-2">Ny. Odah Saodah</td>
-                    </tr>
-                    <tr>
-                        <td class="border-b p-2 font-bold">Bendahara</td>
-                        <td class="border-b p-2">Ny. Oom Komariah</td>
-                    </tr>
-                    <tr>
-                        <td class="border-b p-2 font-bold">Anggota</td>
-                        <td class="border-b p-2">Ny. Yeni, Ny. Uun Unaesih</td>
-                    </tr>
-                </tbody>
-            </table>
-
-            <h4 class="text-lg font-semibold mt-6 mb-4">Posyandu Lingga Harapan II</h4>
-            <table class="table-auto w-full border-separate border-spacing-2">
-                <tbody>
-                    <tr>
-                        <td class="border-b p-2 font-bold">Ketua</td>
-                        <td class="border-b p-2">Ny. Ade Natikah</td>
-                    </tr>
-                    <tr>
-                        <td class="border-b p-2 font-bold">Sekretaris</td>
-                        <td class="border-b p-2">Ny. Mimin Karmini</td>
-                    </tr>
-                    <tr>
-                        <td class="border-b p-2 font-bold">Bendahara</td>
-                        <td class="border-b p-2">Ny. Rita Susiana</td>
-                    </tr>
-                    <tr>
-                        <td class="border-b p-2 font-bold">Anggota</td>
-                        <td class="border-b p-2">Ny. Ini, Ny. Eti</td>
-                    </tr>
-                </tbody>
-            </table>
-
-            <h4 class="text-lg font-semibold mt-6 mb-4">Posyandu Lingga Harapan III</h4>
-            <table class="table-auto w-full border-separate border-spacing-2">
-                <tbody>
-                    <tr>
-                        <td class="border-b p-2 font-bold">Ketua</td>
-                        <td class="border-b p-2">Ny. Nani Sumarni</td>
-                    </tr>
-                    <tr>
-                        <td class="border-b p-2 font-bold">Sekretaris</td>
-                        <td class="border-b p-2">Ny. Inah Marnah</td>
-                    </tr>
-                    <tr>
-                        <td class="border-b p-2 font-bold">Bendahara</td>
-                        <td class="border-b p-2">Ny. Heni Rosliana</td>
-                    </tr>
-                    <tr>
-                        <td class="border-b p-2 font-bold">Anggota</td>
-                        <td class="border-b p-2">Ny. Ami, Ny. Mia</td>
-                    </tr>
-                </tbody>
-            </table>
+            
     </div>
     </section>
 

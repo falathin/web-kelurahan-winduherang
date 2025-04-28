@@ -6,6 +6,7 @@ use App\Mail\NewPengaduanMail;
 use App\Models\Contact;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Log;
 
 class ContactController extends Controller
 {
@@ -23,21 +24,29 @@ class ContactController extends Controller
             'bukti.*'   => 'image|max:2048',
         ]);
 
-        // simpan file bukti
-        if ($req->hasFile('bukti')) {
-            $paths = [];
-            foreach ($req->file('bukti') as $f) {
-                $paths[] = $f->store('pengaduan', 'public');
+        try {
+            // Simpan file bukti jika ada
+            if ($req->hasFile('bukti')) {
+                $paths = [];
+                foreach ($req->file('bukti') as $f) {
+                    $paths[] = $f->store('pengaduan', 'public');
+                }
+                $data['bukti'] = $paths;
             }
-            $data['bukti'] = $paths;
+
+            // Simpan ke database
+            $contact = Contact::create($data);
+
+            // Kirim email notifikasi ke admin
+            Mail::send(new NewPengaduanMail($contact));
+
+            return redirect()->back()->with('success', 'Pengaduan Anda berhasil dikirim.');
+
+        } catch (\Exception $e) {
+            Log::error('Gagal mengirim pengaduan: ' . $e->getMessage());
+            return redirect()->back()
+                ->withInput()
+                ->with('error', 'Maaf, pengaduan gagal dikirim. Silakan coba lagi.');
         }
-
-        // simpan ke DB
-        $c = Contact::create($data);
-
-        // kirim email notif ke admin
-        Mail::send(new NewPengaduanMail($c));
-
-        return back()->with('success', 'Pengaduan Anda berhasil dikirim.');
     }
 }
