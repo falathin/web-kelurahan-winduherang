@@ -53,18 +53,47 @@
             <!-- Sejarah -->
             <div class="bg-white rounded-lg shadow-lg p-8">
                 <h2 class="text-3xl font-bold text-green-800 text-center mb-6">Sejarah</h2>
-                <p class="text-gray-700 leading-relaxed mb-4">
-                    Posyandu (Pos Pelayanan Terpadu) adalah kegiatan kesehatan dasar yang diselenggarakan dari, oleh, dan
-                    untuk masyarakat yang dibantu oleh petugas kesehatan. Posyandu Anggrek 1 RW 014 merupakan posyandu
-                    balita dan lansia yang berada di wilayah RW 014 Desa Kalangsari. Posyandu ini dibentuk atas inisiatif
-                    warga dan kader kesehatan dengan tujuan meningkatkan pelayanan dasar bagi balita dan lansia.
-                </p>
-                <p class="text-gray-700 leading-relaxed">
-                    Seiring waktu, Posyandu Anggrek 1 berkembang menjadi pusat informasi dan pelayanan kesehatan penting
-                    bagi masyarakat setempat. Kegiatan rutin meliputi penimbangan balita, imunisasi, penyuluhan kesehatan,
-                    serta pemeriksaan lansia.
-                </p>
+                <div class="text-gray-700 leading-relaxed text-justify space-y-4">
+                    <p class="text-center">Assalamualaikum Wr. Wb</p>
+                    <p class="text-center">Bismillahirrahmanirrahim</p>
+                    <p>
+                        Nama Winduherang berasal dari dua suku kata yaitu kata ‘Windu’ dan kata ‘Herang’. ‘Windu’ mempunyai
+                        arti delapan tahun,
+                        namun di sini tidak memiliki arti hitungan melainkan memiliki makna “masa” atau waktu dan bisa pula
+                        diartikan “periode”
+                        dalam arti “tanda” yaitu untuk menandai perbedaan antara waktu sebelumnya dengan waktu yang akan
+                        datang, atau masa berikutnya.
+                    </p>
+                    <p>
+                        “Herang” berasal dari kata bahasa Sunda yang artinya “bersih” yang mempunyai makna “bersih lahir dan
+                        batin”.
+                        Dan ‘Herang’ mempunyai arti lain yaitu bening, caang, bengras, terlihat dengan jelas tidak
+                        samar-samar dan tidak meragukan.
+                    </p>
+                    <p>
+                        Jadi pengertian pokok dari kata ‘WINDUHERANG’ yaitu masa atau waktu yang membedakan antara yang hak
+                        dengan yang batil,
+                        antara yang benar dengan yang salah atau Winduherang bisa juga bermakna tuntunan hidup dari Allah
+                        yang merupakan misi
+                        perjuangan Sinuhun Syech Syarif Hidayatullah untuk meng-Islamkan Gedeng Kamuning beserta rakyatnya,
+                        dan seluruh keturunannya
+                        memeluk agama Islam sampai hari kiamat nanti.
+                    </p>
+                    <p>
+                        Melakukan hijrah keyakinan dan ketauhidan dari ajaran yang menggelapkan kepada ajaran yang benar dan
+                        terang benderang
+                        dalam keimanan kepada Allah SWT: <strong>“Yuhrijukum minadzulumati ilannuur”</strong>.
+                    </p>
+                    <p>
+                        Maka sejak tanggal 14 Muharram 1481 M, Pedukuhan Gedeng Kamuning diganti dengan Winduherang dan
+                        orang yang pertama masuk Islam
+                        adalah Gedeng Kamuning. Sebagai bukti peninggalan sejarah adalah Makam Gedeng Kamuning yang terletak
+                        di Hulu Dayeuh dekat Mata
+                        Air Winduherang yang letaknya membujur ke Barat atau ke arah Kiblat.
+                    </p>
+                </div>
             </div>
+
 
             <!-- Visi & Misi -->
             <div class="bg-white rounded-lg shadow-lg p-8">
@@ -72,18 +101,22 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div>
                         <h3 class="text-xl font-semibold text-green-700 mb-2">Visi</h3>
-                        <p class="italic text-gray-700">“Menjadi Posyandu unggul dalam pelayanan kesehatan dasar
-                            masyarakat.”</p>
+                        <p class="italic text-gray-700"> “ Terwujudnya Kelurahan Winduherang sebagai Destinasi Wisata Religi
+                            “</p>
                     </div>
                     <div>
                         <h3 class="text-xl font-semibold text-green-700 mb-2">Misi</h3>
                         <ul class="list-disc list-inside space-y-2 text-gray-700">
-                            <li>Meningkatkan kualitas pelayanan balita dan lansia.</li>
-                            <li>Menyelenggarakan penyuluhan kesehatan secara rutin.</li>
-                            <li>Mendorong partisipasi aktif masyarakat.</li>
-                            <li>Berkolaborasi dengan instansi terkait untuk layanan terbaik.</li>
+                            <li>Menata Lembaga/Organisasi Kemasyarakat.</li>
+                            <li>Meningkatkan Infra Struktur Menuju Lokasi Wisata.</li>
+                            <li>Mengembangkan UKM (Dengan Mengedepankan Produk Lokal).</li>
+                            <li>Meningkatkan SDM Di Bidang Religi.</li>
                         </ul>
                     </div>
+                </div>
+                <div class="text-center">
+                    <h3 class="text-xl font-semibold text-green-700 mt-6">Moto</h3>
+                    <p class="italic text-gray-700"> “ Winduherang Bersatu, Bangkit Dan Sejahtera“</p>
                 </div>
             </div>
 
@@ -105,48 +138,76 @@
                 <div class="space-y-12">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
                         <div>
-                            <h3 class="text-2xl font-semibold text-green-700 mb-2">Kegiatan Rutin</h3>
+                            <h3 class="text-2xl font-semibold text-green-700 mb-2">Kegiatan Jumat Bersih</h3>
                             <p class="text-gray-700 leading-relaxed">
-                                Penimbangan balita bulanan, pemberian vitamin &amp; imunisasi, pemeriksaan lansia, dan
-                                penyuluhan gizi.
+                                Kegiatan yang dilaksanakan setiap hari Jumat dengan tujuan untuk membersihkan lingkungan
+                                sekitar.
+                                Program ini biasanya melibatkan berbagai elemen masyarakat, termasuk RT, RW, dan berbagai
+                                pihak terkait,
+                                untuk secara bersama-sama menjaga kebersihan lingkungan. Kegiatan ini sangat efektif untuk
+                                mempererat hubungan
+                                antarwarga serta meningkatkan rasa peduli terhadap lingkungan sekitar.
                             </p>
                         </div>
-                        <img src="{{ asset('storage/kegiatan1.jpg') }}" alt="Kegiatan Rutin"
+                        <img src="{{ asset('storage/kegiatan1.jpg') }}" alt="Kegiatan Jumat Bersih"
                             class="rounded-lg shadow-md w-full h-48 object-cover" />
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
-                        <img src="{{ asset('storage/kegiatan2.jpg') }}" alt="Pelatihan"
+                        <img src="{{ asset('storage/kegiatan2.jpg') }}" alt="Kegiatan Posyandu"
                             class="rounded-lg shadow-md w-full h-48 object-cover" />
                         <div>
-                            <h3 class="text-2xl font-semibold text-green-700 mb-2">Pelatihan Kader</h3>
+                            <h3 class="text-2xl font-semibold text-green-700 mb-2">Kegiatan Posyandu</h3>
                             <p class="text-gray-700 leading-relaxed">
-                                Peningkatan kapasitas kader dalam pelayanan kesehatan dan administrasi posyandu.
+                                Kegiatan Posyandu Pusat Pelayanan Terpadu diadakan di Balai Kader Kelurahan Winduherang.
+                                Fokus utamanya adalah pelayanan kesehatan ibu dan anak, meliputi penimbangan balita,
+                                pemberian imunisasi, serta konsultasi kesehatan bagi lansia. Kegiatan ini mendukung tumbuh
+                                kembang balita
+                                dan kesehatan masyarakat setempat.
                             </p>
                         </div>
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
                         <div>
-                            <h3 class="text-2xl font-semibold text-green-700 mb-2">Taman Herbal Keluarga 🌿</h3>
+                            <h3 class="text-2xl font-semibold text-green-700 mb-2">Program Pendukung Usaha bagi UMKM</h3>
                             <p class="text-gray-700 leading-relaxed">
-                                Edukasi dan pemanfaatan tanaman obat keluarga sebagai sarana belajar dan kesehatan.
+                                Program ini bertujuan untuk mendukung pertumbuhan produk dan pemasaran hasil usaha kecil,
+                                seperti olahan makanan dan produk rumahan. Melalui program ini, diharapkan UMKM lokal dapat
+                                meningkatkan
+                                daya saingnya di pasar yang lebih luas dengan produk-produk khas dan inovatif.
                             </p>
                         </div>
-                        <img src="{{ asset('storage/kegiatan3.jpg') }}" alt="TOGA"
+                        <img src="{{ asset('storage/kegiatan3.jpg') }}" alt="Program UMKM"
                             class="rounded-lg shadow-md w-full h-48 object-cover" />
                     </div>
                 </div>
             </div>
 
+
             <!-- Kondisi Geografis -->
             <div class="bg-white rounded-lg shadow-lg p-8">
-                <h2 class="text-3xl font-bold text-green-800 text-center mb-6">Kondisi Geografis</h2>
+                <h2 class="text-3xl font-bold text-green-800 text-center mb-6">Kondisi Geografis 🌏</h2>
                 <p class="text-gray-700 leading-relaxed mb-4">
-                    Posyandu Anggrek 1 terletak di RW 014, Desa Kalangsari, Kecamatan Rengasdengklok, Kabupaten Karawang.
+                    Luas wilayah Kelurahan Winduhareng Kecamatan Cigugur adalah kurang lebih 90,674 Ha 📏.
                 </p>
                 <p class="text-gray-700 leading-relaxed">
-                    Lingkungan padat penduduk, strategis dekat balai RW dan sekolah, memudahkan akses masyarakat.
+                    Kelurahan Winduhareng berbatasan dengan:
+                    <br>- Sebelah Utara : Kelurahan Cirendang 🧭
+                    <br>- Sebelah Selatan : Kelurahan Kuningan 🏡
+                    <br>- Sebelah Timur : Kelurahan Purwawinangun 🌳
+                    <br>- Sebelah Barat : Kelurahan Cipari 🏞️
+                    <br><br>
+                    Kelurahan Winduhareng berada di ketinggian sekitar 600 m dpl, suhu udara 23°C-32°C 🌡️, curah hujan
+                    2000-2500 mm/tahun ☔.
+                    <br>Jarak tempuh:
+                    <br>- Ke ibu kota kecamatan ±2 Km 🚶‍♂️
+                    <br>- Ke ibu kota kabupaten ±1 Km 🛵
+                    <br>- Ke ibu kota provinsi ±200 Km 🚗
+                    <br>- Ke ibu kota negara ±270 Km ✈️
+                    <br><br>
+                    Kelurahan Winduhareng Kecamatan Cigugur beriklim sedang ☀️🌧️.
                 </p>
             </div>
+
 
             @php
                 use App\Models\Resident;

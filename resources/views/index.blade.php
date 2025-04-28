@@ -80,7 +80,7 @@
 
             <!-- Foto Lurah -->
             <div class="lg:w-1/3 w-full flex justify-center">
-                <img src="{{ asset('images/pejabat.png') }}" alt="Foto Lurah"
+                <img src="{{ asset('images/FotoLurah.jpg') }}" alt="Foto Lurah"
                     class="rounded-xl shadow-xl object-cover w-full max-w-xs border-4 border-green-200 animate-fade-in">
             </div>
 
@@ -111,7 +111,7 @@
                         <p>
                             Website ini kami hadirkan secara mandiri untuk mengikuti perkembangan dunia Teknologi Informasi
                             (IT) yang kian pesat. Lahir dari sebuah ide kreatif dan inovatif, serta merupakan sebuah
-                            terobosan atas hasil kolaborasi kami dengan mahasiswa Poltekesos untuk lebih mendekatkan diri
+                            terobosan atas hasil kolaborasi kami dengan Inovindo Digital Media untuk lebih mendekatkan diri
                             kepada masyarakat luas.
                         </p>
                         <p>
@@ -137,7 +137,7 @@
                             kami nantikan demi penyempurnaan website ini.
                         </p>
                         <p><strong>Wassalamu’alaikum warahmatullahi wabarakatuh</strong></p>
-                        <p class="font-semibold text-green-800">Lurah Kelurahan Winduherang<br>Kusnadi, S.IP</p>
+                        <p class="font-semibold text-green-800">Lurah Kelurahan Winduherang<br>H. Ikin Sodikin, S.Sn</p>
                     </div>
 
                     <!-- Tombol -->
