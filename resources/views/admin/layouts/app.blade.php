@@ -229,9 +229,8 @@
                             d="M4 6h16M4 12h16M4 18h16" />
                     </svg>
                 </button>
-                <h2 class="text-xl font-bold">Dashboard</h2>
+                <h2 class="text-xl font-bold">Selamat datang {{ Auth::user()->name }}!</h2>
             </div>
-            <span class="text-sm hidden md:inline-block">Selamat datang, {{ Auth::user()->name }}</span>
         </header>
 
         <!-- Main Content -->
