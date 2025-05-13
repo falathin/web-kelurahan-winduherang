@@ -7,9 +7,9 @@
     <!-- Hero Slider Section -->
     <section x-data="{
         slides: [
-            'https://picsum.photos/1200/600?random=1',
-            'https://picsum.photos/1200/600?random=2',
-            'https://picsum.photos/1200/600?random=3'
+            '{{asset('images/images.jpg')}}',
+            '{{asset('images/kantor lurah.jpg')}}',
+            '{{asset('images/jalan Raya Ramajaksa.jpg')}}'
         ],
         current: 0,
         init() { this.auto = setInterval(this.next, 5000) },
@@ -19,9 +19,13 @@
     }" x-init="init()" class="relative h-screen overflow-hidden font-sans">
         <!-- Slides -->
         <template x-for="(src, i) in slides" :key="i">
-            <div x-show="current === i" class="absolute inset-0 bg-cover bg-center transition-opacity duration-700"
-                :style="`background-image:url(${src});`"></div>
-        </template>
+            <div
+              x-show="current === i"
+              class="absolute inset-0 bg-cover bg-center transition-opacity duration-700"
+              :style="`background-image: url('${src}')`">
+            </div>
+          </template>
+          
 
         <!-- Overlay -->
         <div
@@ -385,8 +389,8 @@
             </aside>
 
             {{-- Map --}}
-            <div class="flex-1 h-[70vh] rounded-xl overflow-hidden shadow border border-gray-200">
-                <div id="map" class="w-full h-full"></div>
+            <div class="flex-1 h-[70vh] rounded-xl shadow border border-gray-200">
+                <div id="map" class="w-full h-full" style="min-height: 320px"></div>
             </div>
         </div>
     </div>

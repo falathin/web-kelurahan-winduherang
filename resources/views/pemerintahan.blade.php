@@ -4,45 +4,73 @@
 @section('title', 'Pemerintahan Desa Winduherang')
 
 @section('content')
-    <!-- Hero Slider -->
-    <section x-data="{
-        slides: [
-            { src: 'https://picsum.photos/1200/400?random=1', title: 'LPM (Lembaga Pemberdayaan Masyarakat)' },
-            { src: 'https://picsum.photos/1200/400?random=2', title: 'Karang Taruna' },
-            { src: 'https://picsum.photos/1200/400?random=3', title: 'PKK (Pemberdayaan Kesejahteraan Keluarga)' }
-        ],
-        current: 0,
-        init() { setInterval(this.next, 5000) },
-        prev() { this.current = (this.current - 1 + this.slides.length) % this.slides.length },
-        next() { this.current = (this.current + 1) % this.slides.length },
-        go(i) { this.current = i }
-    }" x-init="init()" class="relative h-64 md:h-96 overflow-hidden">
-        <template x-for="(slide, i) in slides" :key="i">
-            <div x-show="current === i" class="absolute inset-0 bg-cover bg-center transition-opacity duration-700"
-                :style="`background-image:url(${slide.src})`"></div>
-        </template>
-        <div class="absolute inset-0 bg-green-900 bg-opacity-50 flex flex-col justify-center items-center text-white px-4">
-            <h1 class="text-2xl md:text-4xl font-extrabold mb-2" x-text="slides[current].title"></h1>
-            <div class="flex space-x-4 mt-4">
-                <button @click="prev" class="p-2 bg-white bg-opacity-20 rounded-full hover:bg-opacity-40 transition">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
-                    </svg>
-                </button>
-                <button @click="next" class="p-2 bg-white bg-opacity-20 rounded-full hover:bg-opacity-40 transition">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
-                    </svg>
-                </button>
-            </div>
-            <div class="flex space-x-2 mt-6">
-                <template x-for="(_, i) in slides" :key="i">
-                    <button class="w-3 h-3 rounded-full" :class="i === current ? 'bg-white' : 'bg-white bg-opacity-50'"
-                        @click="go(i)"></button>
-                </template>
-            </div>
-        </div>
-    </section>
+<!-- Hero Slider -->
+<section
+    x-data="{
+      slides: [
+        { src: '{{ asset('images/banner-2.jpg') }}', title: 'LPM (Lembaga Pemberdayaan Masyarakat)' },
+        { src: '{{ asset('https://www.pinterpolitik.com/wp-content/uploads/2023/08/sedang_1634793296_sedang_1624874831_karang-taruna.webp') }}', title: 'Karang Taruna' },
+        { src: '{{ asset('images/kegiatan posyandu 1.jpg') }}', title: 'PKK (Pemberdayaan Kesejahteraan Keluarga)' }
+      ],
+      current: 0,
+      init() {
+        this.auto = setInterval(() => this.next(), 5000)
+      },
+      prev() {
+        this.current = (this.current - 1 + this.slides.length) % this.slides.length
+      },
+      next() {
+        this.current = (this.current + 1) % this.slides.length
+      },
+      go(i) {
+        this.current = i
+      }
+    }"
+    x-init="init()"
+    class="relative h-64 md:h-96 overflow-hidden"
+>
+  <!-- Slides -->
+  <template x-for="(slide, i) in slides" :key="i">
+    <div
+      x-show="current === i"
+      class="absolute inset-0 bg-cover bg-center transition-opacity duration-700"
+      :style="`background-image: url('${slide.src}')`"
+    ></div>
+  </template>
+
+  <!-- Overlay & Controls -->
+  <div class="absolute inset-0 bg-green-900 bg-opacity-50 flex flex-col justify-center items-center text-white px-4">
+    <!-- Slide Title -->
+    <h1 class="text-2xl md:text-4xl font-extrabold mb-2" x-text="slides[current].title"></h1>
+
+    <!-- Arrows -->
+    <div class="flex space-x-4 mt-4">
+      <button @click="prev()"
+              class="p-2 bg-white bg-opacity-20 rounded-full hover:bg-opacity-40 transition">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+        </svg>
+      </button>
+      <button @click="next()"
+              class="p-2 bg-white bg-opacity-20 rounded-full hover:bg-opacity-40 transition">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+        </svg>
+      </button>
+    </div>
+
+    <!-- Pagination Dots -->
+    <div class="flex space-x-2 mt-6">
+      <template x-for="(_, i) in slides" :key="i">
+        <button
+          class="w-3 h-3 rounded-full transition"
+          :class="i === current ? 'bg-white scale-110' : 'bg-white bg-opacity-50 hover:scale-110'"
+          @click="go(i)"
+        ></button>
+      </template>
+    </div>
+  </div>
+</section>
 
     <div class="max-w-7xl mx-auto px-4 py-16 space-y-24">
         {{-- LPM Section --}}

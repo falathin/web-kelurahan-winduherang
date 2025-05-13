@@ -5,47 +5,73 @@
 
 @section('content')
 
-    <!-- Hero Slider -->
-    <section x-data="{
-        slides: [
-            'https://picsum.photos/1200/500?random=21',
-            'https://picsum.photos/1200/500?random=22',
-            'https://picsum.photos/1200/500?random=23'
-        ],
-        current: 0,
-        init() { setInterval(() => this.current = (this.current + 1) % this.slides.length, 5000) },
-        prev() { this.current = (this.current - 1 + this.slides.length) % this.slides.length },
-        next() { this.current = (this.current + 1) % this.slides.length }
-    }" x-init="init()" class="relative h-64 md:h-96 overflow-hidden">
-        <template x-for="(src,i) in slides" :key="i">
-            <div x-show="current===i" class="absolute inset-0 bg-cover bg-center transition-opacity duration-700"
-                :style="`background-image:url(${src});`"></div>
-        </template>
-        <div class="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-center items-center text-white px-4">
-            <h1 class="text-3xl md:text-5xl font-bold">Profil Desa Winduherang</h1>
-            <p class="mt-2 text-sm md:text-lg">Temukan informasi lengkap tentang desa kita</p>
-            <div class="flex space-x-4 mt-4">
-                <button @click="prev()" class="p-2 bg-green-700 rounded-full hover:bg-green-600 transition">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" stroke="currentColor"
-                        stroke-width="2" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
-                    </svg>
-                </button>
-                <button @click="next()" class="p-2 bg-green-700 rounded-full hover:bg-green-600 transition">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" stroke="currentColor"
-                        stroke-width="2" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
-                    </svg>
-                </button>
-            </div>
-            <div class="flex space-x-2 mt-4">
-                <template x-for="(_,i) in slides" :key="i">
-                    <button class="w-2 h-2 rounded-full" :class="i === current ? 'bg-white' : 'bg-white bg-opacity-50'"
-                        @click="current=i"></button>
-                </template>
-            </div>
-        </div>
-    </section>
+<!-- Hero Slider -->
+<section
+    x-data="{
+      slides: [
+        '{{ asset("images/images.jpg") }}',
+        '{{ asset("images/mesjid.jpg") }}',
+        '{{ asset("images/Lapang Sepak bola.jpg") }}'
+      ],
+      current: 0,
+      init() {
+        this.auto = setInterval(() => this.next(), 5000)
+      },
+      prev() {
+        this.current = (this.current - 1 + this.slides.length) % this.slides.length
+      },
+      next() {
+        this.current = (this.current + 1) % this.slides.length
+      },
+      go(i) {
+        this.current = i
+      }
+    }"
+    x-init="init()"
+    class="relative h-64 md:h-96 overflow-hidden"
+>
+  <!-- Slides -->
+  <template x-for="(src, i) in slides" :key="i">
+    <div
+      x-show="current === i"
+      class="absolute inset-0 bg-cover bg-center transition-opacity duration-700"
+      :style="`background-image: url('${src}')`"
+    ></div>
+  </template>
+
+  <!-- Dark Overlay + Content -->
+  <div class="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-center items-center text-white px-4">
+    <h1 class="text-3xl md:text-5xl font-bold">Profil Desa Winduherang</h1>
+    <p class="mt-2 text-sm md:text-lg">Temukan informasi lengkap tentang desa kita</p>
+
+    <!-- Arrows -->
+    <div class="flex space-x-4 mt-4">
+      <button @click="prev()"
+              class="p-2 bg-green-700 rounded-full hover:bg-green-600 transform hover:scale-110 transition">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+        </svg>
+      </button>
+      <button @click="next()"
+              class="p-2 bg-green-700 rounded-full hover:bg-green-600 transform hover:scale-110 transition">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+        </svg>
+      </button>
+    </div>
+
+    <!-- Pagination Dots -->
+    <div class="flex space-x-2 mt-4">
+      <template x-for="(_, i) in slides" :key="i">
+        <button
+          class="w-2 h-2 rounded-full transition"
+          :class="i === current ? 'bg-white scale-110' : 'bg-white bg-opacity-50 hover:scale-110'"
+          @click="go(i)"
+        ></button>
+      </template>
+    </div>
+  </div>
+</section>
 
     <section class="bg-green-50 py-16 space-y-16">
         <div class="max-w-4xl mx-auto px-4 space-y-16">
@@ -132,81 +158,195 @@
                 </div>
             </div>
 
-            <!-- Program & Kegiatan -->
-            <div class="bg-white rounded-lg shadow-lg p-8">
-                <h2 class="text-3xl font-bold text-green-800 text-center mb-6">Program &amp; Kegiatan</h2>
-                <div class="space-y-12">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
-                        <div>
-                            <h3 class="text-2xl font-semibold text-green-700 mb-2">Kegiatan Jumat Bersih</h3>
-                            <p class="text-gray-700 leading-relaxed">
-                                Kegiatan yang dilaksanakan setiap hari Jumat dengan tujuan untuk membersihkan lingkungan
-                                sekitar.
-                                Program ini biasanya melibatkan berbagai elemen masyarakat, termasuk RT, RW, dan berbagai
-                                pihak terkait,
-                                untuk secara bersama-sama menjaga kebersihan lingkungan. Kegiatan ini sangat efektif untuk
-                                mempererat hubungan
-                                antarwarga serta meningkatkan rasa peduli terhadap lingkungan sekitar.
-                            </p>
-                        </div>
-                        <img src="{{ asset('storage/kegiatan1.jpg') }}" alt="Kegiatan Jumat Bersih"
-                            class="rounded-lg shadow-md w-full h-48 object-cover" />
-                    </div>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
-                        <img src="{{ asset('storage/kegiatan2.jpg') }}" alt="Kegiatan Posyandu"
-                            class="rounded-lg shadow-md w-full h-48 object-cover" />
-                        <div>
-                            <h3 class="text-2xl font-semibold text-green-700 mb-2">Kegiatan Posyandu</h3>
-                            <p class="text-gray-700 leading-relaxed">
-                                Kegiatan Posyandu Pusat Pelayanan Terpadu diadakan di Balai Kader Kelurahan Winduherang.
-                                Fokus utamanya adalah pelayanan kesehatan ibu dan anak, meliputi penimbangan balita,
-                                pemberian imunisasi, serta konsultasi kesehatan bagi lansia. Kegiatan ini mendukung tumbuh
-                                kembang balita
-                                dan kesehatan masyarakat setempat.
-                            </p>
-                        </div>
-                    </div>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
-                        <div>
-                            <h3 class="text-2xl font-semibold text-green-700 mb-2">Program Pendukung Usaha bagi UMKM</h3>
-                            <p class="text-gray-700 leading-relaxed">
-                                Program ini bertujuan untuk mendukung pertumbuhan produk dan pemasaran hasil usaha kecil,
-                                seperti olahan makanan dan produk rumahan. Melalui program ini, diharapkan UMKM lokal dapat
-                                meningkatkan
-                                daya saingnya di pasar yang lebih luas dengan produk-produk khas dan inovatif.
-                            </p>
-                        </div>
-                        <img src="{{ asset('storage/kegiatan3.jpg') }}" alt="Program UMKM"
-                            class="rounded-lg shadow-md w-full h-48 object-cover" />
-                    </div>
-                </div>
+<!-- Program & Kegiatan -->
+<div x-data="{ showModal: false, modalSrc: '' }" class="bg-white rounded-lg shadow-lg p-8">
+    <h2 class="text-3xl font-bold text-green-800 text-center mb-6">Program &amp; Kegiatan</h2>
+    <div class="space-y-12">
+  
+      {{-- Jumat Bersih --}}
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+        <div>
+          <h3 class="text-2xl font-semibold text-green-700 mb-2 flex items-center">
+            <!-- Broom SVG Icon -->
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2 text-green-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M4.5 19.5l6-6m0 0l6-6m-6 6L3 10.5m12 8l-3-3"/>
+            </svg>
+            Kegiatan Jumat Bersih
+          </h3>
+          <p class="text-gray-700 leading-relaxed">
+            Kegiatan yang dilaksanakan setiap hari Jumat dengan tujuan untuk membersihkan lingkungan
+            sekitar; melibatkan RT, RW, dan berbagai pihak terkait untuk mempererat hubungan antarwarga.
+          </p>
+        </div>
+        <div class="group relative cursor-pointer">
+          <img @click="showModal = true; modalSrc='{{ asset('images/Kegiatan jumat bersih 3.jpg') }}'"
+               src="{{ asset('images/Kegiatan jumat bersih 3.jpg') }}"
+               alt="Kegiatan Jumat Bersih"
+               class="rounded-lg shadow-md w-full h-48 object-cover transition-transform duration-300 group-hover:scale-105" />
+          <div class="absolute inset-0 bg-black bg-opacity-25 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15 10l4.553-4.553a2.121 2.121 0 10-3-3L12 7m3 3l4.553 4.553a2.121 2.121 0 11-3 3L12 13" />
+            </svg>
+          </div>
+        </div>
+      </div>
+  
+      {{-- Posyandu --}}
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+        <div class="group relative cursor-pointer order-2 md:order-1">
+          <img @click="showModal = true; modalSrc='{{ asset('images/kegiatan posyandu 3.jpg') }}'"
+               src="{{ asset('images/kegiatan posyandu 3.jpg') }}"
+               alt="Kegiatan Posyandu"
+               class="rounded-lg shadow-md w-full h-48 object-cover transition-transform duration-300 group-hover:scale-105" />
+          <div class="absolute inset-0 bg-black bg-opacity-25 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l2 2m6-2a9 9 0 10-9 9 9 9 0 009-9z" />
+            </svg>
+          </div>
+        </div>
+        <div class="order-1 md:order-2">
+          <h3 class="text-2xl font-semibold text-green-700 mb-2 flex items-center">
+            <!-- Medical Cross SVG Icon -->
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2 text-green-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M12 4v16m8-8H4"/>
+            </svg>
+            Kegiatan Posyandu
+          </h3>
+          <p class="text-gray-700 leading-relaxed">
+            Pelayanan kesehatan ibu dan anak di Balai Kader: penimbangan balita, imunisasi, serta konsultasi lansia.
+          </p>
+        </div>
+      </div>
+  
+      {{-- UMKM --}}
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+        <div>
+          <h3 class="text-2xl font-semibold text-green-700 mb-2 flex items-center">
+            <!-- Shop SVG Icon -->
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2 text-green-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M3 9h18M4 9v10a1 1 0 001 1h14a1 1 0 001-1V9M16 9V6a4 4 0 00-8 0v3"/>
+            </svg>
+            Program Pendukung UMKM
+          </h3>
+          <p class="text-gray-700 leading-relaxed">
+            Mendukung pemasaran produk UMKM lokal agar meningkat daya saing dengan branding dan pelatihan.
+          </p>
+        </div>
+        <div class="grid grid-cols-3 gap-4">
+          @foreach ([
+            'images/kue cistik.jpg',
+            'images/Kue Cuhcur 1.jpg',
+            'images/Kue Cuhcur.jpg'
+          ] as $img)
+            <div class="group relative cursor-pointer">
+              <img @click="showModal = true; modalSrc='{{ asset($img) }}'"
+                   src="{{ asset($img) }}"
+                   class="rounded-lg shadow-md w-full h-48 object-cover transition-transform duration-300 group-hover:scale-105" />
+              <div class="absolute inset-0 bg-black bg-opacity-25 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M15 10l4.553-4.553a2.121 2.121 0 10-3-3L12 7m3 3l4.553 4.553a2.121 2.121 0 11-3 3L12 13"/>
+                </svg>
+              </div>
             </div>
-
-
-            <!-- Kondisi Geografis -->
-            <div class="bg-white rounded-lg shadow-lg p-8">
-                <h2 class="text-3xl font-bold text-green-800 text-center mb-6">Kondisi Geografis 🌏</h2>
-                <p class="text-gray-700 leading-relaxed mb-4">
-                    Luas wilayah Kelurahan Winduhareng Kecamatan Cigugur adalah kurang lebih 90,674 Ha 📏.
-                </p>
-                <p class="text-gray-700 leading-relaxed">
-                    Kelurahan Winduhareng berbatasan dengan:
-                    <br>- Sebelah Utara : Kelurahan Cirendang 🧭
-                    <br>- Sebelah Selatan : Kelurahan Kuningan 🏡
-                    <br>- Sebelah Timur : Kelurahan Purwawinangun 🌳
-                    <br>- Sebelah Barat : Kelurahan Cipari 🏞️
-                    <br><br>
-                    Kelurahan Winduhareng berada di ketinggian sekitar 600 m dpl, suhu udara 23°C-32°C 🌡️, curah hujan
-                    2000-2500 mm/tahun ☔.
-                    <br>Jarak tempuh:
-                    <br>- Ke ibu kota kecamatan ±2 Km 🚶‍♂️
-                    <br>- Ke ibu kota kabupaten ±1 Km 🛵
-                    <br>- Ke ibu kota provinsi ±200 Km 🚗
-                    <br>- Ke ibu kota negara ±270 Km ✈️
-                    <br><br>
-                    Kelurahan Winduhareng Kecamatan Cigugur beriklim sedang ☀️🌧️.
-                </p>
-            </div>
+          @endforeach
+        </div>
+      </div>
+    </div>
+  
+    <!-- Image Lightbox Modal -->
+    <div
+      x-show="showModal"
+      x-transition.opacity
+      class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-4"
+      @click.away="showModal = false"
+      @keydown.escape.window="showModal = false"
+    >
+      <div class="relative max-w-3xl w-full">
+        <button
+          @click="showModal = false"
+          class="absolute top-2 right-2 text-white bg-black bg-opacity-50 rounded-full p-1 hover:bg-opacity-75"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+               viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M6 18L18 6M6 6l12 12"/>
+          </svg>
+        </button>
+        <img :src="modalSrc" class="rounded-lg shadow-lg w-full h-auto object-contain" />
+      </div>
+    </div>
+  </div>
+  
+<!-- Kondisi Geografis -->
+<div class="bg-white rounded-lg shadow-lg p-8">
+    <h2 class="text-3xl font-bold text-green-800 text-center mb-6">Kondisi Geografis 🌏</h2>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      Luas wilayah Kelurahan Winduhareng Kecamatan Cigugur adalah kurang lebih 90,674 Ha 📏.
+    </p>
+    <p class="text-gray-700 leading-relaxed">
+      Kelurahan Winduhareng berbatasan dengan:<br>
+      - Sebelah Utara : Kelurahan Cirendang 🧭<br>
+      - Sebelah Selatan : Kelurahan Kuningan 🏡<br>
+      - Sebelah Timur : Kelurahan Purwawinangun 🌳<br>
+      - Sebelah Barat : Kelurahan Cipari 🏞️<br><br>
+      Kelurahan Winduhareng berada di ketinggian sekitar 600 m dpl, suhu udara 23 °C–32 °C 🌡️, curah hujan
+      2000–2500 mm/tahun ☔.<br>
+      Jarak tempuh:<br>
+      - Ke ibu kota kecamatan ±2 Km 🚶‍♂️<br>
+      - Ke ibu kota kabupaten ±1 Km 🛵<br>
+      - Ke ibu kota provinsi ±200 Km 🚗<br>
+      - Ke ibu kota negara ±270 Km ✈️<br><br>
+      Kelurahan Winduhareng Kecamatan Cigugur beriklim sedang ☀️🌧️.
+    </p>
+  
+    <div x-data="{ showPdf: false }">
+        <!-- Tombol PDF -->
+        <div class="text-center mt-6">
+          <button
+            @click="showPdf = true"
+            class="inline-flex items-center px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-500 transition"
+          >
+            <!-- PDF Icon -->
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-white" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6zM13 3.5L18.5 9H13V3.5zM12 14v4h-2v-4H8l4-4 4 4h-4z"/>
+            </svg>
+            Lihat Peta Geografis (PDF)
+          </button>
+        </div>
+      
+        <!-- Modal Overlay -->
+        <div
+          x-show="showPdf"
+          x-transition.opacity
+          class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-75 p-4"
+        >
+          <div class="relative w-full max-w-4xl h-full md:h-3/4 bg-white rounded-lg overflow-hidden shadow-lg">
+            <!-- Close Button -->
+            <button
+              @click="showPdf = false"
+              class="absolute top-2 right-2 text-gray-200 hover:text-white bg-gray-800 bg-opacity-50 rounded-full p-1"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+                   viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                      d="M6 18L18 6M6 6l12 12"/>
+              </svg>
+            </button>
+      
+            <!-- Embedded PDF -->
+            <iframe
+              src="{{ asset('pdf/peta_kondisi_geografis.pdf') }}#toolbar=0&navpanes=0"
+              class="w-full h-full"
+            ></iframe>
+          </div>
+        </div>
+      </div>      
+  </div>
+  
 
 
             @php
